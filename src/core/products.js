@@ -1,6 +1,6 @@
 /* Bazoš Rider — core/products.js
  *
- * Manual products: phrases you type on the options page ("romer king").
+ * Manual products: phrases you type in the popup settings ("romer king").
  * Every recorded listing whose title contains the phrase counts towards that
  * product's median. The median is trusted from MIN_SAMPLE listings.
  */

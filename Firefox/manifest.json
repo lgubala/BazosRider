@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Bazoš Rider",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "__MSG_extDescription__",
   "default_locale": "sk",
   "homepage_url": "https://github.com/lgubala/BazosRider",
@@ -80,9 +80,5 @@
       "32": "icons/icon-32.png",
       "48": "icons/icon-48.png"
     }
-  },
-  "options_ui": {
-    "page": "src/options/options.html",
-    "open_in_tab": true
   }
 }

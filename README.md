@@ -47,7 +47,10 @@ next one.
 - **Ručne zadané produkty**: today's bargains for the products you track
 
 *Vyčistiť* empties a list without touching the history behind it, so
-comparisons keep working.
+comparisons keep working. An empty deal list says why it is empty.
+
+**Settings are in the popup too.** *Nastavenia* swaps the lists for the
+filters, comparison thresholds, your products and the price history.
 
 ## How "similar" works
 
@@ -57,8 +60,8 @@ are not enough, because *Britax Römer* covers a 60 € seat and a 300 € one, 
 comparing them once produced an "−84 %" that was simply wrong. A missing
 comparison is better than a wrong one.
 
-For products without a model number (child seats, prams), type the product on
-the options page instead. Its median counts from five listings.
+For products without a model number (child seats, prams), add the product
+under *Nastavenia* in the popup instead. Its median counts from five listings.
 
 ## Install
 
@@ -68,7 +71,7 @@ Add-on → pick `Firefox/manifest.json`. It unloads when Firefox closes.
 Works on Firefox desktop and Firefox for Android (142 or newer).
 
 <p align="center">
-  <img src="docs/screenshots/options.png" alt="The options page: filters, automatic comparison, your products, price history" width="560">
+  <img src="docs/screenshots/settings.png" alt="Settings in the popup: filters, automatic comparison, your products, price history" width="560">
 </p>
 
 ## Privacy

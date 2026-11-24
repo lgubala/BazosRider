@@ -1,7 +1,7 @@
 /* Bazoš Rider — core/storage.js
  *
  * Two keys in browser.storage.local, nothing else, nothing synced:
- *   settings   written by the options page and the popup's clear buttons
+ *   settings   written by the popup: its settings view and its clear buttons
  *   history    written by the content script on every Bazoš page you open
  */
 (function (BR) {

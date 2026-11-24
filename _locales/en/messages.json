@@ -173,9 +173,6 @@
   "popup_clear": {
     "message": "Clear"
   },
-  "options_title": {
-    "message": "Bazoš Rider – settings"
-  },
   "options_filters": {
     "message": "Hiding listings"
   },
@@ -213,7 +210,7 @@
     "message": "Save"
   },
   "options_saved": {
-    "message": "Saved. Reload the Bazoš page."
+    "message": "Saved. Reload the Bazoš page to apply it there."
   },
   "options_history": {
     "message": "Price history"
@@ -228,12 +225,27 @@
     "message": "Delete price history"
   },
   "options_history_confirm": {
-    "message": "Delete the whole price history? Comparisons will have to be collected again."
+    "message": "Sure? Click again"
   },
   "options_history_done": {
     "message": "History deleted."
   },
   "options_not_affiliated": {
     "message": "Not affiliated with Bazoš.sk."
+  },
+  "popup_back": {
+    "message": "← Lists"
+  },
+  "deals_when_day": {
+    "message": "Today"
+  },
+  "deals_when_year": {
+    "message": "This year"
+  },
+  "deals_none_comparable": {
+    "message": "{when}: {n} priced listings, but no two share a model number in the title, so there is nothing to compare."
+  },
+  "deals_none_cheaper": {
+    "message": "{when}: {comparable} of {n} listings have something to compare with, but none is at least {pct} % under the median of similar ones."
   }
 }

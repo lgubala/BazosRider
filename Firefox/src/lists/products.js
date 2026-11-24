@@ -1,10 +1,10 @@
 /* Ručne zadané produkty: today's listings well under the median of a product
- * you typed on the options page. */
+ * you typed in the popup settings. */
 BR.lists.add({
   id: "products",
   order: 50,
   title: "list_products_title",
-  empty: (ctx) => (ctx.settings.products.length ? "list_products_empty" : "list_products_none"),
+  empty: (ctx) => BR.t(ctx.settings.products.length ? "list_products_empty" : "list_products_none"),
   layout: "top",
   limit: 15,
 

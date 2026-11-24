@@ -8,8 +8,8 @@
  * src/, icons/ and _locales/ are copied as they are. Two things are generated:
  *
  *   manifest.json   content_scripts come from build/modules.json
- *   popup.html,     the <!--SCRIPTS--> marker becomes one <script> tag per
- *   options.html    file, in the same order
+ *   popup.html      the <!--SCRIPTS--> marker becomes one <script> tag per
+ *                   file, in the same order
  *
  * So the load order exists in exactly one place. Module folders (filters/,
  * skip/, badges/, lists/) are read from disk, which means adding a module is
@@ -29,7 +29,7 @@ import { tmpdir } from "node:os";
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const OUT = join(ROOT, "Firefox");
 const COPIED = ["src", "icons", "_locales"];
-const PAGES = { popup: "src/popup/popup.html", options: "src/options/options.html" };
+const PAGES = { popup: "src/popup/popup.html" };
 
 const read = (p) => readFileSync(join(ROOT, p), "utf8");
 const version = () => JSON.parse(read("package.json")).version;
@@ -134,8 +134,7 @@ function manifest(lists, ver) {
       default_title: "Bazoš Rider",
       default_popup: PAGES.popup,
       default_icon: { 16: ICONS[16], 32: ICONS[32], 48: ICONS[48] }
-    },
-    options_ui: { page: PAGES.options, open_in_tab: true }
+    }
   };
 }
 

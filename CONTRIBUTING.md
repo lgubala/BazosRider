@@ -38,8 +38,7 @@ src/
   badges/       labels on Bazoš pages, one each       ← modules
   lists/        cards in the popup, one each          ← modules
   content/      runs on bazos.sk: badges, banner, main
-  popup/        the toolbar popup
-  options/      the options page
+  popup/        the toolbar popup: lists view and settings view
   ui/           shared CSS and DOM helpers
 _locales/       sk (default) and en
 build/modules.json   the core load order and each page's own files
@@ -59,7 +58,7 @@ Firefox/        GENERATED, committed. Never edit it.
 | Add a list to the popup | new file in `src/lists/` |
 | Keep a kind of listing out of price history | new file in `src/skip/` |
 | Change how similar listings are grouped | `src/core/groups.js` |
-| The look | `src/ui/base.css`, `src/popup/popup.css`, `src/options/options.css` |
+| The look | `src/ui/base.css`, `src/popup/popup.css` |
 
 ## Adding a module
 
@@ -80,7 +79,7 @@ take the others down.
 /* src/filters/price.js — hide listings above a price */
 BR.filters.add({
   id: "price",                    // also its key in settings.filters
-  order: 30,                      // position on the options page
+  order: 30,                      // position in the popup settings
   title: "filter_price_title",    // _locales keys
   hint: "filter_price_hint",
   enabledByDefault: false,
@@ -91,7 +90,7 @@ BR.filters.add({
    * Also called with history entries, which have the same fields. */
   matches: (listing, config) => listing.price != null && listing.price > config.max,
 
-  /* The options page draws this. h(tag, attributes, ...children). */
+  /* The popup settings view draws this. h(tag, attributes, ...children). */
   editor: {
     render(box, config, h) {
       box.append(h("input", { type: "number", min: 0, value: config.max }), " €");
@@ -197,8 +196,7 @@ always commit both.
 
 ## Known limitations
 
-- **Not yet run in a real Firefox window.** The logic, the popup and the
-  options page were checked headless with a stubbed browser API.
+- **Tested in Firefox desktop by hand; Android not yet.**
 - **Two Bazoš tabs loading at once** can overwrite each other's history
   writes. Rare and harmless (the next load records the listings again).
 - **Products without a model number** are rarely grouped automatically. Track

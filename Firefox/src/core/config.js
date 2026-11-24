@@ -1,7 +1,7 @@
 /* Bazoš Rider — core/config.js
  * ============================================================================
  * Every number and selector in one place. Ordinary tuning should not need any
- * other file. Values the user can change on the options page are only the
+ * other file. Values the user can change in the popup settings are only the
  * defaults here; their saved copy lives in settings.
  * ============================================================================
  */
@@ -20,7 +20,7 @@
      * reproduced. */
     DROP_GUARD: 10,
 
-    /* --- manual products (options page → "Ručne zadané produkty") ------- */
+    /* --- manual products (popup settings → "Ručne zadané produkty") ------- */
 
     MIN_SAMPLE: 5,          // listings needed before a product median is trusted
     DEAL_THRESHOLD: 0.2,    // default: 20 % under the median

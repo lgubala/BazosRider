@@ -26,6 +26,26 @@
     return parts;
   }
 
+  /* An empty deal list says why. Groups need a shared model number, so a
+   * page of "Šaty na stužkovú" and "Balerínky" has nothing to compare. */
+  function empty(period) {
+    return function (ctx) {
+      let n = 0;
+      let comparable = 0;
+      for (const e of Object.values(ctx.history)) {
+        if (!e.price || !BR.lists.inPeriod(e, period, ctx) || ctx.hidden(e)) continue;
+        n++;
+        if (BR.lists.groupFields(e, ctx).share != null) comparable++;
+      }
+      const when = BR.t(period === "day" ? "deals_when_day" : "deals_when_year");
+      if (!n) return BR.t(period === "day" ? "list_day_empty" : "list_year_empty");
+      if (!comparable) return BR.t("deals_none_comparable", { when, n });
+      return BR.t("deals_none_cheaper", {
+        when, n, comparable, pct: BR.text.percent(ctx.settings.auto.minShare)
+      });
+    };
+  }
+
   const common = { layout: "top", clearable: true, needsGroups: true, meta };
 
   BR.lists.add({
@@ -34,7 +54,7 @@
     order: 20,
     title: "list_day_title",
     hint: "list_day_hint",
-    empty: "list_day_empty",
+    empty: empty("day"),
     items: deals("day")
   });
 
@@ -44,7 +64,7 @@
     order: 30,
     title: "list_year_title",
     hint: "list_year_hint",
-    empty: "list_year_empty",
+    empty: empty("year"),
     items: deals("year")
   });
 })();

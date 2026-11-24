@@ -173,9 +173,6 @@
   "popup_clear": {
     "message": "Vyčistiť"
   },
-  "options_title": {
-    "message": "Bazoš Rider – nastavenia"
-  },
   "options_filters": {
     "message": "Skrývanie inzerátov"
   },
@@ -213,7 +210,7 @@
     "message": "Uložiť"
   },
   "options_saved": {
-    "message": "Uložené. Obnov stránku Bazoša."
+    "message": "Uložené. Na Bazoši sa prejaví po obnovení stránky."
   },
   "options_history": {
     "message": "História cien"
@@ -228,12 +225,27 @@
     "message": "Vymazať históriu cien"
   },
   "options_history_confirm": {
-    "message": "Vymazať celú históriu cien? Porovnania sa budú musieť nabrať nanovo."
+    "message": "Naozaj? Klikni znova"
   },
   "options_history_done": {
     "message": "História vymazaná."
   },
   "options_not_affiliated": {
     "message": "Nie je spojené s Bazoš.sk."
+  },
+  "popup_back": {
+    "message": "← Zoznamy"
+  },
+  "deals_when_day": {
+    "message": "Dnes"
+  },
+  "deals_when_year": {
+    "message": "Tento rok"
+  },
+  "deals_none_comparable": {
+    "message": "{when}: {n} inzerátov s cenou, ale žiadne dva nemajú v názve rovnaké číslo modelu, takže nie je s čím porovnať."
+  },
+  "deals_none_cheaper": {
+    "message": "{when}: {comparable} z {n} inzerátov má s čím porovnať, ale žiadny nie je aspoň o {pct} % pod mediánom podobných."
   }
 }

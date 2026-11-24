@@ -11,7 +11,7 @@ BR.filters.add({
     return !!listing.category && (config.categories || []).includes(listing.category);
   },
 
-  /* The options page calls render() to draw the editor and read() on save.
+  /* The popup settings view calls render() to draw the editor and read() on save.
    * `h` is BR.dom.h: h(tag, attributes, ...children). */
   editor: {
     render(box, config, h) {

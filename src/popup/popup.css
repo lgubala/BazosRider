@@ -46,6 +46,29 @@ header h1 { flex: 1; }
 .pill.free { background: #1a7f37; }
 .pill.rank { background: #57606a; }
 
+/* --- settings view ------------------------------------------------------ */
+
+.settings { display: grid; gap: 14px; }
+.settings h2 { margin-bottom: .2em; }
+
+.filter { border-top: 1px solid var(--line-soft); padding: 12px 0 4px; }
+.filter:first-child { border-top: none; }
+.filter > label { font-weight: 600; display: flex; align-items: center; gap: 8px; }
+.filter .body { margin-top: 6px; }
+.filter.off .body { opacity: .5; }
+
+.checks { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: .3em .8em; }
+.checks label { display: flex; align-items: center; gap: 6px; }
+
+label.line { display: flex; align-items: center; gap: 8px; margin: .5em 0; flex-wrap: wrap; }
+
+/* Save stays reachable while scrolling a long filter list. */
+.actions { display: flex; align-items: center; gap: 12px; position: sticky; bottom: 0;
+           padding: 10px 0; background: var(--bg); }
+#status { color: var(--ok); font-size: 13px; }
+
+.settings footer { text-align: center; }
+
 /* Phones. Not a max-width query: a desktop popup's viewport can start
    narrow while Firefox sizes it, which would flip it into one column. */
 @media (hover: none) and (pointer: coarse) {
@@ -53,4 +76,5 @@ header h1 { flex: 1; }
   .grid { grid-template-columns: 1fr; }
   .tab { padding: 6px 12px; font-size: 14px; }
   button { padding: .6em 1em; }
+  input[type=checkbox] { width: 20px; height: 20px; }
 }

@@ -1,8 +1,7 @@
 {
   "_comment": [
     "The load order, defined once. scripts/build.mjs reads this file and writes",
-    "the manifest's content_scripts and the <script> tags of the popup and the",
-    "options page from it.",
+    "the manifest's content_scripts and the popup's <script> tags from it.",
     "",
     "Paths are relative to src/. These are classic scripts sharing one global,",
     "BR, so a file must come after anything it reads at load time.",
@@ -43,11 +42,8 @@
     "popup": [
       "ui/dom.js",
       "popup/rows.js",
+      "popup/settings.js",
       "popup/popup.js"
-    ],
-    "options": [
-      "ui/dom.js",
-      "options/options.js"
     ]
   }
 }

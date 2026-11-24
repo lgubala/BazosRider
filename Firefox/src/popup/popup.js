@@ -1,28 +1,37 @@
 /* Bazoš Rider — popup/popup.js
  *
- * Builds one card per list module (src/lists/), in `order`. Settings live on
- * the options page; the popup only reads them, except for the clear buttons.
+ * Two views in one popup: the lists (one card per module in src/lists/, in
+ * `order`) and the settings (popup/settings.js). The header button switches
+ * between them.
  */
 (async function (BR) {
   "use strict";
 
   const { h } = BR.dom;
   const C = BR.config;
+  const $ = (id) => document.getElementById(id);
   const tabState = {};
 
   BR.dom.localize(document);
-  document.getElementById("open-options").addEventListener("click", () => {
-    (globalThis.browser || globalThis.chrome).runtime.openOptionsPage();
-    window.close();
-  });
 
   const data = await BR.store.load();
-  const count = Object.keys(data.history).length;
-  document.getElementById("count").textContent = BR.t("popup_history_count", { n: count.toLocaleString(BR.lang) });
 
-  /* Tall lists go in the left column, the rest stack on the right. A grid
-   * with a row-spanning card left big gaps between the right-hand cards. */
-  const columns = { tall: document.getElementById("col-tall"), rest: document.getElementById("col-rest") };
+  /* --- views --------------------------------------------------------------- */
+
+  let view = "lists";
+  function show(next) {
+    view = next;
+    $("view-lists").hidden = view !== "lists";
+    $("view-settings").hidden = view !== "settings";
+    $("toggle-view").textContent = BR.t(view === "lists" ? "popup_settings" : "popup_back");
+    window.scrollTo(0, 0);
+  }
+  $("toggle-view").addEventListener("click", () => show(view === "lists" ? "settings" : "lists"));
+
+  /* --- lists --------------------------------------------------------------- */
+
+  /* Tall lists go in the left column, the rest stack on the right. */
+  const columns = { tall: $("col-tall"), rest: $("col-rest") };
   const cards = new Map();
 
   for (const def of BR.lists.all()) {
@@ -38,13 +47,13 @@
     cards.set(def.id, body);
   }
 
-  renderAll();
-
   function context() {
     return BR.context(data.history, data.settings, new Date());
   }
 
   function renderAll() {
+    const n = Object.keys(data.history).length;
+    $("count").textContent = BR.t("popup_history_count", { n: n.toLocaleString(BR.lang) });
     const ctx = context();
     for (const def of BR.lists.all()) render(def, ctx);
   }
@@ -64,8 +73,9 @@
       rows = [];
     }
     if (!rows.length) {
-      const key = typeof def.empty === "function" ? def.empty(ctx) : def.empty;
-      box.append(h("div", { class: "empty" }, BR.t(key || "list_empty")));
+      /* `empty` is a _locales key, or a function returning finished text. */
+      const text = typeof def.empty === "function" ? def.empty(ctx) : BR.t(def.empty || "list_empty");
+      box.append(h("div", { class: "empty" }, text));
       return;
     }
     const limit = def.limit || C.LIST_LIMIT;
@@ -83,4 +93,10 @@
     data.settings.clearedAt = saved.clearedAt;
     render(def, context());
   }
+
+  /* --- start --------------------------------------------------------------- */
+
+  BR.settingsView.mount(data, renderAll);
+  renderAll();
+  show(location.hash === "#settings" ? "settings" : "lists");
 })(globalThis.BR);

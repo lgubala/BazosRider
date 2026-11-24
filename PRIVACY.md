@@ -21,7 +21,7 @@ your device only:
   seller.
 
 History is built only from pages you open yourself. Entries not seen for about
-a year are deleted automatically, and the options page has a button that
+a year are deleted automatically, and the popup settings have a button that
 deletes all of it. Uninstalling the extension removes everything.
 
 Storage is never synced to other devices.

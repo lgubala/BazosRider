@@ -1,5 +1,5 @@
 /* "−25 % vs. medián (8 inz.)": well under the median of a product you typed
- * on the options page. The threshold is set there too. */
+ * in the popup settings. The threshold is set there too. */
 BR.badges.add({
   id: "product-deal",
   order: 30,

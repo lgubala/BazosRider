@@ -12,14 +12,60 @@
   <header>
     <h1><img src="../../icons/icon-48.png" alt="">Bazoš Rider</h1>
     <span id="count" class="hint"></span>
-    <button id="open-options" type="button" data-i18n="popup_settings"></button>
+    <button id="toggle-view" type="button"></button>
   </header>
 
-  <!-- One card per module in src/lists/, built by popup.js. -->
-  <main class="grid">
+  <!-- The lists: one card per module in src/lists/, built by popup.js. -->
+  <main id="view-lists" class="grid">
     <div id="col-tall" class="col"></div>
     <div id="col-rest" class="col"></div>
   </main>
+
+  <!-- Settings, in the popup itself. Built by settings.js. -->
+  <div id="view-settings" class="settings" hidden>
+    <section class="card">
+      <h2 data-i18n="options_filters"></h2>
+      <p class="hint" data-i18n="options_filters_hint"></p>
+      <!-- One block per module in src/filters/. -->
+      <div id="filters"></div>
+    </section>
+
+    <section class="card">
+      <h2 data-i18n="options_auto"></h2>
+      <p class="hint" data-i18n="options_auto_hint"></p>
+      <label class="line"><input id="auto-enabled" type="checkbox"> <span data-i18n="options_auto_enabled"></span></label>
+      <label class="line"><span data-i18n="options_auto_share"></span>
+        <input id="auto-share" type="number" min="1" max="90"> %</label>
+      <label class="line"><span data-i18n="options_auto_min"></span>
+        <input id="auto-min" type="number" min="2" max="20"></label>
+    </section>
+
+    <section class="card">
+      <h2 data-i18n="options_products"></h2>
+      <p class="hint" data-i18n="options_products_hint"></p>
+      <textarea id="products" rows="4" data-i18n-placeholder="options_products_placeholder"></textarea>
+      <label class="line"><span data-i18n="options_threshold"></span>
+        <input id="threshold" type="number" min="1" max="90"> %</label>
+    </section>
+
+    <div class="actions">
+      <button id="save" class="primary" type="button" data-i18n="options_save"></button>
+      <span id="status" role="status"></span>
+    </div>
+
+    <section class="card">
+      <h2 data-i18n="options_history"></h2>
+      <p class="hint" id="history-count"></p>
+      <p class="hint" data-i18n="options_history_hint"></p>
+      <button id="reset-history" class="danger" type="button" data-i18n="options_history_reset"></button>
+    </section>
+
+    <footer class="hint">
+      <span id="version"></span> ·
+      <a href="https://github.com/lgubala/BazosRider" target="_blank" rel="noopener">GitHub</a> ·
+      <span data-i18n="options_not_affiliated"></span>
+    </footer>
+  </div>
 
   <script src="../core/namespace.js"></script>
   <script src="../core/config.js"></script>
@@ -51,6 +97,7 @@
   <script src="../lists/products.js"></script>
   <script src="../ui/dom.js"></script>
   <script src="../popup/rows.js"></script>
+  <script src="../popup/settings.js"></script>
   <script src="../popup/popup.js"></script>
 </body>
 </html>

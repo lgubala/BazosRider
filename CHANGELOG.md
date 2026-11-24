@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.1.0
+
+- **Settings are back in the popup.** *Nastavenia* in the popup's header swaps
+  the lists for the settings, and *← Zoznamy* swaps back. The separate options
+  page is gone: one place to look, and on Android the popup is already a full
+  page. Saving redraws the lists at once, so a newly hidden category drops out
+  of them without reopening the popup
+- **Empty deal lists say why.** *Deal dňa* and *Deal roka* only compare
+  listings whose titles share a model number, so a page of clothes and books
+  has nothing to compare. Instead of "nothing yet" they now say, for example,
+  "Dnes: 71 inzerátov s cenou, ale žiadne dva nemajú v názve rovnaké číslo
+  modelu", or how many had a comparison but were not cheap enough
+- **Deleting the price history asks with a second click** instead of a dialog,
+  which Firefox does not show from a toolbar popup
+
 ## 1.0.0 — Bazoš Rider
 
 The "Bazoš filter" prototype (0.10.0), rebuilt as an open-source project.
@@ -9,9 +24,7 @@ The "Bazoš filter" prototype (0.10.0), rebuilt as an open-source project.
   `src/skip/`. Adding one is dropping a file in and running `npm run build`;
   the build picks it up and writes the load order into the manifest and the
   pages
-- **Settings moved to a real options page.** The popup is now only the lists,
-  which was the point of opening it. The options page opens from the popup's
-  *Nastavenia* button or from the add-ons manager
+- Settings on a separate options page (moved back into the popup in 1.1.0)
 - **Works on a phone.** The popup has a viewport tag, so Firefox for Android no
   longer draws it at desktop scale, and switches to one column with bigger tap
   targets on touch screens

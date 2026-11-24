@@ -1,5 +1,5 @@
 /* Bazoš Rider — ui/dom.js
- * DOM helpers for the popup and the options page. Never innerHTML: listing
+ * DOM helpers for the popup. Never innerHTML: listing
  * titles come from strangers. */
 (function (BR) {
   "use strict";
