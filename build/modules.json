@@ -12,7 +12,9 @@
     "         the whole procedure for adding a filter. The same goes for",
     "         skip/, badges/ and lists/. Display order comes from each module's",
     "         own `order` field, never from the file name.",
-    "pages    what each page loads after core and the modules"
+    "pages    what each page loads after core and the modules",
+    "background  the script that puts the deal count on the toolbar icon;",
+    "            it loads nothing else"
   ],
   "core": [
     "core/namespace.js",
@@ -29,13 +31,17 @@
     "core/products.js",
     "core/groups.js",
     "core/context.js",
+    "core/deals.js",
     "core/badges.js",
     "core/lists.js"
   ],
   "modules": ["filters", "skip", "badges", "lists"],
+  "background": ["background/background.js"],
   "pages": {
     "content": [
       "content/badges.js",
+      "content/highlight.js",
+      "content/scan.js",
       "content/banner.js",
       "content/main.js"
     ],

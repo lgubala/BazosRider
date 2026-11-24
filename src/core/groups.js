@@ -86,6 +86,7 @@
    * Groups the whole history. Returns
    *   shareOf(id) → { share, free, n, label, median } | null
    *   groupOf(id) → { label, n, median } | null
+   *   membersOf(id) → the other history entries in the same group
    * Free listings always get share 1.
    */
   function build(history, opts) {
@@ -112,18 +113,21 @@
         if (score > bestScore) { best = g; bestScore = score; }
       }
       if (!best) {
-        best = { key: "g" + groups.length, members: [], counts: new Map(), core: new Set() };
+        best = { key: "g" + groups.length, members: [], ids: [], counts: new Map(), core: new Set() };
         groups.push(best);
         list.push(best);
       }
       best.members.push(e.price);
+      best.ids.push(e.id);
       for (const t of tokens) best.counts.set(t, (best.counts.get(t) || 0) + 1);
       best.core = coreOf(best.counts, best.members.length);
       groupKey[e.id] = best.key;
     }
 
     const info = {};
+    const idsOf = {};
     for (const g of groups) {
+      idsOf[g.key] = g.ids;
       const prices = g.members.filter((p) => p != null && p > 0);
       const label = [...g.core]
         .sort((a, b) => g.counts.get(b) - g.counts.get(a) || b.length - a.length)
@@ -143,7 +147,12 @@
       return { share: (g.median - entry.price) / g.median, free: false, ...g };
     }
 
-    return { shareOf, groupOf };
+    /** The other entries of id's group (the listing itself left out). */
+    function membersOf(id) {
+      return (idsOf[groupKey[id]] || []).filter((m) => m !== id).map((m) => history[m]).filter(Boolean);
+    }
+
+    return { shareOf, groupOf, membersOf };
   }
 
   BR.groups = { tokensOf, matchOf, canJoin, build };

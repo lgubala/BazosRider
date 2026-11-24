@@ -1,12 +1,20 @@
 # Privacy Policy for Bazoš Rider
 
-_Last updated: 24 November 2026_
+_Last updated: 25 November 2026_
 
 ## The short version
 
 Bazoš Rider does not collect, transmit, or sell any data. There is no server,
-no account, no analytics, and no network request of any kind. Everything
-happens in your own browser.
+no account and no analytics. Everything happens in your own browser.
+
+## Network requests
+
+None, except one you ask for. When you click *Prejsť ďalších 10 strán* in the
+bar above Bazoš results, the extension loads the next pages of the search you
+are on from bazos.sk, the same pages Bazoš's *Ďalšia* link opens, one at a
+time with a pause between them, up to ten. It sends nothing but the ordinary
+page request your browser would send. It never loads anything on its own or
+in the background, and never contacts any other site.
 
 ## What the extension stores
 
@@ -20,7 +28,8 @@ your device only:
   days it was first and last seen. Nothing about you, and nothing about the
   seller.
 
-History is built only from pages you open yourself. Entries not seen for about
+History is built only from pages you open yourself, and from the pages
+loaded when you click *Prejsť ďalších 10 strán*. Entries not seen for about
 a year are deleted automatically, and the popup settings have a button that
 deletes all of it. Uninstalling the extension removes everything.
 

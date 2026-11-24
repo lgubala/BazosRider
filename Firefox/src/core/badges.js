@@ -1,8 +1,9 @@
 /* Bazoš Rider — core/badges.js
  *
  * Runs the badge modules from src/badges/ for one listing on a Bazoš page.
- * Each module's test(listing, entry, ctx, shown) returns the badge text or
- * null. Modules run in `order`; `shown` holds the ids that already said
+ * Each module's test(listing, entry, ctx, shown) returns the badge text, or
+ * { text, color?, title?, details? } to change the colour, add a tooltip or
+ * attach a deal (core/deals.js) whose comparables open on click, or null. Modules run in `order`; `shown` holds the ids that already said
  * something, so a module can stay quiet when a more important one spoke.
  *
  *   listing  the parsed listing (listing.skip is the skip rule, if any)
@@ -11,20 +12,21 @@
 (function (BR) {
   "use strict";
 
-  /** [{ id, text, color }] for one listing. */
+  /** [{ id, text, color, title, details }] for one listing. */
   function forListing(listing, entry, ctx) {
     const out = [];
     const shown = new Set();
     for (const b of BR.badges.all()) {
-      let text = null;
+      let r = null;
       try {
-        text = b.test(listing, entry, ctx, shown);
+        r = b.test(listing, entry, ctx, shown);
       } catch (e) {
         console.error(`[bazos-rider] badge "${b.id}" failed`, e);
       }
-      if (!text) continue;
+      if (!r) continue;
+      if (typeof r === "string") r = { text: r };
       shown.add(b.id);
-      out.push({ id: b.id, text, color: b.color || "#57606a" });
+      out.push({ id: b.id, color: b.color || "#57606a", ...r });
     }
     return out;
   }

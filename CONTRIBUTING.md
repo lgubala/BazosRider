@@ -32,12 +32,14 @@ src/
     groups.js      automatic "similar listings" grouping
     products.js    manual product medians
     context.js     what every badge and list module receives
+    deals.js       "is this a good price?" for badges, highlight, bar, icon
     ...
   filters/      hide filters, one file each           ← modules
   skip/         "never record this" rules, one each   ← modules
   badges/       labels on Bazoš pages, one each       ← modules
   lists/        cards in the popup, one each          ← modules
-  content/      runs on bazos.sk: badges, banner, main
+  content/      runs on bazos.sk: badges, highlight, scan, the bar, main
+  background/   puts the deal count on the toolbar icon; nothing else
   popup/        the toolbar popup: lists view and settings view
   ui/           shared CSS and DOM helpers
 _locales/       sk (default) and en
@@ -58,6 +60,10 @@ Firefox/        GENERATED, committed. Never edit it.
 | Add a list to the popup | new file in `src/lists/` |
 | Keep a kind of listing out of price history | new file in `src/skip/` |
 | Change how similar listings are grouped | `src/core/groups.js` |
+| Change what counts as a good deal or a suspicious one | `src/core/deals.js`, thresholds in `config.js` |
+| Change the bar above the results | `src/content/banner.js` |
+| Change the green highlight, fading or sorting | `src/content/highlight.js` |
+| Change how further pages are read | `src/content/scan.js`, `SCAN_*` in `config.js` |
 | The look | `src/ui/base.css`, `src/popup/popup.css` |
 
 ## Adding a module
@@ -110,7 +116,9 @@ BR.badges.add({
   id: "old",
   order: 60,                      // lower runs first and shows first
   color: "#57606a",
-  /* Return the text, or null for no badge.
+  /* Return the text, or null for no badge. Return { text, color, title }
+   * instead to change the colour or add a tooltip; add details: deal (from
+   * BR.deals) and a click shows what the deal was compared with.
    * entry is the history entry (null when skipped).
    * shown is the set of badge ids that already spoke for this listing. */
   test(listing, entry, ctx, shown) {
@@ -186,8 +194,13 @@ always commit both.
 
 ## Rules of the house
 
-- **No background fetching, ever.** Bazoš's `robots.txt` disallows search
-  pages. Data only comes from pages the user loads.
+- **Nothing loads on its own.** Data comes from pages the user opens. The one
+  exception is *Prejsť ďalších strán*, and only because the user clicked it:
+  the pages *Ďalšia* would open, one at a time, `SCAN_DELAY_MS` apart, at
+  most `SCAN_PAGES`, with a stop button. No timers, no background fetching,
+  no other site. Bazoš's `robots.txt` asks automated clients to stay off
+  search pages; a scan is a person's click, kept slow and short so it stays
+  that way. Do not turn it into something that runs by itself.
 - **No `innerHTML`** with listing text. Titles come from strangers.
 - **Slovak first.** Every string goes into both locales; Slovak is the
   default.
@@ -196,7 +209,8 @@ always commit both.
 
 ## Known limitations
 
-- **Tested in Firefox desktop by hand; Android not yet.**
+- **Tested in Firefox desktop by hand; Android not yet.** On Android the
+  toolbar count does not show: Firefox for Android has no icon badge.
 - **Two Bazoš tabs loading at once** can overwrite each other's history
   writes. Rare and harmless (the next load records the listings again).
 - **Products without a model number** are rarely grouped in strict mode.
@@ -205,5 +219,9 @@ always commit both.
   times" rule is a possible improvement.
 - **The "↓ −490 953 €" drop** from the prototype was never reproduced. A guard
   ignores drops where the old price is over 10× the new one.
-- **Open decisions:** notifications, and whether to read Bazoš's bare
-  `rss.php` (allowed by robots.txt) or rely on Bazoš's own e-mail alerts.
+- **Scanned pages are not re-read.** Going back to a page after a scan shows
+  its deals from history, but the "Ďalšie strany" list is gone until the next
+  scan.
+- **Open decisions:** watched searches with notifications, and whether to read
+  Bazoš's bare `rss.php` (allowed by robots.txt) for them or rely on Bazoš's
+  own e-mail alerts.

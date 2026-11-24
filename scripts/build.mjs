@@ -107,7 +107,7 @@ const ICONS = {
   96: "icons/icon-96.png", 128: "icons/icon-128.png"
 };
 
-function manifest(lists, ver) {
+function manifest(lists, ver, background) {
   return {
     manifest_version: 3,
     name: "Bazoš Rider",
@@ -125,6 +125,7 @@ function manifest(lists, ver) {
     },
     icons: { ...ICONS },
     permissions: ["storage", "unlimitedStorage"],
+    background: { scripts: background.map((f) => "src/" + f) },
     content_scripts: [{
       matches: MATCHES,
       js: lists.content.map((f) => "src/" + f),
@@ -153,11 +154,12 @@ function assemble(out, ver) {
   for (const dir of COPIED) copyTree(join(ROOT, dir), join(out, dir));
 
   const lists = scripts();
-  writeFileSync(join(out, "manifest.json"), JSON.stringify(manifest(lists, ver), null, 2) + "\n");
+  const { background = [] } = JSON.parse(read("build/modules.json"));
+  writeFileSync(join(out, "manifest.json"), JSON.stringify(manifest(lists, ver, background), null, 2) + "\n");
   for (const page of Object.keys(PAGES)) injectScripts(out, page, lists[page]);
 
   /* A listed file that is missing fails only at runtime, silently. Catch it here. */
-  const listed = new Set(Object.values(lists).flat());
+  const listed = new Set([...Object.values(lists).flat(), ...background]);
   const missing = [...listed].filter((f) => !existsSync(join(out, "src", f))).sort();
   if (missing.length) throw new Error(`listed but not present:\n  ${missing.join("\n  ")}`);
   return listed.size;

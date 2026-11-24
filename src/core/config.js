@@ -50,6 +50,27 @@
       "mam", "moj", "moja", "the", "and", "of", "darujem", "zadarmo", "osobny", "odber"
     ],
 
+    /* --- on the Bazoš page ---------------------------------------------- */
+
+    /* Rows at least this far under their median get a green highlight and
+     * count in the page's summary bar and on the toolbar icon. The user's
+     * copy is settings.highlightShare (popup settings → "Na stránke"). */
+    HIGHLIGHT_SHARE: 0.15,
+
+    /* This far under the median or more is more often a different product,
+     * a broken one or a scam than a bargain: an orange ⚠ badge instead, and
+     * it never counts as a deal. */
+    SUSPICIOUS_SHARE: 0.7,
+    SUSPICIOUS_COLOR: "#bc4c00",
+
+    DETAILS_LIMIT: 8,       // comparables shown when a deal badge is clicked
+
+    /* "Prejsť ďalšie strany": how many result pages, and the pause between
+     * two requests so Bazoš is not hammered. */
+    SCAN_PAGES: 10,
+    SCAN_DELAY_MS: 1500,
+    SCAN_SHOWN: 8,          // deals from those pages listed in the bar
+
     /* --- popup ---------------------------------------------------------- */
 
     LIST_LIMIT: 5,          // rows per category, or per list for "top" lists

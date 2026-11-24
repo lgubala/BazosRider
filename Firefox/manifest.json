@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Bazoš Rider",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "__MSG_extDescription__",
   "default_locale": "sk",
   "homepage_url": "https://github.com/lgubala/BazosRider",
@@ -30,6 +30,11 @@
     "storage",
     "unlimitedStorage"
   ],
+  "background": {
+    "scripts": [
+      "src/background/background.js"
+    ]
+  },
   "content_scripts": [
     {
       "matches": [
@@ -51,11 +56,14 @@
         "src/core/products.js",
         "src/core/groups.js",
         "src/core/context.js",
+        "src/core/deals.js",
         "src/core/badges.js",
         "src/core/lists.js",
         "src/filters/category.js",
         "src/filters/keyword.js",
+        "src/skip/broken.js",
         "src/skip/installment.js",
+        "src/skip/wanted.js",
         "src/badges/drop.js",
         "src/badges/free.js",
         "src/badges/group-deal.js",
@@ -66,6 +74,8 @@
         "src/lists/free.js",
         "src/lists/products.js",
         "src/content/badges.js",
+        "src/content/highlight.js",
+        "src/content/scan.js",
         "src/content/banner.js",
         "src/content/main.js"
       ],

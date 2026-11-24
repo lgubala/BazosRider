@@ -12,6 +12,7 @@
         if (!e.price || !BR.lists.inPeriod(e, period, ctx)) continue;
         const f = BR.lists.groupFields(e, ctx);
         if (f.share == null || f.free || f.share < min) continue;
+        if (f.share >= BR.config.SUSPICIOUS_SHARE) continue;   // more likely wrong than a deal
         rows.push({ ...e, ...f });
       }
       return rows.sort((a, b) => b.share - a.share);

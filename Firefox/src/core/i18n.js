@@ -3,7 +3,8 @@
  * All visible text comes from _locales/<lang>/messages.json. Slovak is the
  * default; English is used when the browser runs in English.
  *
- *   BR.t("banner_hidden", { hidden: 3, shown: 17, total: 20 })
+ *   BR.t("bar_hidden", { hidden: 3, total: 20 })
+ *   BR.tn("bar_deals", 3)      → bar_deals_few: "3 výhodné ponuky …"
  *
  * Substitutions are written {name} in messages.json, not Firefox's $1/$NAME$
  * placeholders: they read better, and a "$" in a message cannot break them.
@@ -19,6 +20,13 @@
     if (!text) text = key;
     if (subs) text = text.replace(/\{(\w+)\}/g, (m, k) => (k in subs ? String(subs[k]) : m));
     return text;
+  };
+
+  /** Plural by count: key_one (1), key_few (2–4), key_many (0, 5+). Slovak
+   * needs all three; English writes the same text in _few and _many. */
+  BR.tn = function (key, n, subs) {
+    const form = n === 1 ? "one" : n >= 2 && n <= 4 ? "few" : "many";
+    return BR.t(key + "_" + form, { n, ...(subs || {}) });
   };
 
   /** The UI language, for number formatting. */

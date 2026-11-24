@@ -155,9 +155,6 @@
   "meta_product": {
     "message": "produkt „{name}“"
   },
-  "banner_hidden": {
-    "message": "Bazoš Rider: skryté {hidden} · zobrazené {shown} z {total}"
-  },
   "banner_next": {
     "message": "→ ďalšia strana"
   },
@@ -262,5 +259,89 @@
   },
   "deals_none_comparable_loose": {
     "message": "{when}: {n} inzerátov s cenou, ale žiadne dva nemajú dosť podobný názov, takže nie je s čím porovnať."
+  },
+  "skip_wanted_badge": {
+    "message": "kúpim / hľadám"
+  },
+  "skip_broken_badge": {
+    "message": "na diely / nefunkčné"
+  },
+  "badge_details_title": {
+    "message": "Klikni: s čím sa porovnávalo"
+  },
+  "badge_suspicious_title": {
+    "message": "Podozrivo lacné: často iný produkt, poškodený kus alebo podvod. Klikni a pozri, s čím sa porovnávalo."
+  },
+  "details_title": {
+    "message": "Medián {median} z {n} inzerátov. Porovnané s:"
+  },
+  "details_more": {
+    "message": "… a ďalších {n}"
+  },
+  "details_hint": {
+    "message": "Ak sem niečo nepatrí, porovnanie je nesprávne."
+  },
+  "details_suspicious": {
+    "message": "Viac ako 70 % pod mediánom: over si stav, fotky a predajcu. Nepočíta sa medzi výhodné."
+  },
+  "bar_deals_one": {
+    "message": "1 výhodná ponuka na tejto strane:"
+  },
+  "bar_deals_few": {
+    "message": "{n} výhodné ponuky na tejto strane:"
+  },
+  "bar_deals_many": {
+    "message": "{n} výhodných ponúk na tejto strane:"
+  },
+  "bar_no_deals": {
+    "message": "Na tejto strane nie je nič výhodné."
+  },
+  "bar_hidden": {
+    "message": "skryté {hidden} z {total}"
+  },
+  "bar_only_deals": {
+    "message": "Len výhodné"
+  },
+  "bar_sort": {
+    "message": "Zoradiť podľa zľavy"
+  },
+  "bar_scan": {
+    "message": "Prejsť ďalších {pages} strán"
+  },
+  "bar_scan_title": {
+    "message": "Načíta ďalšie strany tohto vyhľadávania, pomaly jednu za druhou, uloží ich ceny do histórie a ukáže výhodné ponuky z nich."
+  },
+  "bar_scanning": {
+    "message": "Načítavam stranu {done} z {pages} ({n} inzerátov)…"
+  },
+  "bar_stop": {
+    "message": "Zastaviť"
+  },
+  "bar_scan_error": {
+    "message": "Načítavanie sa zastavilo: {error}"
+  },
+  "bar_more_one": {
+    "message": "Ďalšie strany ({pages}): 1 výhodná ponuka"
+  },
+  "bar_more_few": {
+    "message": "Ďalšie strany ({pages}): {n} výhodné ponuky"
+  },
+  "bar_more_many": {
+    "message": "Ďalšie strany ({pages}): {n} výhodných ponúk"
+  },
+  "bar_more_none": {
+    "message": "Ďalšie strany ({pages}, {n} inzerátov): nič výhodné."
+  },
+  "bar_more_rest": {
+    "message": "… a ďalších {n}"
+  },
+  "options_page": {
+    "message": "Na stránke Bazoša"
+  },
+  "options_page_hint": {
+    "message": "Výhodné ponuky sa zvýraznia zelenou, ukážu sa v lište nad výsledkami a ich počet na ikone doplnku. Ponuky viac ako 70 % pod mediánom dostanú oranžové ⚠ a nepočítajú sa."
+  },
+  "options_highlight": {
+    "message": "Zvýrazniť od (pod mediánom)"
   }
 }

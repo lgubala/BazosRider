@@ -11,6 +11,8 @@
  *   dealThreshold: 0.2,                          manual product: 20 % under median
  *   auto: { enabled, minComparables, minShare, mode }, automatic grouping;
  *         mode "strict" (model number needed) or "loose"
+ *   highlightShare: 0.15,                        page highlight from 15 % under
+ *   page: { onlyDeals, sortByDeal }              the switches in the page's bar
  *   clearedAt: { [listId]: ISO time | null }     the popup's "Vyčistiť" buttons
  * }
  */
@@ -37,6 +39,8 @@
       products: [],
       dealThreshold: C.DEAL_THRESHOLD,
       auto: { ...C.AUTO },
+      highlightShare: C.HIGHLIGHT_SHARE,
+      page: { onlyDeals: false, sortByDeal: false },
       clearedAt: {}
     };
   }
@@ -62,6 +66,10 @@
     if (Number.isFinite(raw.dealThreshold)) out.dealThreshold = raw.dealThreshold;
     if (plain(raw.auto)) out.auto = { ...out.auto, ...raw.auto };
     if (!["strict", "loose"].includes(out.auto.mode)) out.auto.mode = C.AUTO.mode;
+    if (Number.isFinite(raw.highlightShare)) out.highlightShare = raw.highlightShare;
+    if (plain(raw.page)) {
+      out.page = { onlyDeals: !!raw.page.onlyDeals, sortByDeal: !!raw.page.sortByDeal };
+    }
     if (plain(raw.clearedAt)) out.clearedAt = { ...raw.clearedAt };
     return out;
   }

@@ -155,9 +155,6 @@
   "meta_product": {
     "message": "product “{name}”"
   },
-  "banner_hidden": {
-    "message": "Bazoš Rider: hidden {hidden} · showing {shown} of {total}"
-  },
   "banner_next": {
     "message": "→ next page"
   },
@@ -262,5 +259,89 @@
   },
   "deals_none_comparable_loose": {
     "message": "{when}: {n} priced listings, but no two have titles alike enough, so there is nothing to compare."
+  },
+  "skip_wanted_badge": {
+    "message": "wanted / swap"
+  },
+  "skip_broken_badge": {
+    "message": "for parts / broken"
+  },
+  "badge_details_title": {
+    "message": "Click: what it was compared with"
+  },
+  "badge_suspicious_title": {
+    "message": "Suspiciously cheap: often a different product, a damaged item or a scam. Click to see what it was compared with."
+  },
+  "details_title": {
+    "message": "Median {median} of {n} listings. Compared with:"
+  },
+  "details_more": {
+    "message": "… and {n} more"
+  },
+  "details_hint": {
+    "message": "If something here does not belong, the comparison is wrong."
+  },
+  "details_suspicious": {
+    "message": "More than 70 % under the median: check the condition, photos and seller. Not counted as a deal."
+  },
+  "bar_deals_one": {
+    "message": "1 good deal on this page:"
+  },
+  "bar_deals_few": {
+    "message": "{n} good deals on this page:"
+  },
+  "bar_deals_many": {
+    "message": "{n} good deals on this page:"
+  },
+  "bar_no_deals": {
+    "message": "No good deals on this page."
+  },
+  "bar_hidden": {
+    "message": "hidden {hidden} of {total}"
+  },
+  "bar_only_deals": {
+    "message": "Deals only"
+  },
+  "bar_sort": {
+    "message": "Sort by discount"
+  },
+  "bar_scan": {
+    "message": "Go through the next {pages} pages"
+  },
+  "bar_scan_title": {
+    "message": "Reads the next pages of this search, slowly one after another, saves their prices to history and shows the good deals among them."
+  },
+  "bar_scanning": {
+    "message": "Reading page {done} of {pages} ({n} listings)…"
+  },
+  "bar_stop": {
+    "message": "Stop"
+  },
+  "bar_scan_error": {
+    "message": "Reading stopped: {error}"
+  },
+  "bar_more_one": {
+    "message": "Next pages ({pages}): 1 good deal"
+  },
+  "bar_more_few": {
+    "message": "Next pages ({pages}): {n} good deals"
+  },
+  "bar_more_many": {
+    "message": "Next pages ({pages}): {n} good deals"
+  },
+  "bar_more_none": {
+    "message": "Next pages ({pages}, {n} listings): nothing good."
+  },
+  "bar_more_rest": {
+    "message": "… and {n} more"
+  },
+  "options_page": {
+    "message": "On the Bazoš page"
+  },
+  "options_page_hint": {
+    "message": "Good deals get a green highlight, are listed in the bar above the results, and their count shows on the add-on's icon. Listings more than 70 % under the median get an orange ⚠ and are not counted."
+  },
+  "options_highlight": {
+    "message": "Highlight from (under the median)"
   }
 }

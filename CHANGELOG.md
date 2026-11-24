@@ -1,5 +1,29 @@
 # Changelog
 
+## 1.3.0
+
+- **The good deals are visible as soon as a page opens.** A bar above the
+  results says how many there are, *3 výhodné ponuky na tejto strane*, with a
+  chip per deal that scrolls to it. Deals get a green edge, and the toolbar
+  icon shows the count for that tab. "Good" is 15 % or more under the median,
+  adjustable in *Nastavenia → Na stránke Bazoša*
+- **Len výhodné** fades out everything that is not a deal. **Zoradiť podľa
+  zľavy** puts the biggest discount first; switching it off restores Bazoš's
+  order. Both are remembered across pages
+- **Prejsť ďalších 10 strán** reads the next pages of the current search, one
+  every 1.5 seconds, saves their prices to history and lists the good deals
+  found there. Only on a click, with a stop button. This is the first time
+  Bazoš Rider loads a page by itself; PRIVACY.md says exactly what it does
+- **Click a discount badge** to see what it was compared with: the median and
+  the cheapest listings of the same group, each a link
+- **Suspiciously cheap gets a warning.** 70 % or more under the median is an
+  orange *⚠* badge instead of a deal, is not highlighted, not counted, and
+  left out of *Deal dňa* and *Deal roka*
+- **"Kúpim / Hľadám / Vymením"** ads and **broken or for-parts** items ("na
+  diely", "nefunkčný", "prasknutý displej", "iCloud lock") are no longer
+  recorded. Their prices pulled medians down and made them look like
+  bargains. They show a grey badge saying why
+
 ## 1.2.0
 
 - **Looser grouping, if you want it.** *Nastavenia → Automatické

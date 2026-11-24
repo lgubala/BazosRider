@@ -64,6 +64,7 @@
       $("auto-min").value = s.auto.minComparables;
       $("products").value = s.products.join("\n");
       $("threshold").value = Math.round(s.dealThreshold * 100);
+      $("highlight").value = Math.round(s.highlightShare * 100);
     }
 
     function readComparison(settings) {
@@ -76,6 +77,10 @@
       };
       settings.products = lines($("products").value);
       settings.dealThreshold = clamp(Number($("threshold").value), 1, 90, C.DEAL_THRESHOLD * 100) / 100;
+      /* Below SUSPICIOUS_SHARE, or nothing could ever be highlighted. */
+      const maxHighlight = Math.round(C.SUSPICIOUS_SHARE * 100) - 1;
+      settings.highlightShare =
+        clamp(Number($("highlight").value), 1, maxHighlight, C.HIGHLIGHT_SHARE * 100) / 100;
     }
 
     /* --- history --------------------------------------------------------- */

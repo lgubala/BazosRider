@@ -19,12 +19,24 @@ All of it happens in your browser, from pages you open yourself.
 
 ## What it does
 
-**Hides listings.** Tick whole sections (cars, jobs, real estate…) or type
-words like `na diely`. A banner above the results says how many were hidden,
-with Bazoš's own *next page* link, so an emptied page is one click from the
-next one.
+**Shows the good deals the moment a page opens.** A bar above the results
+says *3 výhodné ponuky na tejto strane: −42 % −31 % −25 %*; each number
+scrolls to its listing. The deals themselves get a green edge, and the
+add-on's toolbar icon shows how many there are. Two switches in the bar:
+*Len výhodné* fades everything else out, *Zoradiť podľa zľavy* puts the
+biggest discount first. "Good" means at least 15 % under the median of
+similar listings; change it under *Nastavenia → Na stránke Bazoša*.
 
-**Badges the good ones.** Right under the price on Bazoš itself:
+**Goes through the rest of the search on request.** *Prejsť ďalších 10 strán*
+reads the next pages of the search you are on, one every 1.5 seconds, and
+lists the good deals it found there. It also fills the price history, so the
+first visit to a new kind of item already has something to compare with.
+
+**Hides listings.** Tick whole sections (cars, jobs, real estate…) or type
+words like `na diely`. The bar says how many were hidden, next to Bazoš's own
+*next page* link.
+
+**Badges every listing.** Right under the price on Bazoš itself:
 
 | Badge | Means |
 |---|---|
@@ -32,10 +44,17 @@ next one.
 | `↓ −200 €` | The price dropped today since you last saw it |
 | `−25 % vs. medián (8 inz.)` | Under the median of a product you typed in |
 | `−12 % vs. 4 podobných` | Under the median of similar listings found automatically |
+| `⚠ −78 % vs. 6 podobných` | So cheap it is more likely a different item, a broken one or a scam. Not counted as a deal |
 | `splátky / leasing` | Not recorded: the number is a down payment or an installment |
+| `kúpim / hľadám` | Not recorded: someone wants to buy or swap |
+| `na diely / nefunkčné` | Not recorded: broken or for parts, it would make working ones look overpriced |
+
+Click a discount badge to see the listings it was compared with and their
+prices. If one of them does not belong, the comparison is wrong, and an issue
+with both titles helps fix it.
 
 <p align="center">
-  <img src="docs/screenshots/page.png" alt="A Bazoš results page with the banner and a discount badge" width="560">
+  <img src="docs/screenshots/page.png" alt="A Bazoš results page: the bar with two deals on this page and two more from the next pages, green highlighted deals, an orange suspicious badge and grey skipped ones" width="640">
 </p>
 
 **Keeps leaderboards in the popup.**
@@ -82,12 +101,14 @@ Works on Firefox desktop and Firefox for Android (142 or newer).
 
 ## Privacy
 
-Nothing leaves your browser. No servers, no accounts, no analytics. The
-extension makes no network requests at all: not to the author, not to Bazoš.
+Nothing leaves your browser. No servers, no accounts, no analytics, and no
+request to anyone but Bazoš.
 
-It never fetches Bazoš pages in the background either. Bazoš's `robots.txt`
-asks automated clients to stay off search pages, and the only data Bazoš Rider
-uses is what you load yourself. See [PRIVACY.md](PRIVACY.md).
+Bazoš Rider reads the pages you open. The only time it loads a page itself is
+when you click *Prejsť ďalších 10 strán*: then it loads the next pages of that
+search, the ones *Ďalšia* would show you, one at a time with a pause between
+them, and stops at ten or when you click *Zastaviť*. Never on its own, never
+in the background. See [PRIVACY.md](PRIVACY.md).
 
 ## Add a module
 
