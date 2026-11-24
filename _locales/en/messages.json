@@ -1,0 +1,239 @@
+{
+  "extDescription": {
+    "message": "Hide what you don't want on bazos.sk and spot the good prices. Everything stays in your browser."
+  },
+  "cat_auto": {
+    "message": "Cars"
+  },
+  "cat_deti": {
+    "message": "Children"
+  },
+  "cat_dom": {
+    "message": "House and garden"
+  },
+  "cat_elektro": {
+    "message": "Electronics"
+  },
+  "cat_foto": {
+    "message": "Photo"
+  },
+  "cat_hudba": {
+    "message": "Music"
+  },
+  "cat_knihy": {
+    "message": "Books"
+  },
+  "cat_mobil": {
+    "message": "Phones"
+  },
+  "cat_motocykle": {
+    "message": "Motorbikes"
+  },
+  "cat_nabytok": {
+    "message": "Furniture"
+  },
+  "cat_oblecenie": {
+    "message": "Clothing"
+  },
+  "cat_pc": {
+    "message": "Computers"
+  },
+  "cat_praca": {
+    "message": "Jobs"
+  },
+  "cat_reality": {
+    "message": "Real estate"
+  },
+  "cat_sluzby": {
+    "message": "Services"
+  },
+  "cat_sport": {
+    "message": "Sport"
+  },
+  "cat_stroje": {
+    "message": "Machinery"
+  },
+  "cat_vstupenky": {
+    "message": "Tickets"
+  },
+  "cat_zvierata": {
+    "message": "Animals"
+  },
+  "cat_ostatne": {
+    "message": "Other"
+  },
+  "cat_other": {
+    "message": "Other"
+  },
+  "filter_category_title": {
+    "message": "Hide categories"
+  },
+  "filter_category_hint": {
+    "message": "Listings from the ticked Bazoš sections are hidden."
+  },
+  "filter_keyword_title": {
+    "message": "Hide keywords"
+  },
+  "filter_keyword_hint": {
+    "message": "One word or phrase per line. Matched in the title and description, ignoring case and diacritics."
+  },
+  "filter_keyword_placeholder": {
+    "message": "na diely\nhľadám"
+  },
+  "skip_installment_badge": {
+    "message": "installments / leasing"
+  },
+  "badge_free": {
+    "message": "FREE"
+  },
+  "badge_drop": {
+    "message": "↓ −{amount}"
+  },
+  "badge_product": {
+    "message": "−{pct} % vs. median ({n} ads)"
+  },
+  "badge_group": {
+    "message": "−{pct} % vs. {n} similar"
+  },
+  "list_cheapest_title": {
+    "message": "Cheapest today"
+  },
+  "list_cheapest_hint": {
+    "message": "(lowest price)"
+  },
+  "list_cheapest_empty": {
+    "message": "No priced listings seen today yet."
+  },
+  "list_day_title": {
+    "message": "Deal of the day"
+  },
+  "list_day_hint": {
+    "message": "(vs. similar)"
+  },
+  "list_day_empty": {
+    "message": "Nothing today yet. Listings with the same model number are compared here."
+  },
+  "list_year_title": {
+    "message": "Deal of the year"
+  },
+  "list_year_hint": {
+    "message": "(vs. similar)"
+  },
+  "list_year_empty": {
+    "message": "Nothing this year yet."
+  },
+  "list_free_title": {
+    "message": "Free"
+  },
+  "list_free_empty": {
+    "message": "No free listings yet."
+  },
+  "list_products_title": {
+    "message": "Your products: today"
+  },
+  "list_products_empty": {
+    "message": "No good deals today yet."
+  },
+  "list_products_none": {
+    "message": "No products yet. Add some in the settings."
+  },
+  "list_auto_off": {
+    "message": "Automatic comparison is switched off."
+  },
+  "list_empty": {
+    "message": "Nothing yet."
+  },
+  "meta_group": {
+    "message": "group “{name}”"
+  },
+  "meta_median": {
+    "message": "median {price} ({n} ads)"
+  },
+  "meta_seen": {
+    "message": "seen {date}"
+  },
+  "meta_product": {
+    "message": "product “{name}”"
+  },
+  "banner_hidden": {
+    "message": "Bazoš Rider: hidden {hidden} · showing {shown} of {total}"
+  },
+  "banner_next": {
+    "message": "→ next page"
+  },
+  "tab_all": {
+    "message": "All"
+  },
+  "popup_settings": {
+    "message": "Settings"
+  },
+  "popup_history_count": {
+    "message": "{n} listings in history"
+  },
+  "popup_clear": {
+    "message": "Clear"
+  },
+  "options_title": {
+    "message": "Bazoš Rider – settings"
+  },
+  "options_filters": {
+    "message": "Hiding listings"
+  },
+  "options_filters_hint": {
+    "message": "Hidden listings disappear from Bazoš and from the lists. A banner above the results says how many were hidden."
+  },
+  "options_auto": {
+    "message": "Automatic comparison"
+  },
+  "options_auto_hint": {
+    "message": "Similar listings are grouped only when their titles share a model number. No comparison beats a wrong one."
+  },
+  "options_auto_enabled": {
+    "message": "on"
+  },
+  "options_auto_share": {
+    "message": "Minimum discount"
+  },
+  "options_auto_min": {
+    "message": "Minimum number of comparable listings"
+  },
+  "options_products": {
+    "message": "Your products"
+  },
+  "options_products_hint": {
+    "message": "One product per line. Every listing whose title contains the phrase is compared with the median of the others. The median counts from 5 listings."
+  },
+  "options_products_placeholder": {
+    "message": "iphone 13\nromer king"
+  },
+  "options_threshold": {
+    "message": "Mark when the price is at least"
+  },
+  "options_save": {
+    "message": "Save"
+  },
+  "options_saved": {
+    "message": "Saved. Reload the Bazoš page."
+  },
+  "options_history": {
+    "message": "Price history"
+  },
+  "options_history_count": {
+    "message": "{n} listings in history."
+  },
+  "options_history_hint": {
+    "message": "Only what you open on Bazoš yourself is stored, and only in this browser. Anything older than a year is removed on its own."
+  },
+  "options_history_reset": {
+    "message": "Delete price history"
+  },
+  "options_history_confirm": {
+    "message": "Delete the whole price history? Comparisons will have to be collected again."
+  },
+  "options_history_done": {
+    "message": "History deleted."
+  },
+  "options_not_affiliated": {
+    "message": "Not affiliated with Bazoš.sk."
+  }
+}

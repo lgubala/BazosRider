@@ -1,0 +1,53 @@
+{
+  "_comment": [
+    "The load order, defined once. scripts/build.mjs reads this file and writes",
+    "the manifest's content_scripts and the <script> tags of the popup and the",
+    "options page from it.",
+    "",
+    "Paths are relative to src/. These are classic scripts sharing one global,",
+    "BR, so a file must come after anything it reads at load time.",
+    "",
+    "core     shared by every page, in this order",
+    "modules  folders whose files are picked up automatically, sorted by name.",
+    "         Dropping a file into src/filters/ and running `npm run build` is",
+    "         the whole procedure for adding a filter. The same goes for",
+    "         skip/, badges/ and lists/. Display order comes from each module's",
+    "         own `order` field, never from the file name.",
+    "pages    what each page loads after core and the modules"
+  ],
+  "core": [
+    "core/namespace.js",
+    "core/config.js",
+    "core/i18n.js",
+    "core/text.js",
+    "core/categories.js",
+    "core/parse.js",
+    "core/settings.js",
+    "core/storage.js",
+    "core/filters.js",
+    "core/skips.js",
+    "core/history.js",
+    "core/products.js",
+    "core/groups.js",
+    "core/context.js",
+    "core/badges.js",
+    "core/lists.js"
+  ],
+  "modules": ["filters", "skip", "badges", "lists"],
+  "pages": {
+    "content": [
+      "content/badges.js",
+      "content/banner.js",
+      "content/main.js"
+    ],
+    "popup": [
+      "ui/dom.js",
+      "popup/rows.js",
+      "popup/popup.js"
+    ],
+    "options": [
+      "ui/dom.js",
+      "options/options.js"
+    ]
+  }
+}

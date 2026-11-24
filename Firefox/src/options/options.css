@@ -1,0 +1,28 @@
+/* Bazoš Rider — options page. One readable column, desktop and phone. */
+
+main { max-width: 760px; margin: 0 auto; padding: 24px 18px 48px; display: grid; gap: 16px; }
+
+h2 { margin-bottom: .2em; }
+
+.filter { border-top: 1px solid var(--line-soft); padding: 12px 0 4px; }
+.filter:first-child { border-top: none; }
+.filter > label { font-weight: 600; display: flex; align-items: center; gap: 8px; }
+.filter .body { margin-top: 6px; }
+.filter.off .body { opacity: .5; }
+
+.checks { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: .3em .8em; }
+.checks label { display: flex; align-items: center; gap: 6px; }
+
+label.line { display: flex; align-items: center; gap: 8px; margin: .5em 0; flex-wrap: wrap; }
+
+.actions { display: flex; align-items: center; gap: 12px; position: sticky; bottom: 0;
+           padding: 10px 0; background: var(--bg); }
+#status { color: var(--ok); font-size: 13px; }
+
+footer { text-align: center; }
+
+@media (hover: none) and (pointer: coarse) {
+  body { font-size: 15px; }
+  input[type=checkbox] { width: 20px; height: 20px; }
+  button { padding: .6em 1em; }
+}

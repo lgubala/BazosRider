@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8">
+  <!-- Without this, Firefox for Android draws the popup at desktop scale. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bazoš Rider</title>
+  <link rel="stylesheet" href="../ui/base.css">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <h1><img src="../../icons/icon-48.png" alt="">Bazoš Rider</h1>
+    <span id="count" class="hint"></span>
+    <button id="open-options" type="button" data-i18n="popup_settings"></button>
+  </header>
+
+  <!-- One card per module in src/lists/, built by popup.js. -->
+  <main class="grid">
+    <div id="col-tall" class="col"></div>
+    <div id="col-rest" class="col"></div>
+  </main>
+
+  <script src="../core/namespace.js"></script>
+  <script src="../core/config.js"></script>
+  <script src="../core/i18n.js"></script>
+  <script src="../core/text.js"></script>
+  <script src="../core/categories.js"></script>
+  <script src="../core/parse.js"></script>
+  <script src="../core/settings.js"></script>
+  <script src="../core/storage.js"></script>
+  <script src="../core/filters.js"></script>
+  <script src="../core/skips.js"></script>
+  <script src="../core/history.js"></script>
+  <script src="../core/products.js"></script>
+  <script src="../core/groups.js"></script>
+  <script src="../core/context.js"></script>
+  <script src="../core/badges.js"></script>
+  <script src="../core/lists.js"></script>
+  <script src="../filters/category.js"></script>
+  <script src="../filters/keyword.js"></script>
+  <script src="../skip/installment.js"></script>
+  <script src="../badges/drop.js"></script>
+  <script src="../badges/free.js"></script>
+  <script src="../badges/group-deal.js"></script>
+  <script src="../badges/product-deal.js"></script>
+  <script src="../badges/skipped.js"></script>
+  <script src="../lists/cheapest.js"></script>
+  <script src="../lists/deals.js"></script>
+  <script src="../lists/free.js"></script>
+  <script src="../lists/products.js"></script>
+  <script src="../ui/dom.js"></script>
+  <script src="../popup/rows.js"></script>
+  <script src="../popup/popup.js"></script>
+</body>
+</html>

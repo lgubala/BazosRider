@@ -1,0 +1,56 @@
+/* Bazoš Rider — toolbar popup. Two columns on desktop (tall lists left, the
+   rest right), one column on a phone. No inner scroll boxes: one page scrollbar. */
+
+body { width: 780px; max-width: 100%; padding: 14px 18px 18px; }
+
+header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+header h1 { flex: 1; }
+
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: start; }
+.col { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+
+.head { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 8px; }
+
+.tabs { display: flex; flex-wrap: wrap; gap: 5px; margin: 0 0 6px; }
+.tab {
+  border: 1px solid var(--chip-line);
+  border-radius: 12px;
+  padding: 3px 10px;
+  background: var(--chip);
+  font-size: 12px;
+}
+.tab.on { background: var(--link); border-color: var(--link); color: #fff; }
+.cathead { font-weight: 600; margin: .8em 0 .2em; color: var(--muted); font-size: 13px; }
+
+.row { display: flex; gap: 12px; align-items: flex-start; padding: 9px 0; border-bottom: 1px solid var(--line-soft); }
+.row:last-child { border-bottom: none; }
+.row .left { min-width: 92px; }
+.row .price { font-size: 20px; font-weight: 700; line-height: 1.1; white-space: nowrap; }
+.row .right { flex: 1; min-width: 0; }
+.row .right a { font-weight: 600; text-decoration: none; word-break: break-word; }
+.row .meta { color: var(--muted); font-size: 12px; margin-top: 3px; }
+
+.pill {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 2px 8px;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+  white-space: nowrap;
+}
+.pill.big { background: #1a7f37; }     /* 50 % and more */
+.pill.mid { background: #d9730d; }     /* 25 % and more */
+.pill.small { background: #0a66c2; }
+.pill.free { background: #1a7f37; }
+.pill.rank { background: #57606a; }
+
+/* Phones. Not a max-width query: a desktop popup's viewport can start
+   narrow while Firefox sizes it, which would flip it into one column. */
+@media (hover: none) and (pointer: coarse) {
+  body { width: 100%; padding: 12px; font-size: 15px; }
+  .grid { grid-template-columns: 1fr; }
+  .tab { padding: 6px 12px; font-size: 14px; }
+  button { padding: .6em 1em; }
+}

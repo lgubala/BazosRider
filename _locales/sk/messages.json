@@ -1,0 +1,239 @@
+{
+  "extDescription": {
+    "message": "Skryje na bazos.sk, čo nechceš vidieť, a ukáže výhodné ceny. Všetko lokálne v prehliadači."
+  },
+  "cat_auto": {
+    "message": "Auto"
+  },
+  "cat_deti": {
+    "message": "Deti"
+  },
+  "cat_dom": {
+    "message": "Dom a záhrada"
+  },
+  "cat_elektro": {
+    "message": "Elektro"
+  },
+  "cat_foto": {
+    "message": "Foto"
+  },
+  "cat_hudba": {
+    "message": "Hudba"
+  },
+  "cat_knihy": {
+    "message": "Knihy"
+  },
+  "cat_mobil": {
+    "message": "Mobily"
+  },
+  "cat_motocykle": {
+    "message": "Motocykle"
+  },
+  "cat_nabytok": {
+    "message": "Nábytok"
+  },
+  "cat_oblecenie": {
+    "message": "Oblečenie"
+  },
+  "cat_pc": {
+    "message": "PC"
+  },
+  "cat_praca": {
+    "message": "Práca"
+  },
+  "cat_reality": {
+    "message": "Reality"
+  },
+  "cat_sluzby": {
+    "message": "Služby"
+  },
+  "cat_sport": {
+    "message": "Šport"
+  },
+  "cat_stroje": {
+    "message": "Stroje"
+  },
+  "cat_vstupenky": {
+    "message": "Vstupenky"
+  },
+  "cat_zvierata": {
+    "message": "Zvieratá"
+  },
+  "cat_ostatne": {
+    "message": "Ostatné"
+  },
+  "cat_other": {
+    "message": "Iné"
+  },
+  "filter_category_title": {
+    "message": "Skryť kategórie"
+  },
+  "filter_category_hint": {
+    "message": "Inzeráty z označených sekcií Bazoša sa nezobrazia."
+  },
+  "filter_keyword_title": {
+    "message": "Skryť kľúčové slová"
+  },
+  "filter_keyword_hint": {
+    "message": "Jedno slovo alebo fráza na riadok. Hľadá sa v názve aj popise, bez ohľadu na veľkosť písmen a diakritiku."
+  },
+  "filter_keyword_placeholder": {
+    "message": "na diely\nhľadám"
+  },
+  "skip_installment_badge": {
+    "message": "splátky / leasing"
+  },
+  "badge_free": {
+    "message": "ZADARMO"
+  },
+  "badge_drop": {
+    "message": "↓ −{amount}"
+  },
+  "badge_product": {
+    "message": "−{pct} % vs. medián ({n} inz.)"
+  },
+  "badge_group": {
+    "message": "−{pct} % vs. {n} podobných"
+  },
+  "list_cheapest_title": {
+    "message": "Najlacnejšie dnes"
+  },
+  "list_cheapest_hint": {
+    "message": "(najnižšia cena)"
+  },
+  "list_cheapest_empty": {
+    "message": "Dnes zatiaľ žiadne inzeráty s cenou."
+  },
+  "list_day_title": {
+    "message": "Deal dňa"
+  },
+  "list_day_hint": {
+    "message": "(vs. podobné)"
+  },
+  "list_day_empty": {
+    "message": "Dnes zatiaľ nič. Inzeráty s rovnakým modelom sa porovnajú tu."
+  },
+  "list_year_title": {
+    "message": "Deal roka"
+  },
+  "list_year_hint": {
+    "message": "(vs. podobné)"
+  },
+  "list_year_empty": {
+    "message": "Zatiaľ nič v tomto roku."
+  },
+  "list_free_title": {
+    "message": "Zadarmo"
+  },
+  "list_free_empty": {
+    "message": "Zatiaľ žiadne inzeráty zadarmo."
+  },
+  "list_products_title": {
+    "message": "Ručne zadané produkty: dnes"
+  },
+  "list_products_empty": {
+    "message": "Dnes zatiaľ žiadne výhodné inzeráty."
+  },
+  "list_products_none": {
+    "message": "Žiadne ručne zadané produkty. Pridaj ich v nastaveniach."
+  },
+  "list_auto_off": {
+    "message": "Automatické porovnávanie je vypnuté."
+  },
+  "list_empty": {
+    "message": "Zatiaľ nič."
+  },
+  "meta_group": {
+    "message": "skupina „{name}“"
+  },
+  "meta_median": {
+    "message": "medián {price} ({n} inz.)"
+  },
+  "meta_seen": {
+    "message": "videné {date}"
+  },
+  "meta_product": {
+    "message": "produkt „{name}“"
+  },
+  "banner_hidden": {
+    "message": "Bazoš Rider: skryté {hidden} · zobrazené {shown} z {total}"
+  },
+  "banner_next": {
+    "message": "→ ďalšia strana"
+  },
+  "tab_all": {
+    "message": "Všetky"
+  },
+  "popup_settings": {
+    "message": "Nastavenia"
+  },
+  "popup_history_count": {
+    "message": "{n} inzerátov v histórii"
+  },
+  "popup_clear": {
+    "message": "Vyčistiť"
+  },
+  "options_title": {
+    "message": "Bazoš Rider – nastavenia"
+  },
+  "options_filters": {
+    "message": "Skrývanie inzerátov"
+  },
+  "options_filters_hint": {
+    "message": "Skryté inzeráty sa nezobrazia na Bazoši ani v zoznamoch. Nad výsledkami sa ukáže, koľko ich bolo skrytých."
+  },
+  "options_auto": {
+    "message": "Automatické porovnávanie"
+  },
+  "options_auto_hint": {
+    "message": "Podobné inzeráty sa spájajú len vtedy, ak majú v názve rovnaké číslo modelu. Radšej žiadne porovnanie ako zlé."
+  },
+  "options_auto_enabled": {
+    "message": "zapnuté"
+  },
+  "options_auto_share": {
+    "message": "Minimálna zľava"
+  },
+  "options_auto_min": {
+    "message": "Minimálny počet porovnateľných inzerátov"
+  },
+  "options_products": {
+    "message": "Ručne zadané produkty"
+  },
+  "options_products_hint": {
+    "message": "Jeden produkt na riadok. Každý inzerát, ktorého názov obsahuje tento výraz, sa porovná s mediánom ostatných. Medián platí od 5 inzerátov."
+  },
+  "options_products_placeholder": {
+    "message": "iphone 13\nromer king"
+  },
+  "options_threshold": {
+    "message": "Označiť, keď je cena aspoň o"
+  },
+  "options_save": {
+    "message": "Uložiť"
+  },
+  "options_saved": {
+    "message": "Uložené. Obnov stránku Bazoša."
+  },
+  "options_history": {
+    "message": "História cien"
+  },
+  "options_history_count": {
+    "message": "V histórii je {n} inzerátov."
+  },
+  "options_history_hint": {
+    "message": "Ukladá sa len to, čo si sám otvoríš na Bazoši, a iba v tomto prehliadači. Staršie ako rok sa maže samo."
+  },
+  "options_history_reset": {
+    "message": "Vymazať históriu cien"
+  },
+  "options_history_confirm": {
+    "message": "Vymazať celú históriu cien? Porovnania sa budú musieť nabrať nanovo."
+  },
+  "options_history_done": {
+    "message": "História vymazaná."
+  },
+  "options_not_affiliated": {
+    "message": "Nie je spojené s Bazoš.sk."
+  }
+}

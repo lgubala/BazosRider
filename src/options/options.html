@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="options_title">Bazoš Rider</title>
+  <link rel="stylesheet" href="../ui/base.css">
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <main>
+    <h1><img src="../../icons/icon-48.png" alt="">Bazoš Rider</h1>
+
+    <section class="card">
+      <h2 data-i18n="options_filters"></h2>
+      <p class="hint" data-i18n="options_filters_hint"></p>
+      <!-- One block per module in src/filters/, built by options.js. -->
+      <div id="filters"></div>
+    </section>
+
+    <section class="card">
+      <h2 data-i18n="options_auto"></h2>
+      <p class="hint" data-i18n="options_auto_hint"></p>
+      <label class="line"><input id="auto-enabled" type="checkbox"> <span data-i18n="options_auto_enabled"></span></label>
+      <label class="line"><span data-i18n="options_auto_share"></span>
+        <input id="auto-share" type="number" min="1" max="90"> %</label>
+      <label class="line"><span data-i18n="options_auto_min"></span>
+        <input id="auto-min" type="number" min="2" max="20"></label>
+    </section>
+
+    <section class="card">
+      <h2 data-i18n="options_products"></h2>
+      <p class="hint" data-i18n="options_products_hint"></p>
+      <textarea id="products" rows="5" data-i18n-placeholder="options_products_placeholder"></textarea>
+      <label class="line"><span data-i18n="options_threshold"></span>
+        <input id="threshold" type="number" min="1" max="90"> %</label>
+    </section>
+
+    <div class="actions">
+      <button id="save" class="primary" type="button" data-i18n="options_save"></button>
+      <span id="status" role="status"></span>
+    </div>
+
+    <section class="card">
+      <h2 data-i18n="options_history"></h2>
+      <p class="hint" id="history-count"></p>
+      <p class="hint" data-i18n="options_history_hint"></p>
+      <button id="reset-history" class="danger" type="button" data-i18n="options_history_reset"></button>
+    </section>
+
+    <footer class="hint">
+      <span id="version"></span> ·
+      <a href="https://github.com/lgubala/BazosRider" target="_blank" rel="noopener">GitHub</a> ·
+      <span data-i18n="options_not_affiliated"></span>
+    </footer>
+  </main>
+
+  <!--SCRIPTS-->
+</body>
+</html>

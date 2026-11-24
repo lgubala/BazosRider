@@ -1,0 +1,19 @@
+{
+  "name": "bazos-rider",
+  "version": "1.0.0",
+  "description": "Hide what you don't want on bazos.sk and spot the good prices. A Firefox extension.",
+  "private": true,
+  "license": "MIT",
+  "homepage": "https://github.com/lgubala/BazosRider",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/build.mjs --check",
+    "syntax": "node scripts/syntax.mjs",
+    "lint": "npx --yes web-ext lint --source-dir Firefox",
+    "pack": "npx --yes web-ext build --source-dir Firefox --artifacts-dir dist --overwrite-dest",
+    "verify": "npm run syntax && npm run check"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

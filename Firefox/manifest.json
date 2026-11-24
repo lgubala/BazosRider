@@ -1,0 +1,88 @@
+{
+  "manifest_version": 3,
+  "name": "Bazoš Rider",
+  "version": "1.0.0",
+  "description": "__MSG_extDescription__",
+  "default_locale": "sk",
+  "homepage_url": "https://github.com/lgubala/BazosRider",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "bazosrider@lgubala.github.io",
+      "strict_min_version": "142.0",
+      "data_collection_permissions": {
+        "required": [
+          "none"
+        ]
+      }
+    },
+    "gecko_android": {
+      "strict_min_version": "142.0"
+    }
+  },
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "96": "icons/icon-96.png",
+    "128": "icons/icon-128.png"
+  },
+  "permissions": [
+    "storage",
+    "unlimitedStorage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://bazos.sk/*",
+        "*://*.bazos.sk/*"
+      ],
+      "js": [
+        "src/core/namespace.js",
+        "src/core/config.js",
+        "src/core/i18n.js",
+        "src/core/text.js",
+        "src/core/categories.js",
+        "src/core/parse.js",
+        "src/core/settings.js",
+        "src/core/storage.js",
+        "src/core/filters.js",
+        "src/core/skips.js",
+        "src/core/history.js",
+        "src/core/products.js",
+        "src/core/groups.js",
+        "src/core/context.js",
+        "src/core/badges.js",
+        "src/core/lists.js",
+        "src/filters/category.js",
+        "src/filters/keyword.js",
+        "src/skip/installment.js",
+        "src/badges/drop.js",
+        "src/badges/free.js",
+        "src/badges/group-deal.js",
+        "src/badges/product-deal.js",
+        "src/badges/skipped.js",
+        "src/lists/cheapest.js",
+        "src/lists/deals.js",
+        "src/lists/free.js",
+        "src/lists/products.js",
+        "src/content/badges.js",
+        "src/content/banner.js",
+        "src/content/main.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "action": {
+    "default_title": "Bazoš Rider",
+    "default_popup": "src/popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png",
+      "48": "icons/icon-48.png"
+    }
+  },
+  "options_ui": {
+    "page": "src/options/options.html",
+    "open_in_tab": true
+  }
+}

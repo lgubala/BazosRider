@@ -1,0 +1,36 @@
+# What this checks, and why.
+#
+# Bazoš Rider ships through addons.mozilla.org, so CI produces no artifact.
+# It answers three questions on every push:
+#
+#   1. Does every file still parse? One that does not takes the add-on down.
+#   2. Does the committed Firefox/ match src/? It is generated, and it is what
+#      gets uploaded. A stale one means shipping code nobody reviewed.
+#   3. Would AMO's linter reject it? Cheaper to learn here than in the queue.
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Every file parses
+        run: npm run syntax
+
+      - name: Committed build matches the source
+        run: npm run check
+
+      - name: web-ext lint
+        run: npx --yes web-ext lint --source-dir Firefox --warnings-as-errors=false

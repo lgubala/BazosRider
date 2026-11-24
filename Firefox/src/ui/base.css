@@ -1,0 +1,95 @@
+/* Bazoš Rider — shared look of the popup and the options page.
+   Colours are tokens so dark mode is one block. */
+
+:root {
+  --bg: #f6f7f9;
+  --card: #ffffff;
+  --line: #d0d7de;
+  --line-soft: #eef0f2;
+  --text: #1f2328;
+  --muted: #59636e;
+  --link: #0a66c2;
+  --accent: #e8741c;          /* the icon's orange */
+  --ok: #1a7f37;
+  --danger: #b3261e;
+  --danger-bg: #fbe9e7;
+  --danger-line: #e6a49e;
+  --chip: #ffffff;
+  --chip-line: #bbb;
+  --radius: 10px;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1c1e22;
+    --card: #26292e;
+    --line: #3a3f46;
+    --line-soft: #31353b;
+    --text: #e6e8eb;
+    --muted: #9aa3ad;
+    --link: #6cb1ff;
+    --ok: #3fb950;
+    --danger: #ff8a80;
+    --danger-bg: #3a2220;
+    --danger-line: #6b3b37;
+    --chip: #2d3137;
+    --chip-line: #4a5058;
+  }
+}
+
+* { box-sizing: border-box; }
+
+/* A display rule on a class beats the UA's [hidden], so restate it. */
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  font: 14px/1.4 system-ui, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+}
+
+a { color: var(--link); }
+
+h1 { font-size: 18px; margin: 0; display: flex; align-items: center; gap: 8px; }
+h1 img { width: 22px; height: 22px; }
+h2 { font-size: 15px; margin: 0; }
+h2 small { font-weight: normal; color: var(--muted); }
+
+button {
+  font: inherit;
+  padding: .45em .9em;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--chip);
+  color: var(--text);
+  cursor: pointer;
+}
+button:hover { border-color: var(--muted); }
+button.primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+button.danger { background: var(--danger-bg); color: var(--danger); border-color: var(--danger-line); }
+button.small { padding: .2em .7em; font-size: 12px; }
+
+input, textarea {
+  font: inherit;
+  color: var(--text);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: .3em .5em;
+}
+textarea { width: 100%; resize: vertical; }
+input[type=number] { width: 5em; }
+input[type=checkbox] { accent-color: var(--accent); }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  min-width: 0;
+}
+
+.hint { color: var(--muted); font-size: 12px; margin: .3em 0; }
+.empty { color: var(--muted); font-size: 13px; padding: .4em 0; }
