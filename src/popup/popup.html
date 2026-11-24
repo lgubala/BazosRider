@@ -34,6 +34,12 @@
       <h2 data-i18n="options_auto"></h2>
       <p class="hint" data-i18n="options_auto_hint"></p>
       <label class="line"><input id="auto-enabled" type="checkbox"> <span data-i18n="options_auto_enabled"></span></label>
+      <div class="modes">
+        <label class="mode"><input type="radio" name="auto-mode" value="strict">
+          <span><b data-i18n="options_mode_strict"></b><br><span class="hint" data-i18n="options_mode_strict_hint"></span></span></label>
+        <label class="mode"><input type="radio" name="auto-mode" value="loose">
+          <span><b data-i18n="options_mode_loose"></b><br><span class="hint" data-i18n="options_mode_loose_hint"></span></span></label>
+      </div>
       <label class="line"><span data-i18n="options_auto_share"></span>
         <input id="auto-share" type="number" min="1" max="90"> %</label>
       <label class="line"><span data-i18n="options_auto_min"></span>

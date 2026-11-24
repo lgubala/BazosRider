@@ -183,7 +183,7 @@
     "message": "Automatic comparison"
   },
   "options_auto_hint": {
-    "message": "Similar listings are grouped only when their titles share a model number. No comparison beats a wrong one."
+    "message": "Compares a listing with the median of similar listings in your history."
   },
   "options_auto_enabled": {
     "message": "on"
@@ -247,5 +247,20 @@
   },
   "deals_none_cheaper": {
     "message": "{when}: {comparable} of {n} listings have something to compare with, but none is at least {pct} % under the median of similar ones."
+  },
+  "options_mode_strict": {
+    "message": "Strict"
+  },
+  "options_mode_strict_hint": {
+    "message": "Only listings sharing a model number in the title (Samsung QE55Q60, Cybex Priam 2023). Fewer comparisons, nearly always right."
+  },
+  "options_mode_loose": {
+    "message": "Loose"
+  },
+  "options_mode_loose_hint": {
+    "message": "Also listings without a model number when their titles are very alike (Šaty na stužkovú). More comparisons, sometimes of different things. Different model numbers never group."
+  },
+  "deals_none_comparable_loose": {
+    "message": "{when}: {n} priced listings, but no two have titles alike enough, so there is nothing to compare."
   }
 }

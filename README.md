@@ -60,8 +60,14 @@ are not enough, because *Britax Römer* covers a 60 € seat and a 300 € one, 
 comparing them once produced an "−84 %" that was simply wrong. A missing
 comparison is better than a wrong one.
 
-For products without a model number (child seats, prams), add the product
-under *Nastavenia* in the popup instead. Its median counts from five listings.
+Titles whose numbers disagree never group, so "iPhone 13 128GB" is not
+compared with "iPhone 15 128GB".
+
+For listings without model numbers (clothes, books, furniture), switch
+*Nastavenia → Automatické porovnávanie* to *Voľnejšie*: titles that are very
+alike group even without a number. More comparisons, occasionally a wrong one.
+Or track a product by name under *Ručne zadané produkty*; its median counts
+from five listings.
 
 ## Install
 

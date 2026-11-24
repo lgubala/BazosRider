@@ -39,7 +39,10 @@
       }
       const when = BR.t(period === "day" ? "deals_when_day" : "deals_when_year");
       if (!n) return BR.t(period === "day" ? "list_day_empty" : "list_year_empty");
-      if (!comparable) return BR.t("deals_none_comparable", { when, n });
+      if (!comparable) {
+        const key = ctx.settings.auto.mode === "loose" ? "deals_none_comparable_loose" : "deals_none_comparable";
+        return BR.t(key, { when, n });
+      }
       return BR.t("deals_none_cheaper", {
         when, n, comparable, pct: BR.text.percent(ctx.settings.auto.minShare)
       });

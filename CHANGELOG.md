@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.2.0
+
+- **Looser grouping, if you want it.** *Nastavenia → Automatické
+  porovnávanie* now has *Prísne* (the default: titles must share a model
+  number) and *Voľnejšie*, which also groups titles without a model number
+  when their words overlap strongly: "Šaty na stužkovú" with "Šaty na
+  stužkovú červené", "Apple iPhone 13" with "iPhone 13". More comparisons in
+  sections like clothes and books, at the price of an occasional wrong one
+- **Titles whose numbers disagree never group**, in either mode. Strict mode
+  used to put "iPhone 13 128GB" and "iPhone 15 128GB" together because both
+  say "128gb"; now each having a number the other lacks keeps them apart.
+  The same keeps "Octavia 2008" away from "Octavia 2015"
+
 ## 1.1.0
 
 - **Settings are back in the popup.** *Nastavenia* in the popup's header swaps

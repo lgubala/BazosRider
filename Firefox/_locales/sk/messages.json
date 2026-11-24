@@ -183,7 +183,7 @@
     "message": "Automatické porovnávanie"
   },
   "options_auto_hint": {
-    "message": "Podobné inzeráty sa spájajú len vtedy, ak majú v názve rovnaké číslo modelu. Radšej žiadne porovnanie ako zlé."
+    "message": "Porovná inzerát s mediánom podobných inzerátov z tvojej histórie."
   },
   "options_auto_enabled": {
     "message": "zapnuté"
@@ -247,5 +247,20 @@
   },
   "deals_none_cheaper": {
     "message": "{when}: {comparable} z {n} inzerátov má s čím porovnať, ale žiadny nie je aspoň o {pct} % pod mediánom podobných."
+  },
+  "options_mode_strict": {
+    "message": "Prísne"
+  },
+  "options_mode_strict_hint": {
+    "message": "Len inzeráty s rovnakým číslom modelu v názve (Samsung QE55Q60, Cybex Priam 2023). Menej porovnaní, ale takmer vždy správne."
+  },
+  "options_mode_loose": {
+    "message": "Voľnejšie"
+  },
+  "options_mode_loose_hint": {
+    "message": "Aj inzeráty bez čísla modelu, ak majú veľmi podobný názov (Šaty na stužkovú). Viac porovnaní, občas porovná rozdielne veci. Rozdielne čísla modelov sa nespoja nikdy."
+  },
+  "deals_none_comparable_loose": {
+    "message": "{when}: {n} inzerátov s cenou, ale žiadne dva nemajú dosť podobný názov, takže nie je s čím porovnať."
   }
 }

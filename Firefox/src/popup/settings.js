@@ -59,6 +59,7 @@
     function renderComparison() {
       const s = data.settings;
       $("auto-enabled").checked = s.auto.enabled;
+      for (const r of document.querySelectorAll("input[name=auto-mode]")) r.checked = r.value === s.auto.mode;
       $("auto-share").value = Math.round(s.auto.minShare * 100);
       $("auto-min").value = s.auto.minComparables;
       $("products").value = s.products.join("\n");
@@ -69,6 +70,7 @@
       const C = BR.config;
       settings.auto = {
         enabled: $("auto-enabled").checked,
+        mode: document.querySelector("input[name=auto-mode]:checked")?.value || C.AUTO.mode,
         minShare: clamp(Number($("auto-share").value), 1, 90, C.AUTO.minShare * 100) / 100,
         minComparables: clamp(Number($("auto-min").value), 2, 20, C.AUTO.minComparables)
       };

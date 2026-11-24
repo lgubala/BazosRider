@@ -27,12 +27,18 @@
 
     /* --- automatic grouping of similar listings ------------------------- */
 
-    AUTO: { enabled: true, minComparables: 2, minShare: 0.05 },
+    AUTO: { enabled: true, minComparables: 2, minShare: 0.05, mode: "strict" },
 
     SIMILARITY: 0.6,        // Dice score a title needs to join a group
     MIN_SHARED: 2,          // and at least this many shared words
     MODEL_TOKEN_MIN: 3,     // "i30", "5340": a word with a digit, at least this long
     CORE_SHARE: 0.75,       // a group's label is the words in 75 % of its members
+
+    /* "loose" mode only: titles without a shared model number join when
+     * their words overlap at least this much. Higher than SIMILARITY because
+     * nothing else vouches for them. */
+    LOOSE_SIMILARITY: 0.75,
+    LOOSE_MIN_SHARED: 2,
 
     /* Words that say nothing about which product it is. Written plain; they
      * are compared after diacritics are stripped. */

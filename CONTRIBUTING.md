@@ -199,8 +199,8 @@ always commit both.
 - **Tested in Firefox desktop by hand; Android not yet.**
 - **Two Bazoš tabs loading at once** can overwrite each other's history
   writes. Rare and harmless (the next load records the listings again).
-- **Products without a model number** are rarely grouped automatically. Track
-  them as manual products.
+- **Products without a model number** are rarely grouped in strict mode.
+  Loose mode helps; manual products are the precise option.
 - **Group medians mix days, versions and used/new.** A stricter "seen several
   times" rule is a possible improvement.
 - **The "↓ −490 953 €" drop** from the prototype was never reproduced. A guard

@@ -9,7 +9,8 @@
  *   filters:  { [filterId]: { enabled, config } },
  *   products: ["romer king", "iphone 13"],      manual product search terms
  *   dealThreshold: 0.2,                          manual product: 20 % under median
- *   auto: { enabled, minComparables, minShare }, automatic grouping
+ *   auto: { enabled, minComparables, minShare, mode }, automatic grouping;
+ *         mode "strict" (model number needed) or "loose"
  *   clearedAt: { [listId]: ISO time | null }     the popup's "Vyčistiť" buttons
  * }
  */
@@ -60,6 +61,7 @@
     if (Array.isArray(raw.products)) out.products = raw.products.filter((p) => typeof p === "string");
     if (Number.isFinite(raw.dealThreshold)) out.dealThreshold = raw.dealThreshold;
     if (plain(raw.auto)) out.auto = { ...out.auto, ...raw.auto };
+    if (!["strict", "loose"].includes(out.auto.mode)) out.auto.mode = C.AUTO.mode;
     if (plain(raw.clearedAt)) out.clearedAt = { ...raw.clearedAt };
     return out;
   }

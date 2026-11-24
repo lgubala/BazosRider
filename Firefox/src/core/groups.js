@@ -10,6 +10,13 @@
  * "autosedacka") cover many different products: grouping on them once put a
  * budget and a premium child seat together and produced a "−84 %" against the
  * wrong product. A missing comparison is better than a wrong one.
+ *
+ * That is the "strict" mode, the default. "loose" mode (settings.auto.mode)
+ * also groups titles without a model number when their words overlap even
+ * more ("Šaty na stužkovú" + "Šaty na stužkovú červené").
+ *
+ * In both modes, two titles whose numbers disagree never group: "iPhone 13
+ * 128GB" and "iPhone 15 128GB" share "128gb" but are different phones.
  */
 (function (BR) {
   "use strict";
@@ -35,18 +42,38 @@
   function matchOf(tokens, core) {
     let shared = 0;
     let sharedModel = 0;
+    let ownOnly = 0;          // numbers in the title the group does not have
     for (const t of tokens) {
-      if (!core.has(t)) continue;
+      const number = /\d/.test(t);
+      if (!core.has(t)) {
+        if (number) ownOnly++;
+        continue;
+      }
       shared++;
       if (isModelToken(t)) sharedModel++;
     }
+    const own = new Set(tokens);
+    let coreOnly = 0;         // numbers in the group the title does not have
+    for (const t of core) if (/\d/.test(t) && !own.has(t)) coreOnly++;
     const denom = tokens.length + core.size;
-    return { score: denom ? (2 * shared) / denom : 0, shared, sharedModel };
+    return {
+      score: denom ? (2 * shared) / denom : 0,
+      shared,
+      sharedModel,
+      /* Each side has a number the other lacks ("iPhone 13 128GB" against
+       * "iPhone 15 128GB", "Octavia 2008" against "Octavia 2015"): different
+       * models, however alike the rest is. A number on one side only
+       * ("Samsung QE55Q60" + "TV Samsung QE55Q60 55") is fine. */
+      modelConflict: ownOnly > 0 && coreOnly > 0
+    };
   }
 
-  function canJoin(tokens, core) {
+  function canJoin(tokens, core, mode) {
     const m = matchOf(tokens, core);
-    return m.score >= C.SIMILARITY && m.shared >= C.MIN_SHARED && m.sharedModel >= 1;
+    if (m.modelConflict) return false;
+    if (m.score >= C.SIMILARITY && m.shared >= C.MIN_SHARED && m.sharedModel >= 1) return true;
+    if (mode !== "loose") return false;
+    return m.score >= C.LOOSE_SIMILARITY && m.shared >= C.LOOSE_MIN_SHARED;
   }
 
   /** Words present in at least CORE_SHARE of the group's members. */
@@ -80,7 +107,7 @@
       let best = null;
       let bestScore = -1;
       for (const g of list) {
-        if (!canJoin(tokens, g.core)) continue;
+        if (!canJoin(tokens, g.core, o.mode)) continue;
         const { score } = matchOf(tokens, g.core);
         if (score > bestScore) { best = g; bestScore = score; }
       }
