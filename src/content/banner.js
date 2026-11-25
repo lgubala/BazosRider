@@ -88,6 +88,10 @@
       stop.type = "button";
       stop.addEventListener("click", actions.stopScan);
       line.append(stop);
+    } else if (!BR.parse.readable(location.href) || (next && !BR.parse.readable(next))) {
+      /* A search page: robots.txt asks programs not to read those, so no
+       * scan. Background reading covers the sections instead. */
+      line.append(el("span", "margin-right:.6em;color:#57606a;font-size:13px;", BR.t("bar_scan_search")));
     } else if (state.scanned && !state.scanned.next) {
       line.append(el("span", "margin-right:.6em;color:#57606a;", BR.t("bar_scan_end")));
     } else if (next) {

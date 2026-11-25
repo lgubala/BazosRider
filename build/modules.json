@@ -13,8 +13,7 @@
     "         skip/, badges/ and lists/. Display order comes from each module's",
     "         own `order` field, never from the file name.",
     "pages    what each page loads after core and the modules",
-    "background  the script that puts the deal count on the toolbar icon;",
-    "            it loads nothing else"
+    "         (the background page is one of them: it gets core and the modules too)"
   ],
   "core": [
     "core/namespace.js",
@@ -32,11 +31,11 @@
     "core/groups.js",
     "core/context.js",
     "core/deals.js",
+    "core/watches.js",
     "core/badges.js",
     "core/lists.js"
   ],
   "modules": ["filters", "skip", "badges", "lists"],
-  "background": ["background/background.js"],
   "pages": {
     "content": [
       "content/badges.js",
@@ -47,11 +46,17 @@
       "content/main.js"
     ],
     "popup": [
+      "geo/data.js",
+      "geo/geo.js",
       "ui/dom.js",
       "core/backup.js",
       "popup/rows.js",
       "popup/settings.js",
       "popup/popup.js"
+    ],
+    "background": [
+      "background/reader.js",
+      "background/background.js"
     ]
   }
 }

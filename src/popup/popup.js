@@ -3,6 +3,10 @@
  * Two views in one popup: the lists (one card per module in src/lists/, in
  * `order`) and the settings (popup/settings.js). The header button switches
  * between them.
+ *
+ * Above the lists: the V okolí / Celé Slovensko switch in the header, and a
+ * line about background reading with a button to run it now. While reading
+ * runs, the lists redraw as new listings arrive.
  */
 (async function (BR) {
   "use strict";
@@ -11,6 +15,11 @@
   const C = BR.config;
   const $ = (id) => document.getElementById(id);
   const tabState = {};
+  const api = globalThis.browser || globalThis.chrome;
+  /* The host access background reading needs. Asked for on the click that
+   * first needs it, which is when Firefox allows asking. */
+  const HOSTS = { origins: ["*://bazos.sk/*", "*://*.bazos.sk/*"] };
+  BR.hostAccess = () => api.permissions.request(HOSTS);
 
   BR.dom.localize(document);
 
@@ -54,6 +63,8 @@
   function renderAll() {
     const n = Object.keys(data.history).length;
     $("count").textContent = BR.t("popup_history_count", { n: n.toLocaleString(BR.lang) });
+    renderScope();
+    renderReader();
     const ctx = context();
     for (const def of BR.lists.all()) render(def, ctx);
   }
@@ -79,7 +90,9 @@
       return;
     }
     const limit = def.limit || C.LIST_LIMIT;
-    if (def.layout === "categories") {
+    if (def.layout === "sections") {
+      BR.rows.sections(box, def, rows, ctx);
+    } else if (def.layout === "categories") {
       BR.rows.tabbed(box, def, BR.lists.topPerCategory(rows, limit), ctx, tabState, () => render(def, context()));
     } else {
       for (const r of rows.slice(0, limit)) box.append(BR.rows.row(r, def.meta(r, ctx), 0));
@@ -93,6 +106,91 @@
     data.settings.clearedAt = saved.clearedAt;
     render(def, context());
   }
+
+  /* --- V okolí / Celé Slovensko --------------------------------------------- */
+
+  function renderScope() {
+    const home = data.settings.home;
+    const known = BR.geo.known(home.psc);
+    const scope = known ? data.settings.scope : "all";
+    for (const b of document.querySelectorAll("#scope .tab")) {
+      b.classList.toggle("on", b.dataset.scope === scope);
+      if (b.dataset.scope !== "near") continue;
+      b.textContent = BR.t("scope_near", { km: home.radiusKm });
+      b.disabled = !known;
+      b.title = known ? "" : BR.t("scope_near_off");
+    }
+  }
+
+  for (const b of document.querySelectorAll("#scope .tab")) {
+    b.addEventListener("click", async () => {
+      const saved = await BR.store.updateSettings((s) => { s.scope = b.dataset.scope; });
+      data.settings.scope = saved.scope;
+      renderAll();
+    });
+  }
+
+  /* --- background reading ---------------------------------------------------- */
+
+  function when(iso) {
+    const d = new Date(iso);
+    const time = d.toLocaleTimeString(BR.lang, { hour: "2-digit", minute: "2-digit" });
+    return BR.text.localDay(d) === BR.text.localDay(new Date())
+      ? time : BR.text.shortDate(BR.text.localDay(d)) + " " + time;
+  }
+
+  function button(key, onclick) {
+    return h("button", { type: "button", class: "small", onclick }, BR.t(key));
+  }
+
+  function runNow() {
+    /* Asking for host access must be the first thing the click does. */
+    BR.hostAccess().then((ok) => {
+      if (ok) api.runtime.sendMessage({ type: "br-reader-now" }).then(renderReader, () => {});
+    }, () => {});
+  }
+
+  async function renderReader() {
+    const line = $("reader-line");
+    const st = (await api.storage.local.get("reader")).reader || {};
+    const r = data.settings.reader;
+    line.textContent = "";
+    if (st.queue && st.run) {
+      line.append(BR.t("reader_running", {
+        done: st.run.pages, total: st.run.total, n: st.run.listings.toLocaleString(BR.lang)
+      }), button("reader_stop", () => api.runtime.sendMessage({ type: "br-reader-stop" })));
+      return;
+    }
+    const parts = [];
+    if (st.lastRun) {
+      const res = st.lastResult || {};
+      parts.push(BR.t("reader_last", {
+        when: when(st.lastRun), pages: res.pages || 0, fresh: (res.fresh || 0).toLocaleString(BR.lang)
+      }));
+    }
+    line.append(r.enabled ? BR.t("reader_on", { every: r.everyMinutes / 60 }) : BR.t("reader_off"));
+    if (parts.length) line.append(" · " + parts.join(" · "));
+    if (st.lastResult && st.lastResult.error) {
+      line.append(h("span", { class: "bad" }, BR.t("reader_error", { error: st.lastResult.error })));
+    }
+    if (st.pausedUntil && Date.now() < Date.parse(st.pausedUntil)) {
+      line.append(h("span", { class: "bad" }, BR.t("reader_paused", { until: when(st.pausedUntil) })));
+      return;
+    }
+    line.append(button("reader_now", runNow));
+  }
+
+  /* New listings from background reading (or another tab) redraw the lists. */
+  let redraw = 0;
+  api.storage.onChanged.addListener((changes, area) => {
+    if (area !== "local") return;
+    if (changes.reader) renderReader();
+    if (changes.history) {
+      data.history = changes.history.newValue || {};
+      clearTimeout(redraw);
+      redraw = setTimeout(renderAll, 400);
+    }
+  });
 
   /* --- start --------------------------------------------------------------- */
 

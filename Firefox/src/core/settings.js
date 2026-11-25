@@ -13,6 +13,10 @@
  *         mode "strict" (model number needed) or "loose"
  *   highlightShare: 0.15,                        page highlight from 15 % under
  *   page: { onlyDeals, sortByDeal }              the switches in the page's bar
+ *   home: { psc: "97401", radiusKm: 25 }         where "v okolí" is measured from
+ *   scope: "all" | "near"                        the popup's V okolí / Celé Slovensko
+ *   reader: { enabled, pages, everyMinutes }     background reading (background/)
+ *   watches: [{ id, query, category, maxPrice }] the watchdogs ("Strážcovia")
  *   clearedAt: { [listId]: ISO time | null }     the popup's "Vyčistiť" buttons
  * }
  */
@@ -44,7 +48,23 @@
       auto: { ...C.AUTO },
       highlightShare: C.HIGHLIGHT_SHARE,
       page: { onlyDeals: false, sortByDeal: false },
+      home: { ...C.HOME },
+      scope: "all",
+      reader: { ...C.READER },
+      watches: [],
       clearedAt: {}
+    };
+  }
+
+  /** One watchdog, cleaned up, or null when it has no words to look for. */
+  function watch(w) {
+    if (!plain(w) || typeof w.query !== "string" || !w.query.trim()) return null;
+    const max = Number(w.maxPrice);
+    return {
+      id: typeof w.id === "string" && w.id ? w.id : "w" + Math.random().toString(36).slice(2, 9),
+      query: w.query.trim(),
+      category: typeof w.category === "string" && w.category ? w.category : null,
+      maxPrice: Number.isFinite(max) && max > 0 ? max : null
     };
   }
 
@@ -74,9 +94,36 @@
     if (plain(raw.page)) {
       out.page = { onlyDeals: !!raw.page.onlyDeals, sortByDeal: !!raw.page.sortByDeal };
     }
+    if (plain(raw.home)) {
+      const psc = String(raw.home.psc || "").replace(/\s/g, "");
+      out.home = {
+        psc: /^\d{5}$/.test(psc) ? psc : "",
+        radiusKm: BR.text.clamp(Number(raw.home.radiusKm), 1, 300, C.HOME.radiusKm)
+      };
+    }
+    if (raw.scope === "near" || raw.scope === "all") out.scope = raw.scope;
+    if (plain(raw.reader)) {
+      const r = raw.reader;
+      out.reader = {
+        enabled: !!r.enabled,
+        pages: BR.text.clamp(Number(r.pages), 1, C.READER_MAX_PAGES, C.READER.pages),
+        everyMinutes: BR.text.clamp(Number(r.everyMinutes), C.READER_MIN_MINUTES, 24 * 60, C.READER.everyMinutes)
+      };
+    }
+    if (Array.isArray(raw.watches)) out.watches = raw.watches.map(watch).filter(Boolean);
     if (plain(raw.clearedAt)) out.clearedAt = { ...raw.clearedAt };
     return out;
   }
 
-  BR.settings = { SCHEMA, defaults, normalize };
+  /** Sections background reading visits: every one not hidden by the
+   * category filter, plus each watchdog's own section. */
+  function readerSections(settings) {
+    const f = settings.filters.category;
+    const hidden = new Set(f && f.enabled ? f.config.categories || [] : []);
+    const ids = BR.categories.IDS.filter((id) => !hidden.has(id));
+    for (const w of settings.watches) if (w.category && !ids.includes(w.category)) ids.push(w.category);
+    return ids;
+  }
+
+  BR.settings = { SCHEMA, defaults, normalize, watch, readerSections };
 })(globalThis.BR);

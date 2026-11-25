@@ -40,7 +40,8 @@ src/
   lists/        cards in the popup, one each          ← modules
   content/      runs on bazos.sk: badges, highlight, scan, the bar, the
                 listing-page price check (detail.js), main
-  background/   puts the deal count on the toolbar icon; nothing else
+  background/   the toolbar count, and background reading (reader.js)
+  geo/          postal code → position (data.js is generated) and distances
   popup/        the toolbar popup: lists view and settings view
   ui/           shared CSS and DOM helpers
 _locales/       sk (default) and en
@@ -69,6 +70,10 @@ Firefox/        GENERATED, committed. Never edit it.
 | Fix listing-page parsing after Bazoš changes its HTML | `config.js` → `SELECTORS.detail*` |
 | Change the green highlight, fading or sorting | `src/content/highlight.js` |
 | Change how further pages are read | `src/content/scan.js`, `SCAN_*` in `config.js` |
+| Change background reading | `src/background/reader.js`, `READER*` in `config.js` |
+| Change which URLs may be read | `config.js` → `DISALLOWED_URL_PARTS` (from Bazoš's robots.txt) |
+| Change how watchdogs match | `src/core/watches.js` |
+| Rebuild the postal code table | `node scripts/make-psc.mjs SK.txt` (GeoNames dump) |
 | The look | `src/ui/base.css`, `src/popup/popup.css` |
 
 ## Adding a module
@@ -199,13 +204,16 @@ always commit both.
 
 ## Rules of the house
 
-- **Nothing loads on its own.** Data comes from pages the user opens. The one
-  exception is *Prejsť ďalších strán*, and only because the user clicked it:
-  the pages *Ďalšia* would open, one at a time, `SCAN_DELAY_MS` apart, at
-  most `SCAN_PAGES`, with a stop button. No timers, no background fetching,
-  no other site. Bazoš's `robots.txt` asks automated clients to stay off
-  search pages; a scan is a person's click, kept slow and short so it stays
-  that way. Do not turn it into something that runs by itself.
+- **Read Bazoš the way robots.txt asks.** Only URLs `BR.parse.readable`
+  allows: section and listing pages, never search (`search.php`, `hledat=`,
+  `hlokalita=` ...). Background reading is off until the user switches it on,
+  reads one page every `READER_DELAY_MS`, and pauses `READER_PAUSE_HOURS` when
+  Bazoš answers 403, 429 or 5xx. Do not make it faster, wider or default-on:
+  being blocked would also block the user's own browsing. Bazoš's robots.txt
+  bans a bot called "pricebot" outright; staying slow is what keeps this a
+  person's tool rather than one.
+- **Nothing about the user leaves the browser.** The postal code and
+  distances never go into a request.
 - **No `innerHTML`** with listing text. Titles come from strangers.
 - **Slovak first.** Every string goes into both locales; Slovak is the
   default.
@@ -216,8 +224,18 @@ always commit both.
 
 - **Tested in Firefox desktop by hand; Android not yet.** On Android the
   toolbar count does not show: Firefox for Android has no icon badge.
-- **Two Bazoš tabs loading at once** can overwrite each other's history
-  writes. Rare and harmless (the next load records the listings again).
+- **Two writers at once** (two Bazoš tabs, or a tab and background reading)
+  can overwrite each other's history writes. Rare and harmless: the next read
+  records the listings again.
+- **Watchdogs only see what was read.** Bazoš search is off-limits, so a
+  watchdog finds listings from background reading and browsing, not a listing
+  posted a month ago in a section nobody read since.
+- **Distances are from postal codes**, straight-line, and only for listings
+  read since 1.6.0; older history has no location. Czech postal codes are not
+  in the table.
+- **Background reading and Firefox's idle limit**: a run is split into
+  chunks of `READER_CHUNK` pages, one per minute, so Firefox stopping an idle
+  background page only delays it.
 - **Products without a model number** are rarely grouped in strict mode.
   Loose mode helps; manual products are the precise option.
 - **Group medians mix days, versions and used/new.** A stricter "seen several

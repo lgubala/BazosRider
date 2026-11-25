@@ -80,6 +80,30 @@
 
     DETAILS_LIMIT: 8,
 
+    /* --- location ("v okolí") ------------------------------------------ */
+
+    HOME: { psc: "", radiusKm: 25 },
+
+    /* --- background reading (background/reader.js) ---------------------
+     * Off until the user switches it on. Reads only section pages
+     * ("mobil.bazos.sk/", "/40/", ...), which Bazoš's robots.txt allows,
+     * never search URLs. Slow on purpose: one page every READER_DELAY_MS. */
+    READER: { enabled: false, pages: 3, everyMinutes: 180 },
+    READER_MAX_PAGES: 10,
+    READER_MIN_MINUTES: 60,
+    READER_DELAY_MS: 2000,
+    READER_CHUNK: 8,          // pages per one-minute tick, see background/reader.js
+    READER_PAUSE_HOURS: 24,   // after Bazoš answers with an error
+
+    /* robots.txt (checked November 2026) disallows these in any URL. Neither
+     * the background reader nor the scan button reads a page that has one. */
+    DISALLOWED_URL_PARTS: ["search.php", "hledat=", "hlokalita=", "humkreis", "order=", "cenaod=",
+                           "cenado=", "rubriky=", "type=", "category="],
+
+    /* --- watchdogs ("Strážcovia") ------------------------------------- */
+
+    WATCH_LIMIT: 5,           // listings shown per watchdog, near and nationwide
+
     /* A listing's own page calls a price within this much of the median
      * "about the usual price" instead of cheaper or dearer. */
     FAIR_BAND: 0.05,       // comparables shown when a deal badge is clicked
@@ -107,6 +131,7 @@
       price: "div.inzeratycena",
       pagination: ".strankovani a",
       resultsAnchor: ".listainzerat",
+      location: ".inzeratylok",
 
       /* A single listing's own page (/inzerat/<id>/...). Checked against
        * mobil.bazos.sk in November 2026. */
@@ -117,6 +142,7 @@
       canonical: 'link[rel="canonical"]'
     },
     DETAIL_PRICE_LABEL: "Cena:",
+    DETAIL_LOCATION_LABEL: "Lokalita:",
     DETAIL_DESCRIPTION_MAX: 400,   // characters kept in history, like a results snippet
     NEXT_PAGE_TEXT: "Ďalšia",
     FREE_WORDS: ["zadarmo"]

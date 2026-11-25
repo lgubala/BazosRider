@@ -430,5 +430,128 @@
   },
   "detail_no_price": {
     "message": "no price given, nothing to compare"
+  },
+  "scope_all": {
+    "message": "All of Slovakia"
+  },
+  "scope_near": {
+    "message": "Within {km} km"
+  },
+  "scope_near_off": {
+    "message": "Set your postal code first (Settings → My location)."
+  },
+  "reader_on": {
+    "message": "Background reading: on, every {every} h"
+  },
+  "reader_off": {
+    "message": "Background reading: off (switch it on in Settings)"
+  },
+  "reader_last": {
+    "message": "last {when}: {pages} pages, {fresh} new listings"
+  },
+  "reader_running": {
+    "message": "Reading Bazoš: page {done} of {total}, {n} listings…"
+  },
+  "reader_now": {
+    "message": "Read now"
+  },
+  "reader_stop": {
+    "message": "Stop"
+  },
+  "reader_error": {
+    "message": "error: {error}"
+  },
+  "reader_paused": {
+    "message": "Bazoš refused a request, paused until {until}"
+  },
+  "list_watches_title": {
+    "message": "Watchdogs"
+  },
+  "list_watches_hint": {
+    "message": "(the cheapest of what you want)"
+  },
+  "list_watches_none": {
+    "message": "No watchdogs. Add what you are looking for in Settings, for example “sony hifi”."
+  },
+  "watch_summary": {
+    "message": "{n} found, median {median}"
+  },
+  "watch_nothing": {
+    "message": "nothing found yet"
+  },
+  "watch_near": {
+    "message": "“{name}” within {km} km"
+  },
+  "watch_all": {
+    "message": "“{name}” in all of Slovakia"
+  },
+  "watch_near_none": {
+    "message": "Nothing nearby yet."
+  },
+  "watch_all_none": {
+    "message": "Nothing yet. Background reading and browsing Bazoš keep adding listings."
+  },
+  "meta_km": {
+    "message": "{km} km"
+  },
+  "bar_scan_search": {
+    "message": "Search results are not read further (Bazoš forbids it to programs). Background reading goes through whole sections."
+  },
+  "options_watches": {
+    "message": "Watchdogs"
+  },
+  "options_watches_hint": {
+    "message": "What you are looking for. Every word must be in the listing title, whatever the diacritics and endings. The popup shows the 5 cheapest nearby and the 5 cheapest in all of Slovakia."
+  },
+  "options_watch_add": {
+    "message": "+ Add a watchdog"
+  },
+  "options_watch_any": {
+    "message": "all sections"
+  },
+  "options_watch_placeholder": {
+    "message": "e.g. sony hifi"
+  },
+  "options_watch_max": {
+    "message": "max €"
+  },
+  "options_watch_remove": {
+    "message": "Remove"
+  },
+  "options_home": {
+    "message": "My location"
+  },
+  "options_home_hint": {
+    "message": "Your postal code, where “nearby” is measured from. It stays in this browser; distances are computed here, from the postal codes in listings."
+  },
+  "options_home_psc": {
+    "message": "Postal code"
+  },
+  "options_home_radius": {
+    "message": "Nearby means within"
+  },
+  "options_home_unknown": {
+    "message": "unknown postal code"
+  },
+  "options_reader": {
+    "message": "Background reading"
+  },
+  "options_reader_hint": {
+    "message": "Bazoš Rider reads the newest pages of each section itself, so the popup shows today's deals without you browsing Bazoš. Only section pages, which Bazoš allows robots, never search; one page every 2 seconds. If Bazoš refuses, it waits a day. Firefox asks for access to bazos.sk when you switch it on."
+  },
+  "options_reader_enabled": {
+    "message": "on"
+  },
+  "options_reader_pages": {
+    "message": "Pages from each section"
+  },
+  "options_reader_every": {
+    "message": "How often"
+  },
+  "options_reader_sections": {
+    "message": "Reads: {sections}. {n} pages per reading."
+  },
+  "meta_km_close": {
+    "message": "under 1 km"
   }
 }

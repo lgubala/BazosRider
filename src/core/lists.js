@@ -30,14 +30,22 @@
     return [...groups.entries()].map(([category, items]) => ({ category, items }));
   }
 
-  /** Rows for list `def`, with hidden and cleared rows removed. */
+  /**
+   * Rows for list `def`, with hidden and cleared rows removed, each with its
+   * distance as `km`. With the popup on "V okolí", rows outside the radius
+   * (or without a known place) are left out too, unless the list says
+   * `scoped: false` (the watchdogs show near and far themselves).
+   */
   function itemsOf(def, ctx) {
     const cleared = ctx.settings.clearedAt[def.id] || null;
+    const nearOnly = def.scoped !== false && ctx.settings.scope === "near" && ctx.homeSet;
     return def.items(ctx).filter((r) => {
+      if (r.empty) return true;               // a placeholder row, see rows.js
       if (ctx.hidden(r)) return false;
       if (cleared && (r.firstSeenAt || r.firstSeen) <= cleared) return false;
+      if (nearOnly && !ctx.near(r)) return false;
       return true;
-    });
+    }).map((r) => (r.empty || r.km !== undefined ? r : { ...r, km: ctx.km(r) }));
   }
 
   /** The group comparison of one history entry, as row fields. */

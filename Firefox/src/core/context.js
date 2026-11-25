@@ -10,6 +10,11 @@
  *                  comparison is switched off
  *   ctx.productStats   { [product]: { median, n } }
  *   ctx.hidden(item)   true when a hide filter matches
+ *   ctx.km(item)       kilometres from your postal code, or null (no home
+ *                      set, no PSČ on the listing, or no geo/ loaded: the
+ *                      content script does not load it)
+ *   ctx.near(item)     within settings.home.radiusKm
+ *   ctx.homeSet        a home postal code is set and known
  */
 (function (BR) {
   "use strict";
@@ -18,6 +23,8 @@
     const today = BR.text.localDay(now);
     let groups;
     let productStats;
+    const homeSet = !!(BR.geo && settings.home.psc && BR.geo.known(settings.home.psc));
+    const km = (item) => (homeSet && item && item.psc ? BR.geo.km(settings.home.psc, item.psc) : null);
 
     return {
       history,
@@ -38,7 +45,13 @@
         return productStats;
       },
 
-      hidden: (item) => BR.filters.hides(item, settings)
+      hidden: (item) => BR.filters.hides(item, settings),
+      km,
+      near: (item) => {
+        const d = km(item);
+        return d != null && d <= settings.home.radiusKm;
+      },
+      homeSet
     };
   };
 })(globalThis.BR);

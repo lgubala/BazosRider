@@ -1,5 +1,31 @@
 # Changelog
 
+## 1.6.0
+
+- **Background reading.** *Nastavenia → Čítanie Bazoša na pozadí*: Bazoš
+  Rider reads the newest pages of every section you have not hidden by
+  itself, every 3 hours by default, so the popup shows today's deals without
+  you browsing Bazoš. Off until you switch it on; Firefox asks for access to
+  bazos.sk then. A line under the popup's header says when it last ran, with
+  *Prečítať teraz*
+  - only section pages (`mobil.bazos.sk/`, `/40/` ...), which Bazoš's
+    robots.txt allows, never search URLs
+  - one page every 2 seconds; 1 to 10 pages per section; every 1 to 24 hours
+  - if Bazoš answers 403, 429 or 5xx it stops for a day
+- **Strážcovia (watchdogs).** Add what you are looking for, "sony hifi" in
+  Elektro, optionally with a top price. The popup shows the 5 cheapest near
+  you and the 5 cheapest in all of Slovakia, with how many were found and
+  their median. Words match whatever the diacritics, endings or hyphens:
+  "Sony Hi-Fi systém" and "hifi veža Sony" both count
+- **V okolí / Celé Slovensko.** Enter your postal code under *Moja lokalita*;
+  every listing is shown with its town and distance, and the header switch
+  filters every list to your area. Distances are computed in your browser
+  from a bundled table of Slovak postal codes (GeoNames, CC BY 4.0)
+- **The scan button is no longer offered on search results**, only on
+  section pages: Bazoš's robots.txt asks programs not to read search pages.
+  Background reading covers the sections instead
+- Listings now remember their town and postal code
+
 ## 1.5.0
 
 - **Price check on a listing's own page.** Open any listing and a box under

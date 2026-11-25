@@ -46,7 +46,7 @@
     let done = 0;
     let error = null;
     try {
-      while (url && done < pages && !seen.has(url)) {
+      while (url && done < pages && !seen.has(url) && BR.parse.readable(url)) {
         if (done > 0) await wait(C.SCAN_DELAY_MS, signal);
         seen.add(url);
         const read = await page(url, signal);

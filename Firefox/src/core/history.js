@@ -3,8 +3,10 @@
  * Local price history, built only from pages you open. No extra requests.
  *
  *   history[id] = { id, title, description, url, category, price, prevPrice,
- *                   drop: { from, day } | null,
+ *                   drop: { from, day } | null, psc, place,
  *                   firstSeen, firstSeenAt, lastSeen }
+ *
+ * psc and place (the seller's postal code and town) exist from 1.6.0 on.
  *
  * firstSeen and lastSeen are local "YYYY-MM-DD"; firstSeenAt is an ISO time,
  * used by the popup's clear buttons.
@@ -35,6 +37,8 @@
           price: l.price,
           prevPrice: null,
           drop: null,
+          psc: l.psc || null,
+          place: l.place || "",
           firstSeen: day,
           firstSeenAt: now.toISOString(),
           lastSeen: day
@@ -49,6 +53,7 @@
       if (l.price != null) old.price = l.price;
       old.title = l.title || old.title;
       old.description = l.description || old.description;
+      if (l.psc) { old.psc = l.psc; old.place = l.place || old.place || ""; }
       old.lastSeen = day;
     }
     return history;

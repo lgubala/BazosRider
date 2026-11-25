@@ -11,11 +11,19 @@
 <body>
   <header>
     <h1><img src="../../icons/icon-48.png" alt="">Bazoš Rider</h1>
+    <!-- V okolí / Celé Slovensko: filters every list but Strážcovia. -->
+    <div id="scope" class="tabs scope">
+      <button class="tab" type="button" data-scope="near"></button>
+      <button class="tab" type="button" data-scope="all" data-i18n="scope_all"></button>
+    </div>
     <span id="count" class="hint"></span>
     <button id="toggle-view" type="button"></button>
   </header>
 
   <!-- The lists: one card per module in src/lists/, built by popup.js. -->
+  <!-- Background reading: when it last ran, and a button to run it now. -->
+  <div id="reader-line" class="reader hint"></div>
+
   <main id="view-lists" class="grid">
     <div id="col-tall" class="col"></div>
     <div id="col-rest" class="col"></div>
@@ -44,6 +52,37 @@
         <input id="auto-share" type="number" min="1" max="90"> %</label>
       <label class="line"><span data-i18n="options_auto_min"></span>
         <input id="auto-min" type="number" min="2" max="20"></label>
+    </section>
+
+    <section class="card">
+      <h2 data-i18n="options_watches"></h2>
+      <p class="hint" data-i18n="options_watches_hint"></p>
+      <div id="watches"></div>
+      <button id="watch-add" type="button" class="small" data-i18n="options_watch_add"></button>
+    </section>
+
+    <section class="card">
+      <h2 data-i18n="options_home"></h2>
+      <p class="hint" data-i18n="options_home_hint"></p>
+      <label class="line"><span data-i18n="options_home_psc"></span>
+        <input id="home-psc" type="text" inputmode="numeric" maxlength="6" size="7" placeholder="974 01">
+        <span id="home-check" class="hint"></span></label>
+      <label class="line"><span data-i18n="options_home_radius"></span>
+        <input id="home-radius" type="number" min="1" max="300"> km</label>
+    </section>
+
+    <section class="card">
+      <h2 data-i18n="options_reader"></h2>
+      <p class="hint" data-i18n="options_reader_hint"></p>
+      <label class="line"><input id="reader-enabled" type="checkbox"> <span data-i18n="options_reader_enabled"></span></label>
+      <label class="line"><span data-i18n="options_reader_pages"></span>
+        <input id="reader-pages" type="number" min="1" max="10"></label>
+      <label class="line"><span data-i18n="options_reader_every"></span>
+        <select id="reader-every">
+          <option value="60">1 h</option><option value="120">2 h</option><option value="180">3 h</option>
+          <option value="360">6 h</option><option value="720">12 h</option><option value="1440">24 h</option>
+        </select></label>
+      <p class="hint" id="reader-sections"></p>
     </section>
 
     <section class="card">

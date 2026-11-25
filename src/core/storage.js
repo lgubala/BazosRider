@@ -1,8 +1,10 @@
 /* Bazoš Rider — core/storage.js
  *
- * Two keys in browser.storage.local, nothing else, nothing synced:
+ * Three keys in browser.storage.local, nothing else, nothing synced:
  *   settings   written by the popup: its settings view and its clear buttons
- *   history    written by the content script on every Bazoš page you open
+ *   history    written by the content script on every Bazoš page you open,
+ *              and by background reading (background/reader.js)
+ *   reader     background reading's own state, written only by reader.js
  */
 (function (BR) {
   "use strict";

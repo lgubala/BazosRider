@@ -83,6 +83,90 @@
         clamp(Number($("highlight").value), 1, maxHighlight, C.HIGHLIGHT_SHARE * 100) / 100;
     }
 
+    /* --- watchdogs ------------------------------------------------------- */
+
+    function watchRow(w) {
+      const category = h("select", { class: "w-category" },
+        h("option", { value: "" }, BR.t("options_watch_any")),
+        BR.categories.all().map((c) => h("option", { value: c.id, selected: w.category === c.id }, c.label)));
+      const row = h("div", { class: "watch" },
+        h("input", { class: "w-query", type: "text", value: w.query || "",
+                     placeholder: BR.t("options_watch_placeholder") }),
+        category,
+        h("input", { class: "w-max", type: "number", min: "1", value: w.maxPrice || "",
+                     placeholder: BR.t("options_watch_max") }),
+        h("button", { type: "button", class: "small", title: BR.t("options_watch_remove"),
+                      onclick: () => row.remove() }, "✕"));
+      row.dataset.id = w.id || "";
+      return row;
+    }
+
+    function renderWatches() {
+      const box = $("watches");
+      box.textContent = "";
+      for (const w of data.settings.watches) box.append(watchRow(w));
+    }
+
+    $("watch-add").addEventListener("click", () => {
+      const row = watchRow({});
+      $("watches").append(row);
+      row.querySelector("input").focus();
+    });
+
+    function readWatches(settings) {
+      settings.watches = [...document.querySelectorAll("#watches .watch")].map((row) => BR.settings.watch({
+        id: row.dataset.id,
+        query: row.querySelector(".w-query").value,
+        category: row.querySelector(".w-category").value,
+        maxPrice: row.querySelector(".w-max").value
+      })).filter(Boolean);
+    }
+
+    /* --- location and background reading ------------------------------------ */
+
+    function checkHome() {
+      const psc = $("home-psc").value.replace(/\s/g, "");
+      $("home-check").textContent = !psc ? "" : BR.geo.known(psc) ? "✓" : BR.t("options_home_unknown");
+    }
+    $("home-psc").addEventListener("input", checkHome);
+
+    function renderReading() {
+      const s = data.settings;
+      $("home-psc").value = s.home.psc;
+      $("home-radius").value = s.home.radiusKm;
+      checkHome();
+      $("reader-enabled").checked = s.reader.enabled;
+      $("reader-pages").value = s.reader.pages;
+      $("reader-every").value = String(s.reader.everyMinutes);
+      const ids = BR.settings.readerSections(s);
+      $("reader-sections").textContent = BR.t("options_reader_sections", {
+        sections: ids.map(BR.categories.label).join(", "),
+        n: ids.length * s.reader.pages
+      });
+    }
+
+    /* Host access is asked for on the click that switches reading on: the
+     * only moment Firefox lets an add-on ask. Saying no leaves it off. */
+    $("reader-enabled").addEventListener("change", () => {
+      const box = $("reader-enabled");
+      if (!box.checked) return;
+      BR.hostAccess().then((ok) => { if (!ok) box.checked = false; }, () => { box.checked = false; });
+    });
+
+    function readReading(settings) {
+      const C = BR.config;
+      const psc = $("home-psc").value.replace(/\s/g, "");
+      settings.home = {
+        psc: /^\d{5}$/.test(psc) ? psc : "",
+        radiusKm: clamp(Number($("home-radius").value), 1, 300, C.HOME.radiusKm)
+      };
+      settings.reader = {
+        enabled: $("reader-enabled").checked,
+        pages: clamp(Number($("reader-pages").value), 1, C.READER_MAX_PAGES, C.READER.pages),
+        everyMinutes: Number($("reader-every").value) || C.READER.everyMinutes
+      };
+    }
+
     /* --- history --------------------------------------------------------- */
 
     function renderHistory() {
@@ -99,9 +183,14 @@
       settings.filters = data.settings.filters;
       readFilters(settings);
       readComparison(settings);
-      await BR.store.saveSettings(settings);
-      data.settings = settings;
+      readWatches(settings);
+      readReading(settings);
+      const clean = BR.settings.normalize(settings);
+      await BR.store.saveSettings(clean);
+      data.settings = clean;
       renderComparison();
+      renderWatches();
+      renderReading();
       flash(BR.t("options_saved"));
       onChange();
     });
@@ -168,6 +257,8 @@
         data.history = history;
         renderFilters();
         renderComparison();
+        renderWatches();
+        renderReading();
         renderHistory();
         onChange();
         backupStatus(BR.t("backup_imported", { added, updated }));
@@ -191,6 +282,8 @@
 
     renderFilters();
     renderComparison();
+    renderWatches();
+    renderReading();
     renderHistory();
   }
 

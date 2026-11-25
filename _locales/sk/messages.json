@@ -430,5 +430,128 @@
   },
   "detail_no_price": {
     "message": "cena nie je uvedená, nie je s čím porovnať"
+  },
+  "scope_all": {
+    "message": "Celé Slovensko"
+  },
+  "scope_near": {
+    "message": "V okolí {km} km"
+  },
+  "scope_near_off": {
+    "message": "Najprv zadaj svoje PSČ v nastaveniach (Moja lokalita)."
+  },
+  "reader_on": {
+    "message": "Čítanie na pozadí: zapnuté, každé {every} h"
+  },
+  "reader_off": {
+    "message": "Čítanie na pozadí: vypnuté (zapni v nastaveniach)"
+  },
+  "reader_last": {
+    "message": "naposledy {when}: {pages} strán, {fresh} nových inzerátov"
+  },
+  "reader_running": {
+    "message": "Čítam Bazoš: strana {done} z {total}, {n} inzerátov…"
+  },
+  "reader_now": {
+    "message": "Prečítať teraz"
+  },
+  "reader_stop": {
+    "message": "Zastaviť"
+  },
+  "reader_error": {
+    "message": "chyba: {error}"
+  },
+  "reader_paused": {
+    "message": "Bazoš odmietol požiadavku, pauza do {until}"
+  },
+  "list_watches_title": {
+    "message": "Strážcovia"
+  },
+  "list_watches_hint": {
+    "message": "(najlacnejšie, čo hľadáš)"
+  },
+  "list_watches_none": {
+    "message": "Žiadny strážca. V nastaveniach pridaj, čo hľadáš, napríklad „sony hifi“."
+  },
+  "watch_summary": {
+    "message": "{n} nájdených, medián {median}"
+  },
+  "watch_nothing": {
+    "message": "zatiaľ nič nájdené"
+  },
+  "watch_near": {
+    "message": "„{name}“ v okolí {km} km"
+  },
+  "watch_all": {
+    "message": "„{name}“ na celom Slovensku"
+  },
+  "watch_near_none": {
+    "message": "V okolí zatiaľ nič."
+  },
+  "watch_all_none": {
+    "message": "Zatiaľ nič. Čítanie na pozadí a prezeranie Bazoša priebežne pridávajú inzeráty."
+  },
+  "meta_km": {
+    "message": "{km} km"
+  },
+  "bar_scan_search": {
+    "message": "Vyhľadávanie sa ďalej nečíta (Bazoš to programom zakazuje). Čítanie na pozadí prechádza celé sekcie."
+  },
+  "options_watches": {
+    "message": "Strážcovia"
+  },
+  "options_watches_hint": {
+    "message": "Čo hľadáš. Všetky slová musia byť v názve inzerátu, bez ohľadu na diakritiku a koncovky. Popup ukáže 5 najlacnejších v okolí a 5 na celom Slovensku."
+  },
+  "options_watch_add": {
+    "message": "+ Pridať strážcu"
+  },
+  "options_watch_any": {
+    "message": "všetky sekcie"
+  },
+  "options_watch_placeholder": {
+    "message": "napr. sony hifi"
+  },
+  "options_watch_max": {
+    "message": "max €"
+  },
+  "options_watch_remove": {
+    "message": "Odstrániť"
+  },
+  "options_home": {
+    "message": "Moja lokalita"
+  },
+  "options_home_hint": {
+    "message": "Tvoje PSČ, od ktorého sa počíta vzdialenosť („v okolí“). Zostáva len v tomto prehliadači; vzdialenosti sa rátajú tu, z PSČ v inzerátoch."
+  },
+  "options_home_psc": {
+    "message": "PSČ"
+  },
+  "options_home_radius": {
+    "message": "Okolie"
+  },
+  "options_home_unknown": {
+    "message": "neznáme PSČ"
+  },
+  "options_reader": {
+    "message": "Čítanie Bazoša na pozadí"
+  },
+  "options_reader_hint": {
+    "message": "Bazoš Rider sám číta najnovšie strany každej sekcie, takže v popupe vidíš dnešné ponuky bez prezerania Bazoša. Len stránky sekcií, ktoré Bazoš robotom povoľuje, nikdy vyhľadávanie; jedna stránka každé 2 sekundy. Ak Bazoš odmietne, deň počká. Pri zapnutí sa Firefox spýta na prístup k bazos.sk."
+  },
+  "options_reader_enabled": {
+    "message": "zapnuté"
+  },
+  "options_reader_pages": {
+    "message": "Strán z každej sekcie"
+  },
+  "options_reader_every": {
+    "message": "Ako často"
+  },
+  "options_reader_sections": {
+    "message": "Číta: {sections}. Spolu {n} stránok za jedno čítanie."
+  },
+  "meta_km_close": {
+    "message": "do 1 km"
   }
 }

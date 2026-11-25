@@ -19,6 +19,20 @@ All of it happens in your browser, from pages you open yourself.
 
 ## What it does
 
+**Reads Bazoš for you, if you let it.** Switch on *Nastavenia → Čítanie
+Bazoša na pozadí* and Bazoš Rider reads the newest pages of every section you
+have not hidden, every 3 hours (one page every 2 seconds, section pages only).
+Open the popup and today's deals are there, without browsing Bazoš.
+*Prečítať teraz* reads at once.
+
+**Watchdogs.** Tell it what you are looking for, "sony hifi" in Elektro, and
+the popup's *Strážcovia* shows the 5 cheapest near you and the 5 cheapest in
+all of Slovakia, with the median of everything it found.
+
+**Near you or all of Slovakia.** Enter your postal code once; every listing
+shows its town and distance ("Zvolen · 17 km"), and the header switch *V okolí
+25 km / Celé Slovensko* filters every list.
+
 **Shows the good deals the moment a page opens.** A bar above the results
 says *3 výhodné ponuky na tejto strane: −42 % −31 % −25 %*; each number
 scrolls to its listing. The deals themselves get a green edge, and the
@@ -28,9 +42,10 @@ biggest discount first. "Good" means at least 15 % under the median of
 similar listings; change it under *Nastavenia → Na stránke Bazoša*.
 
 **Goes through the rest of the search on request.** *Prejsť ďalších 10 strán*
-reads the next pages of the search you are on, one every 1.5 seconds, and
+reads the next pages of the section you are on, one every 1.5 seconds, and
 lists the good deals it found there. Click again to continue with the 10
-after those. It also fills the price history, so the
+after those. On search results it is not offered: Bazoš asks programs not to
+read those. It also fills the price history, so the
 first visit to a new kind of item already has something to compare with.
 
 **Checks the price of any listing you open.** Under the title of a
@@ -121,11 +136,14 @@ Works on Firefox desktop and Firefox for Android (142 or newer).
 Nothing leaves your browser. No servers, no accounts, no analytics, and no
 request to anyone but Bazoš.
 
-Bazoš Rider reads the pages you open. The only time it loads a page itself is
-when you click *Prejsť ďalších 10 strán*: then it loads the next pages of that
-search, the ones *Ďalšia* would show you, one at a time with a pause between
-them, and stops at ten or when you click *Zastaviť*. Never on its own, never
-in the background. See [PRIVACY.md](PRIVACY.md).
+Bazoš Rider reads the pages you open. It loads pages itself only when you ask:
+background reading, if you switch it on, and *Prejsť ďalších 10 strán*. Both
+read only Bazoš section pages, which Bazoš's `robots.txt` allows, never search
+results; one page every 2 seconds; and background reading stops for a day if
+Bazoš ever refuses. Your postal code stays in your browser, and distances are
+computed there. See [PRIVACY.md](PRIVACY.md).
+
+Postal code positions: [GeoNames](https://www.geonames.org), CC BY 4.0.
 
 ## Add a module
 

@@ -16,8 +16,22 @@
     return rank ? h("div", { class: "pill rank" }, "#" + rank) : null;
   }
 
+  /** "Čadca · 48 km", or whichever of the two is known. */
+  function where(r) {
+    const parts = [];
+    if (r.place) parts.push(r.place);
+    if (r.km != null) {
+      /* The same postal code is 0 km apart, which reads oddly: "do 1 km". */
+      parts.push(r.km < 1 ? BR.t("meta_km_close")
+        : BR.t("meta_km", { km: r.km < 10 ? r.km.toFixed(1) : Math.round(r.km) }));
+    }
+    return parts.length ? parts.join(" · ") : null;
+  }
+
   /** Price and discount on the left, title and context on the right. */
   function row(r, metaParts, rank) {
+    const place = where(r);
+    if (place) metaParts = [place, ...metaParts];
     return h("div", { class: "row" },
       h("div", { class: "left" },
         h("div", { class: "price" }, BR.text.money(r.price)),
@@ -53,5 +67,23 @@
     }
   }
 
-  BR.rows = { row, tabbed };
+  /**
+   * Rows under headings: each row has a `section` (and the first row of a
+   * section may carry a `summary` line). A row with `empty` is a
+   * placeholder: the section has nothing, and that is the text to show.
+   */
+  function sections(box, def, rows, ctx) {
+    let current = null;
+    for (const r of rows) {
+      if (r.section !== current) {
+        current = r.section;
+        box.append(h("div", { class: "cathead" }, r.section,
+          r.summary ? h("small", {}, " " + r.summary) : null));
+      }
+      if (r.empty) box.append(h("div", { class: "empty small" }, r.empty));
+      else box.append(row(r, def.meta(r, ctx), 0));
+    }
+  }
+
+  BR.rows = { row, tabbed, sections };
 })(globalThis.BR);

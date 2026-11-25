@@ -5,6 +5,18 @@ body { width: 780px; max-width: 100%; padding: 14px 18px 18px; }
 
 header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
 header h1 { flex: 1; }
+.scope { margin: 0; flex-wrap: nowrap; }
+.scope .tab:disabled { opacity: .5; cursor: default; }
+
+.reader { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: -4px 0 12px; }
+.reader:empty { display: none; }
+.reader .bad { color: var(--bad, #cf222e); }
+
+.empty.small { padding: .1em 0 .4em; font-size: 12px; }
+.cathead small { font-weight: 400; }
+
+.watch { display: grid; grid-template-columns: 1fr 9em 6em auto; gap: 6px; margin: 6px 0; align-items: center; }
+.watch input, .watch select { width: 100%; box-sizing: border-box; }
 
 .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: start; }
 .col { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
@@ -85,4 +97,6 @@ label.line { display: flex; align-items: center; gap: 8px; margin: .5em 0; flex-
   .tab { padding: 6px 12px; font-size: 14px; }
   button { padding: .6em 1em; }
   input[type=checkbox] { width: 20px; height: 20px; }
+  header { flex-wrap: wrap; }
+  .watch { grid-template-columns: 1fr 1fr; }
 }
