@@ -233,9 +233,9 @@ always commit both.
 - **Distances are from postal codes**, straight-line, and only for listings
   read since 1.6.0; older history has no location. Czech postal codes are not
   in the table.
-- **Background reading and Firefox's idle limit**: a run is split into
-  chunks of `READER_CHUNK` pages, one per minute, so Firefox stopping an idle
-  background page only delays it.
+- **Background reading and Firefox's idle limit**: a run is a queue saved
+  after every page, and a half-minute alarm carries on, so Firefox stopping
+  an idle background page only delays it.
 - **Products without a model number** are rarely grouped in strict mode.
   Loose mode helps; manual products are the precise option.
 - **Group medians mix days, versions and used/new.** A stricter "seen several

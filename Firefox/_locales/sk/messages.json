@@ -143,9 +143,6 @@
   "list_empty": {
     "message": "Zatiaľ nič."
   },
-  "meta_group": {
-    "message": "skupina „{name}“"
-  },
   "meta_median": {
     "message": "medián {price} ({n} inz.)"
   },
@@ -537,7 +534,7 @@
     "message": "Čítanie Bazoša na pozadí"
   },
   "options_reader_hint": {
-    "message": "Bazoš Rider sám číta najnovšie strany každej sekcie, takže v popupe vidíš dnešné ponuky bez prezerania Bazoša. Len stránky sekcií, ktoré Bazoš robotom povoľuje, nikdy vyhľadávanie; jedna stránka každé 2 sekundy. Ak Bazoš odmietne, deň počká. Pri zapnutí sa Firefox spýta na prístup k bazos.sk."
+    "message": "Bazoš Rider sám číta najnovšie strany každej sekcie, takže v popupe vidíš dnešné ponuky bez prezerania Bazoša. Len stránky sekcií, ktoré Bazoš robotom povoľuje, nikdy vyhľadávanie; jedna stránka každú 1,5 sekundy a po prvom čítaní len to, čo pribudlo. Ak Bazoš odmietne, deň počká. Pri zapnutí sa Firefox spýta na prístup k bazos.sk."
   },
   "options_reader_enabled": {
     "message": "zapnuté"
@@ -549,9 +546,37 @@
     "message": "Ako často"
   },
   "options_reader_sections": {
-    "message": "Číta: {sections}. Spolu {n} stránok za jedno čítanie."
+    "message": "Číta: {sections}. Prvýkrát najviac {n} stránok, potom už len nové, zvyčajne jednu-dve na sekciu."
   },
   "meta_km_close": {
     "message": "do 1 km"
+  },
+  "popup_full": {
+    "message": "⤢ Prehľad",
+    "description": "Header button: opens the lists in a whole tab"
+  },
+  "popup_full_title": {
+    "message": "Otvoriť zoznamy na celej karte",
+    "description": "Tooltip of popup_full"
+  },
+  "stat_day": {
+    "message": "dealov dnes",
+    "description": "Dashboard tile"
+  },
+  "stat_year": {
+    "message": "dealov tento rok",
+    "description": "Dashboard tile"
+  },
+  "stat_watches": {
+    "message": "nálezov strážcov",
+    "description": "Dashboard tile"
+  },
+  "stat_new_today": {
+    "message": "nových inzerátov dnes",
+    "description": "Dashboard tile"
+  },
+  "stat_history": {
+    "message": "inzerátov v histórii",
+    "description": "Dashboard tile"
   }
 }

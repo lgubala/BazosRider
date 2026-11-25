@@ -22,7 +22,6 @@
   function meta(row) {
     const parts = [BR.categories.label(row.category)];
     if (row.median != null) parts.push(BR.t("meta_median", { price: BR.text.money(row.median), n: row.n }));
-    if (row.group) parts.push(BR.t("meta_group", { name: row.group }));
     parts.push(BR.t("meta_seen", { date: BR.text.shortDate(row.lastSeen) }));
     return parts;
   }
@@ -55,7 +54,7 @@
   BR.lists.add({
     ...common,
     id: "day",
-    order: 20,
+    order: 10,
     title: "list_day_title",
     hint: "list_day_hint",
     empty: empty("day"),
@@ -65,7 +64,7 @@
   BR.lists.add({
     ...common,
     id: "year",
-    order: 30,
+    order: 20,
     title: "list_year_title",
     hint: "list_year_hint",
     empty: empty("year"),

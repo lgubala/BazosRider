@@ -11,12 +11,14 @@
 <body>
   <header>
     <h1><img src="../../icons/icon-48.png" alt="">Bazoš Rider</h1>
-    <!-- V okolí / Celé Slovensko: filters every list but Strážcovia. -->
+    <!-- V okolí / Celé Slovensko: filters every list, Strážcovia included. -->
     <div id="scope" class="tabs scope">
       <button class="tab" type="button" data-scope="near"></button>
       <button class="tab" type="button" data-scope="all" data-i18n="scope_all"></button>
     </div>
     <span id="count" class="hint"></span>
+    <!-- The same page in a whole tab: the dashboard. Hidden there. -->
+    <button id="open-full" type="button" data-i18n="popup_full" data-i18n-title="popup_full_title"></button>
     <button id="toggle-view" type="button"></button>
   </header>
 
@@ -24,9 +26,10 @@
   <!-- Background reading: when it last ran, and a button to run it now. -->
   <div id="reader-line" class="reader hint"></div>
 
-  <main id="view-lists" class="grid">
-    <div id="col-tall" class="col"></div>
-    <div id="col-rest" class="col"></div>
+  <main id="view-lists">
+    <!-- The dashboard's numbers at a glance; only in a whole tab. -->
+    <div id="stats" class="stats"></div>
+    <div id="cards" class="grid"></div>
   </main>
 
   <!-- Settings, in the popup itself. Built by settings.js. -->
@@ -76,7 +79,7 @@
       <p class="hint" data-i18n="options_reader_hint"></p>
       <label class="line"><input id="reader-enabled" type="checkbox"> <span data-i18n="options_reader_enabled"></span></label>
       <label class="line"><span data-i18n="options_reader_pages"></span>
-        <input id="reader-pages" type="number" min="1" max="10"></label>
+        <input id="reader-pages" type="number" min="1" max="20"></label>
       <label class="line"><span data-i18n="options_reader_every"></span>
         <select id="reader-every">
           <option value="60">1 h</option><option value="120">2 h</option><option value="180">3 h</option>

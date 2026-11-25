@@ -1,5 +1,6 @@
-/* Bazoš Rider — toolbar popup. Two columns on desktop (tall lists left, the
-   rest right), one column on a phone. No inner scroll boxes: one page scrollbar. */
+/* Bazoš Rider — toolbar popup. Two columns on desktop, cards in list order
+   (the deals first), one column on a phone. body.full is the same page in a
+   whole tab: the dashboard. */
 
 body { width: 780px; max-width: 100%; padding: 14px 18px 18px; }
 
@@ -19,7 +20,26 @@ header h1 { flex: 1; }
 .watch input, .watch select { width: 100%; box-sizing: border-box; }
 
 .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: start; }
-.col { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.grid > .card { min-width: 0; }
+
+select.pick { margin: 0 0 6px; max-width: 100%; font-size: 13px; }
+
+.stats { display: none; }
+
+/* --- dashboard: the whole tab ------------------------------------------- */
+
+body.full { width: auto; max-width: 1900px; margin: 0 auto; padding: 18px 24px 24px; }
+body.full header h1 { font-size: 22px; }
+body.full .grid { grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); }
+/* Each card scrolls on its own, so every list starts above the fold. */
+body.full .grid > .card { max-height: calc(100vh - 210px); display: flex; flex-direction: column; }
+body.full .grid > .card > .body { overflow-y: auto; min-height: 0; padding-right: 4px; }
+body.full .stats { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+.stat { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+        padding: 8px 16px; display: flex; align-items: baseline; gap: 8px; }
+.stat b { font-size: 22px; }
+.stat span { color: var(--muted); font-size: 13px; }
+body.full .settings { max-width: 900px; margin: 0 auto; }
 
 .head { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 8px; }
 

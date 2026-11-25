@@ -42,8 +42,9 @@
   }
 
   /**
-   * Category tabs over groups [{ category, items }]. "Všetky" shows every
-   * category under its own heading. `state` remembers the picked tab.
+   * A category picker over groups [{ category, items }]: a dropdown, so a
+   * list with 20 categories does not start with a wall of buttons. "Všetky"
+   * shows every category under its own heading. `state` remembers the pick.
    */
   function tabbed(box, def, groups, ctx, state, rerender) {
     groups.sort((a, b) =>
@@ -53,12 +54,12 @@
       groups.map((g) => ({ key: g.category, label: BR.categories.label(g.category), count: g.items.length })));
     const picked = tabs.some((t) => t.key === state[def.id]) ? state[def.id] : "all";
 
-    box.append(h("div", { class: "tabs" }, tabs.map((t) =>
-      h("button", {
-        type: "button",
-        class: "tab" + (t.key === picked ? " on" : ""),
-        onclick: () => { state[def.id] = t.key; rerender(); }
-      }, `${t.label} ${t.count}`))));
+    const select = h("select", {
+      class: "pick",
+      onchange: () => { state[def.id] = select.value; rerender(); }
+    }, tabs.map((t) => h("option", { value: t.key }, `${t.label} (${t.count})`)));
+    select.value = picked;
+    box.append(select);
 
     for (const g of groups) {
       if (picked !== "all" && g.category !== picked) continue;

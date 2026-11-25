@@ -1,13 +1,13 @@
-/* Strážcovia: for each watchdog set in the popup settings, the cheapest
- * matches near you and in all of Slovakia (core/watches.js). Not affected by
- * the V okolí / Celé Slovensko switch: it always shows both. */
+/* Strážcovia: for each watchdog set in the popup settings, its cheapest
+ * matches (core/watches.js): near you with the popup on "V okolí", in all of
+ * Slovakia on "Celé Slovensko". The count and median are over all of them. */
 BR.lists.add({
   id: "watches",
-  order: 5,
+  order: 30,
   title: "list_watches_title",
   hint: "list_watches_hint",
   layout: "sections",
-  scoped: false,
+  scoped: false,                  // picks near or all itself, below
   empty: "list_watches_none",
 
   items(ctx) {
@@ -24,8 +24,8 @@ BR.lists.add({
         if (!list.length) rows.push({ section, summary, empty: BR.t(none) });
         else for (const e of list) rows.push({ ...e, section, summary });
       };
-      if (ctx.homeSet) add("watch_near", r.near, "watch_near_none");
-      add("watch_all", r.all, "watch_all_none");
+      if (ctx.homeSet && ctx.settings.scope === "near") add("watch_near", r.near, "watch_near_none");
+      else add("watch_all", r.all, "watch_all_none");
     }
     return rows;
   },

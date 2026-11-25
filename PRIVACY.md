@@ -15,7 +15,7 @@ Only to bazos.sk, and only in two cases:
   na pozadí*; it is off by default). The extension then loads the newest pages
   of the Bazoš sections you have not hidden, for example
   `https://mobil.bazos.sk/` and `https://mobil.bazos.sk/40/`, a few pages per
-  section, one page every 2 seconds, as often as you set (every 3 hours by
+  section, one page every 1.5 seconds, and after the first time only until it reaches listings it already read, as often as you set (every 3 hours by
   default). These are section pages, which Bazoš's `robots.txt` allows; it
   never loads search URLs. If Bazoš refuses a request, it stops for a day.
 - **When you click** *Prejsť ďalších 10 strán* on a section page: the next

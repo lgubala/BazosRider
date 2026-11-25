@@ -12,7 +12,7 @@ All of it happens in your browser, from pages you open yourself.
 [![Licence: MIT](https://img.shields.io/badge/licence-MIT-blue.svg)](LICENSE)
 
 <p align="center">
-  <img src="docs/screenshots/popup.png" alt="The Bazoš Rider popup: cheapest today per category, deals of the day and of the year, free items" width="640">
+  <img src="docs/screenshots/dashboard.png" alt="The Bazoš Rider dashboard: deals of the day and of the year, watchdogs and today's cheapest side by side, with the day's numbers on top" width="800">
 </p>
 
 ---
@@ -21,13 +21,16 @@ All of it happens in your browser, from pages you open yourself.
 
 **Reads Bazoš for you, if you let it.** Switch on *Nastavenia → Čítanie
 Bazoša na pozadí* and Bazoš Rider reads the newest pages of every section you
-have not hidden, every 3 hours (one page every 2 seconds, section pages only).
+have not hidden, every 3 hours (one page every 1.5 seconds, section pages only, and after the first time only what is new).
 Open the popup and today's deals are there, without browsing Bazoš.
 *Prečítať teraz* reads at once.
 
+**A dashboard.** *⤢ Prehľad* opens the lists in a whole tab: deals of the
+day and the year, watchdogs and today's cheapest side by side.
+
 **Watchdogs.** Tell it what you are looking for, "sony hifi" in Elektro, and
-the popup's *Strážcovia* shows the 5 cheapest near you and the 5 cheapest in
-all of Slovakia, with the median of everything it found.
+the popup's *Strážcovia* shows the 5 cheapest near you, or in all of Slovakia
+(the header switch decides), with the median of everything it found.
 
 **Near you or all of Slovakia.** Enter your postal code once; every listing
 shows its town and distance ("Zvolen · 17 km"), and the header switch *V okolí
@@ -139,7 +142,7 @@ request to anyone but Bazoš.
 Bazoš Rider reads the pages you open. It loads pages itself only when you ask:
 background reading, if you switch it on, and *Prejsť ďalších 10 strán*. Both
 read only Bazoš section pages, which Bazoš's `robots.txt` allows, never search
-results; one page every 2 seconds; and background reading stops for a day if
+results; one page every 1.5 seconds; and background reading stops for a day if
 Bazoš ever refuses. Your postal code stays in your browser, and distances are
 computed there. See [PRIVACY.md](PRIVACY.md).
 

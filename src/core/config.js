@@ -89,10 +89,9 @@
      * ("mobil.bazos.sk/", "/40/", ...), which Bazoš's robots.txt allows,
      * never search URLs. Slow on purpose: one page every READER_DELAY_MS. */
     READER: { enabled: false, pages: 3, everyMinutes: 180 },
-    READER_MAX_PAGES: 10,
+    READER_MAX_PAGES: 20,
     READER_MIN_MINUTES: 60,
-    READER_DELAY_MS: 2000,
-    READER_CHUNK: 8,          // pages per one-minute tick, see background/reader.js
+    READER_DELAY_MS: 1500,
     READER_PAUSE_HOURS: 24,   // after Bazoš answers with an error
 
     /* robots.txt (checked November 2026) disallows these in any URL. Neither

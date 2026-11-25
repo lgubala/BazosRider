@@ -1,7 +1,7 @@
 /* Zadarmo: everything given away this year, five per category. */
 BR.lists.add({
   id: "free",
-  order: 40,
+  order: 60,
   title: "list_free_title",
   empty: "list_free_empty",
   layout: "categories",

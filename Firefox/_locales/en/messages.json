@@ -143,9 +143,6 @@
   "list_empty": {
     "message": "Nothing yet."
   },
-  "meta_group": {
-    "message": "group “{name}”"
-  },
   "meta_median": {
     "message": "median {price} ({n} ads)"
   },
@@ -537,7 +534,7 @@
     "message": "Background reading"
   },
   "options_reader_hint": {
-    "message": "Bazoš Rider reads the newest pages of each section itself, so the popup shows today's deals without you browsing Bazoš. Only section pages, which Bazoš allows robots, never search; one page every 2 seconds. If Bazoš refuses, it waits a day. Firefox asks for access to bazos.sk when you switch it on."
+    "message": "Bazoš Rider reads the newest pages of each section itself, so the popup shows today's deals without you browsing Bazoš. Only section pages, which Bazoš allows robots, never search; one page every 1.5 seconds, and after the first reading only what is new. If Bazoš refuses, it waits a day. Firefox asks for access to bazos.sk when you switch it on."
   },
   "options_reader_enabled": {
     "message": "on"
@@ -549,9 +546,37 @@
     "message": "How often"
   },
   "options_reader_sections": {
-    "message": "Reads: {sections}. {n} pages per reading."
+    "message": "Reads: {sections}. At most {n} pages the first time; after that only the new pages, usually one or two per section."
   },
   "meta_km_close": {
     "message": "under 1 km"
+  },
+  "popup_full": {
+    "message": "⤢ Dashboard",
+    "description": "Header button: opens the lists in a whole tab"
+  },
+  "popup_full_title": {
+    "message": "Open the lists in a whole tab",
+    "description": "Tooltip of popup_full"
+  },
+  "stat_day": {
+    "message": "deals today",
+    "description": "Dashboard tile"
+  },
+  "stat_year": {
+    "message": "deals this year",
+    "description": "Dashboard tile"
+  },
+  "stat_watches": {
+    "message": "watchdog finds shown",
+    "description": "Dashboard tile"
+  },
+  "stat_new_today": {
+    "message": "new listings today",
+    "description": "Dashboard tile"
+  },
+  "stat_history": {
+    "message": "listings in history",
+    "description": "Dashboard tile"
   }
 }

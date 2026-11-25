@@ -8,18 +8,25 @@
  *     /80/ ...). Bazoš's robots.txt allows them. Search URLs (search.php,
  *     hledat=, hlokalita= ...) are refused, see config DISALLOWED_URL_PARTS
  *   - only sections you have not hidden, plus your watchdogs' sections
- *   - settings.reader.pages pages per section, one request every
+ *   - at most settings.reader.pages pages per section, one request every
  *     READER_DELAY_MS, every settings.reader.everyMinutes
  *   - if Bazoš answers 403, 429 or 5xx, nothing more for READER_PAUSE_HOURS
  *   - off until the user switches it on
  *
- * Firefox may stop an idle background page after ~30 s, so a run is a queue
- * kept in storage and worked through in chunks of READER_CHUNK pages, one
- * chunk per "br-reader-tick" alarm (every minute). A stopped page loses
- * nothing: the next tick carries on.
+ * Only what is new: Bazoš numbers listings in order, so each section
+ * remembers the newest listing id a finished reading saw ("frontier"). The
+ * next reading stops in that section at the first page that is mostly older
+ * than it. The first reading goes settings.reader.pages deep; later ones
+ * usually need a page or two per section.
+ *
+ * Firefox may stop an idle background page after ~30 s, so the run is a queue
+ * kept in storage and saved after every page. The "br-reader-tick" alarm
+ * (every half minute while a run is on) carries on if the page was stopped;
+ * a stopped page loses at most the page it was reading.
  *
  * State, in storage.local "reader":
- *   { queue: [{ category, url, left }] | null,
+ *   { queue: [{ category, url, left, max }] | null,
+ *     frontier: { category: newest listing id read },
  *     run: { startedAt, total, pages, listings, fresh } | null,
  *     lastRun, lastResult: { pages, listings, fresh, error }, pausedUntil }
  */
@@ -70,7 +77,7 @@
       if (age < settings.reader.everyMinutes * 60000 * 0.9) return { started: false, why: "recent" };
     }
     const queue = sections(settings).map((category) => ({
-      category, url: `https://${category}.${C.DOMAIN}/`, left: settings.reader.pages
+      category, url: `https://${category}.${C.DOMAIN}/`, left: settings.reader.pages, max: 0
     }));
     await saveState({
       ...state,
@@ -78,71 +85,102 @@
       run: { startedAt: new Date(now).toISOString(), total: queue.length * settings.reader.pages,
              pages: 0, listings: 0, fresh: 0 }
     });
-    api.alarms.create(TICK, { periodInMinutes: 1 });
+    api.alarms.create(TICK, { periodInMinutes: 0.5 });
     tick();
     return { started: true };
   }
 
+  const idNumber = (l) => Number(l.id) || 0;
+
+  /** The middle id of a page: TOP listings (old, pinned first) do not move it. */
+  function middleId(listings) {
+    const ids = listings.map(idNumber).filter(Boolean).sort((a, b) => a - b);
+    return ids.length ? ids[Math.floor(ids.length / 2)] : 0;
+  }
+
+  /** Records one page's listings in the history; returns how many were new. */
+  async function record(listings) {
+    if (!listings.length) return 0;
+    const { history } = await BR.store.load();
+    const fresh = new Set(listings.filter((l) => l.id && !history[l.id]).map((l) => l.id));
+    const now = new Date();
+    BR.history.record(history, listings, now);
+    BR.history.prune(history, now);
+    await BR.store.saveHistory(history);
+    return [...fresh].filter((id) => history[id]).length;
+  }
+
   let busy = false;
 
-  /** Reads up to READER_CHUNK pages from the queue, records them, saves. */
+  /**
+   * Works through the queue page by page, READER_DELAY_MS apart, saving after
+   * each one. Runs until the queue is empty or Firefox stops the page; the
+   * tick alarm then calls it again.
+   */
   async function tick() {
     if (busy) return;
     busy = true;
     try {
-      const state = await loadState();
-      if (!state.queue || !state.queue.length) {
-        api.alarms.clear(TICK);
-        return;
-      }
-      const queue = state.queue;
-      const run = state.run || { pages: 0, listings: 0, fresh: 0, total: 0 };
-      const found = [];
-      let error = null;
-      let pause = false;
-
-      for (let n = 0; n < C.READER_CHUNK && queue.length; n++) {
+      let state = await loadState();
+      let first = true;
+      while (state.queue && state.queue.length) {
+        const queue = state.queue;
+        const run = state.run || { pages: 0, listings: 0, fresh: 0, total: 0 };
+        const frontier = { ...(state.frontier || {}) };
         const item = queue[0];
-        if (!item.url || item.left <= 0 || !readable(item.url)) { queue.shift(); n--; continue; }
-        if (n > 0) await wait(C.READER_DELAY_MS);
-        try {
-          const doc = await fetchPage(item.url);
-          for (const l of BR.parse.listings(doc)) { l.element = null; found.push(l); }
-          run.pages++;
-          item.left--;
-          item.url = BR.parse.nextPageUrl(doc);
-          if (!item.url || item.left <= 0) queue.shift();
-        } catch (e) {
-          error = e.message || String(e);
-          /* Bazoš saying no: stop and leave it alone for a day. Anything
-           * else (offline, a timeout): stop this run, try again next time. */
-          pause = e.status === 403 || e.status === 429 || e.status >= 500;
-          queue.length = 0;
-          break;
+        let error = null;
+        let pause = false;
+
+        if (!item.url || item.left <= 0 || !readable(item.url)) {
+          queue.shift();
+        } else {
+          if (!first) await wait(C.READER_DELAY_MS);
+          first = false;
+          /* The popup's Stop may have cleared the queue while we waited. */
+          const now = await loadState();
+          if (!now.queue || !now.queue.length) break;
+          try {
+            const doc = await fetchPage(item.url);
+            const listings = BR.parse.listings(doc).map((l) => ({ ...l, element: null }));
+            run.pages++;
+            run.listings += listings.length;
+            run.fresh += await record(listings);
+            item.left--;
+            item.max = Math.max(item.max || 0, ...listings.map(idNumber));
+            item.url = BR.parse.nextPageUrl(doc);
+            /* Reached what the last reading already read: this section is done. */
+            const known = frontier[item.category] || 0;
+            const caughtUp = known && middleId(listings) <= known;
+            if (!item.url || item.left <= 0 || caughtUp) {
+              if (caughtUp) run.total -= item.left;   // the progress line's "of N"
+              frontier[item.category] = Math.max(known, item.max);
+              queue.shift();
+            }
+          } catch (e) {
+            error = e.message || String(e);
+            /* Bazoš saying no: stop and leave it alone for a day. Anything
+             * else (offline, a timeout): stop this run, try again next time. */
+            pause = e.status === 403 || e.status === 429 || e.status >= 500;
+            queue.length = 0;
+          }
         }
-      }
 
-      if (found.length) {
-        const { history } = await BR.store.load();
-        const before = new Set(Object.keys(history));
-        const now = new Date();
-        BR.history.record(history, found, now);
-        BR.history.prune(history, now);
-        await BR.store.saveHistory(history);
-        run.listings += found.length;
-        run.fresh += new Set(found.filter((l) => l.id && !before.has(l.id) && history[l.id]).map((l) => l.id)).size;
+        /* Stopped from the popup while this page loaded: its listings are
+         * recorded, the stop stands. */
+        if (!(await loadState()).queue) break;
+        const next = { ...state, queue, run, frontier };
+        if (!queue.length) {
+          next.queue = null;
+          next.run = null;
+          next.lastRun = new Date().toISOString();
+          next.lastResult = { pages: run.pages, listings: run.listings, fresh: run.fresh, error };
+          if (pause) next.pausedUntil = new Date(Date.now() + C.READER_PAUSE_HOURS * 3600e3).toISOString();
+          api.alarms.clear(TICK);
+        }
+        await saveState(next);
+        state = next;
       }
-
-      const next = { ...state, queue, run };
-      if (!queue.length) {
-        next.queue = null;
-        next.run = null;
-        next.lastRun = new Date().toISOString();
-        next.lastResult = { pages: run.pages, listings: run.listings, fresh: run.fresh, error };
-        if (pause) next.pausedUntil = new Date(Date.now() + C.READER_PAUSE_HOURS * 3600e3).toISOString();
-        api.alarms.clear(TICK);
-      }
-      await saveState(next);
+      if (!state.queue) api.alarms.clear(TICK);
     } catch (e) {
       console.error("[bazos-rider] reader", e);
     } finally {

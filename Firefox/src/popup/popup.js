@@ -4,6 +4,9 @@
  * `order`) and the settings (popup/settings.js). The header button switches
  * between them.
  *
+ * The same page opened in a tab with #dashboard is the dashboard: the whole
+ * window, cards side by side, more rows each, and a line of numbers on top.
+ *
  * Above the lists: the V okolí / Celé Slovensko switch in the header, and a
  * line about background reading with a button to run it now. While reading
  * runs, the lists redraw as new listings arrive.
@@ -23,6 +26,14 @@
 
   BR.dom.localize(document);
 
+  const full = location.hash === "#dashboard";
+  document.body.classList.toggle("full", full);
+  $("open-full").hidden = full;
+  $("open-full").addEventListener("click", () => {
+    const url = new URL("popup.html#dashboard", location.href).href;
+    Promise.resolve(api.tabs.create({ url })).then(() => window.close(), () => window.open(url));
+  });
+
   const data = await BR.store.load();
 
   /* --- views --------------------------------------------------------------- */
@@ -39,20 +50,21 @@
 
   /* --- lists --------------------------------------------------------------- */
 
-  /* Tall lists go in the left column, the rest stack on the right. */
-  const columns = { tall: $("col-tall"), rest: $("col-rest") };
+  /* One card per list, in `order`: the deals first, so they are what you
+   * see when the popup opens. */
   const cards = new Map();
+  const counts = {};
 
   for (const def of BR.lists.all()) {
     const body = h("div", { class: "body" });
-    const card = h("section", { class: "card" + (def.tall ? " tall" : "") },
+    const card = h("section", { class: "card", "data-list": def.id },
       h("div", { class: "head" },
         h("h2", {}, BR.t(def.title), def.hint ? h("small", {}, " " + BR.t(def.hint)) : null),
         def.clearable
           ? h("button", { type: "button", class: "small", onclick: () => clear(def) }, BR.t("popup_clear"))
           : null),
       body);
-    (def.tall ? columns.tall : columns.rest).append(card);
+    $("cards").append(card);
     cards.set(def.id, body);
   }
 
@@ -67,11 +79,27 @@
     renderReader();
     const ctx = context();
     for (const def of BR.lists.all()) render(def, ctx);
+    if (full) renderStats(ctx);
+  }
+
+  /** The dashboard's line of numbers. */
+  function renderStats(ctx) {
+    let today = 0;
+    for (const e of Object.values(ctx.history)) if (e.firstSeen === ctx.today) today++;
+    const tile = (n, key) => h("div", { class: "stat" },
+      h("b", {}, (n || 0).toLocaleString(BR.lang)), h("span", {}, BR.t(key)));
+    $("stats").replaceChildren(
+      tile(counts.day, "stat_day"),
+      tile(counts.year, "stat_year"),
+      tile(counts.watches, "stat_watches"),
+      tile(today, "stat_new_today"),
+      tile(Object.keys(ctx.history).length, "stat_history"));
   }
 
   function render(def, ctx) {
     const box = cards.get(def.id);
     box.textContent = "";
+    counts[def.id] = 0;
     if (def.needsGroups && !ctx.settings.auto.enabled) {
       box.append(h("div", { class: "empty" }, BR.t("list_auto_off")));
       return;
@@ -83,13 +111,14 @@
       console.error(`[bazos-rider] list "${def.id}" failed`, e);
       rows = [];
     }
+    counts[def.id] = rows.filter((r) => !r.empty).length;
     if (!rows.length) {
       /* `empty` is a _locales key, or a function returning finished text. */
       const text = typeof def.empty === "function" ? def.empty(ctx) : BR.t(def.empty || "list_empty");
       box.append(h("div", { class: "empty" }, text));
       return;
     }
-    const limit = def.limit || C.LIST_LIMIT;
+    const limit = (def.limit || C.LIST_LIMIT) * (full ? 2 : 1);
     if (def.layout === "sections") {
       BR.rows.sections(box, def, rows, ctx);
     } else if (def.layout === "categories") {

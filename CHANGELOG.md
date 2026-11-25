@@ -1,5 +1,22 @@
 # Changelog
 
+## 1.7.0
+
+- **Dashboard.** *⤢ Prehľad* in the popup's header opens the lists in a
+  whole tab: the cards side by side, twice the rows, each card scrolling on
+  its own, and a line of numbers on top (deals today and this year, watchdog
+  finds, new listings today)
+- **Deal dňa and Deal roka come first**, then Strážcovia, then Najlacnejšie
+  dnes. Categories are a dropdown instead of a wall of buttons, and rows no
+  longer repeat the group's name
+- **Strážcovia follow the V okolí / Celé Slovensko switch**: one section per
+  watchdog, near you or nationwide
+- **Background reading is much faster.** It reads one page every 1.5 seconds
+  without stopping each minute, saving after every page. After the first
+  reading it reads only what is new: Bazoš numbers listings in order, so a
+  section stops at the first page it already read, usually after a page or two
+- Up to 20 pages per section (was 10)
+
 ## 1.6.0
 
 - **Background reading.** *Nastavenia → Čítanie Bazoša na pozadí*: Bazoš
