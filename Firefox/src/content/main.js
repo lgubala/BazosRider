@@ -25,7 +25,7 @@
     scannedListings: [],  // listings read from further pages
     more: [],          // [{ listing, deal }] the good deals among them
     scan: null,        // { controller, done, pages, found } while scanning
-    scanned: null      // { pages, listings, error } after a scan
+    scanned: null      // { pages, listings, last, next, error }, totals over every scan
   };
 
   state.counts = BR.filters.apply(listings, state.settings);
@@ -86,7 +86,10 @@
     state.scan = { controller, done: 0, pages: BR.config.SCAN_PAGES, found: 0 };
     bar();
 
+    /* A second click continues after the last page read, not from here. */
+    const before = state.scanned;
     const result = await BR.scan.run(document, {
+      from: before ? before.next : null,
       signal: controller.signal,
       onPage(done, pages, found) {
         Object.assign(state.scan, { done, pages, found });
@@ -97,8 +100,12 @@
     /* Fresh history: another tab may have written since this page loaded. */
     const { history } = await BR.store.load();
     const now = new Date();
-    const onPage = new Set(listings.map((l) => l.id));
-    const read = result.listings.filter((l) => l.id && !onPage.has(l.id));
+    const known = new Set([...listings, ...state.scannedListings].map((l) => l.id));
+    const read = result.listings.filter((l) => {
+      if (!l.id || known.has(l.id)) return false;
+      known.add(l.id);
+      return true;
+    });
     for (const l of read) {
       l.hidden = BR.filters.hides(l, state.settings);
       l.skip = BR.skips.reasonFor(l);
@@ -108,8 +115,14 @@
     await BR.store.saveHistory(history);
 
     state.history = history;
-    state.scannedListings = read;
-    state.scanned = { pages: result.pages, listings: read.length, error: result.error };
+    state.scannedListings = [...state.scannedListings, ...read];
+    state.scanned = {
+      pages: (before ? before.pages : 0) + result.pages,
+      listings: state.scannedListings.length,
+      last: result.last || (before && before.last) || null,
+      next: result.next,
+      error: result.error
+    };
     state.scan = null;
     render();
   }

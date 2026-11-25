@@ -29,7 +29,8 @@ similar listings; change it under *Nastavenia → Na stránke Bazoša*.
 
 **Goes through the rest of the search on request.** *Prejsť ďalších 10 strán*
 reads the next pages of the search you are on, one every 1.5 seconds, and
-lists the good deals it found there. It also fills the price history, so the
+lists the good deals it found there. Click again to continue with the 10
+after those. It also fills the price history, so the
 first visit to a new kind of item already has something to compare with.
 
 **Hides listings.** Tick whole sections (cars, jobs, real estate…) or type
@@ -70,21 +71,28 @@ comparisons keep working. An empty deal list says why it is empty.
 
 **Settings are in the popup too.** *Nastavenia* swaps the lists for the
 filters, comparison thresholds, your products and the price history.
+*Záloha* exports all of it to a file and imports it on another computer.
 
 ## How "similar" works
 
-Listings are grouped only when their titles share a **model number**:
-`Cybex Priam 2023`, `Samsung QE55Q60`, `i30`. Brand and category words alone
-are not enough, because *Britax Römer* covers a 60 € seat and a 300 € one, and
-comparing them once produced an "−84 %" that was simply wrong. A missing
-comparison is better than a wrong one.
+Titles are compared word by word within one Bazoš section, after some
+tidying: "128 GB" and "128GB" are one word, "iPhone 13" and "iPhone13" are the
+same model, and Slovak endings are ignored ("kočík", "kočíka", "kočíky").
 
-Titles whose numbers disagree never group, so "iPhone 13 128GB" is not
-compared with "iPhone 15 128GB".
+Some things always keep two titles apart:
 
-For listings without model numbers (clothes, books, furniture), switch
-*Nastavenia → Automatické porovnávanie* to *Voľnejšie*: titles that are very
-alike group even without a number. More comparisons, occasionally a wrong one.
+- **Numbers that disagree.** "iPhone 13" is never compared with "iPhone 15",
+  "Octavia 2008" with "Octavia 2015", "1.6 TDI" with "2.0 TDI"
+- **A variant on one side only.** "iPhone 13 Pro" is not a cheap "iPhone 13".
+  The words are *pro, max, mini, plus, ultra, lite, fe, xl*
+
+*Nastavenia → Automatické porovnávanie* has two modes. *Voľnejšie*, the
+default, also groups titles without a model number when they are very alike
+("Šaty na stužkovú"). *Prísne* needs a shared model number (`Cybex Priam
+2023`, `Samsung QE55Q60`, `iPhone 13`): fewer comparisons, almost never a
+wrong one. Brand words alone are never enough, because *Britax Römer* covers
+a 60 € seat and a 300 € one.
+
 Or track a product by name under *Ručne zadané produkty*; its median counts
 from five listings.
 

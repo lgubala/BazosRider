@@ -252,7 +252,7 @@
     "message": "Only listings sharing a model number in the title (Samsung QE55Q60, Cybex Priam 2023). Fewer comparisons, nearly always right."
   },
   "options_mode_loose": {
-    "message": "Loose"
+    "message": "Loose (default)"
   },
   "options_mode_loose_hint": {
     "message": "Also listings without a model number when their titles are very alike (Šaty na stužkovú). More comparisons, sometimes of different things. Different model numbers never group."
@@ -343,5 +343,41 @@
   },
   "options_highlight": {
     "message": "Highlight from (under the median)"
+  },
+  "bar_scan_more": {
+    "message": "Continue with the next {pages} pages"
+  },
+  "bar_scan_end": {
+    "message": "Read to the end of the search."
+  },
+  "bar_scan_last": {
+    "message": "→ to the last page read"
+  },
+  "options_backup": {
+    "message": "Backup"
+  },
+  "options_backup_hint": {
+    "message": "Move settings and price history to another computer. Importing replaces the settings and merges the history with the one you have. Import opens in a new tab, because a file picker would close this popup."
+  },
+  "options_export": {
+    "message": "Export"
+  },
+  "options_import": {
+    "message": "Import…"
+  },
+  "backup_exported": {
+    "message": "Exported {n} listings."
+  },
+  "backup_imported": {
+    "message": "Imported {added} new listings, {updated} updated. Settings come from the backup."
+  },
+  "backup_failed": {
+    "message": "Import failed: {error}"
+  },
+  "backup_not_json": {
+    "message": "the file is not JSON"
+  },
+  "backup_not_ours": {
+    "message": "this is not a Bazoš Rider backup"
   }
 }

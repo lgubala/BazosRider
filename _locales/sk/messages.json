@@ -252,7 +252,7 @@
     "message": "Len inzeráty s rovnakým číslom modelu v názve (Samsung QE55Q60, Cybex Priam 2023). Menej porovnaní, ale takmer vždy správne."
   },
   "options_mode_loose": {
-    "message": "Voľnejšie"
+    "message": "Voľnejšie (predvolené)"
   },
   "options_mode_loose_hint": {
     "message": "Aj inzeráty bez čísla modelu, ak majú veľmi podobný názov (Šaty na stužkovú). Viac porovnaní, občas porovná rozdielne veci. Rozdielne čísla modelov sa nespoja nikdy."
@@ -343,5 +343,41 @@
   },
   "options_highlight": {
     "message": "Zvýrazniť od (pod mediánom)"
+  },
+  "bar_scan_more": {
+    "message": "Pokračovať ďalšími {pages} stranami"
+  },
+  "bar_scan_end": {
+    "message": "Prečítané až po koniec vyhľadávania."
+  },
+  "bar_scan_last": {
+    "message": "→ na poslednú prečítanú stranu"
+  },
+  "options_backup": {
+    "message": "Záloha"
+  },
+  "options_backup_hint": {
+    "message": "Prenes nastavenia a históriu cien na iný počítač. Import nahradí nastavenia a históriu spojí s tou, ktorú už máš. Import sa otvorí na novej karte, lebo výber súboru by zavrel toto okno."
+  },
+  "options_export": {
+    "message": "Exportovať"
+  },
+  "options_import": {
+    "message": "Importovať…"
+  },
+  "backup_exported": {
+    "message": "Exportované: {n} inzerátov."
+  },
+  "backup_imported": {
+    "message": "Importované: {added} nových inzerátov, {updated} aktualizovaných. Nastavenia sú zo zálohy."
+  },
+  "backup_failed": {
+    "message": "Import zlyhal: {error}"
+  },
+  "backup_not_json": {
+    "message": "súbor nie je JSON"
+  },
+  "backup_not_ours": {
+    "message": "toto nie je záloha Bazoš Ridera"
   }
 }

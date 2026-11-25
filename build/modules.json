@@ -47,6 +47,7 @@
     ],
     "popup": [
       "ui/dom.js",
+      "core/backup.js",
       "popup/rows.js",
       "popup/settings.js",
       "popup/popup.js"

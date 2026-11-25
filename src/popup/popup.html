@@ -73,6 +73,19 @@
       <button id="reset-history" class="danger" type="button" data-i18n="options_history_reset"></button>
     </section>
 
+    <section class="card">
+      <h2 data-i18n="options_backup"></h2>
+      <p class="hint" data-i18n="options_backup_hint"></p>
+      <div class="buttons">
+        <button id="export" type="button" data-i18n="options_export"></button>
+        <!-- Firefox closes a toolbar popup when a file picker opens, so in the
+             popup this opens the same page in a tab, where the picker works. -->
+        <button id="import" type="button" data-i18n="options_import"></button>
+        <input id="import-file" type="file" accept=".json,application/json" hidden>
+      </div>
+      <p class="hint" id="backup-status" role="status"></p>
+    </section>
+
     <footer class="hint">
       <span id="version"></span> ·
       <a href="https://github.com/lgubala/BazosRider" target="_blank" rel="noopener">GitHub</a> ·

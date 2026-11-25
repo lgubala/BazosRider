@@ -1,8 +1,8 @@
 /* Bazoš Rider — popup/settings.js
  *
  * The popup's settings view: filters (one block per module in src/filters/),
- * automatic comparison, manual products, and the price history. Nothing is
- * stored until "Uložiť".
+ * automatic comparison, manual products, the price history and backups.
+ * Nothing is stored until "Uložiť", except a history reset and an import.
  *
  *   BR.settingsView.mount(data, onChange)
  *     data      { settings, history }, shared with the lists view
@@ -128,6 +128,59 @@
       flash(BR.t("options_history_done"));
       onChange();
     });
+
+    /* --- backup ---------------------------------------------------------- */
+
+    const inTab = location.hash === "#import";
+    const version = api.runtime.getManifest().version;
+
+    $("export").addEventListener("click", async () => {
+      const { settings, history } = await BR.store.load();
+      const now = new Date();
+      const json = JSON.stringify(BR.backup.make(settings, history, version, now));
+      const url = URL.createObjectURL(new Blob([json], { type: "application/json" }));
+      const a = h("a", { href: url, download: `bazos-rider-${BR.text.localDay(now)}.json` });
+      document.body.append(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 60000);
+      backupStatus(BR.t("backup_exported", { n: Object.keys(history).length.toLocaleString(BR.lang) }));
+    });
+
+    $("import").addEventListener("click", () => {
+      if (inTab) { $("import-file").click(); return; }
+      api.tabs.create({ url: api.runtime.getURL("src/popup/popup.html#import") });
+      window.close();
+    });
+
+    $("import-file").addEventListener("change", async () => {
+      const file = $("import-file").files[0];
+      $("import-file").value = "";
+      if (!file) return;
+      try {
+        const backup = BR.backup.read(await file.text());
+        const { history } = await BR.store.load();
+        const { added, updated } = BR.backup.merge(history, backup.history);
+        const settings = BR.settings.normalize(backup.settings);
+        await BR.store.saveSettings(settings);
+        await BR.store.saveHistory(history);
+        data.settings = settings;
+        data.history = history;
+        renderFilters();
+        renderComparison();
+        renderHistory();
+        onChange();
+        backupStatus(BR.t("backup_imported", { added, updated }));
+      } catch (e) {
+        backupStatus(BR.t("backup_failed", { error: e.message }), true);
+      }
+    });
+
+    function backupStatus(text, bad) {
+      const p = $("backup-status");
+      p.textContent = text;
+      p.classList.toggle("bad", !!bad);
+    }
 
     let flashTimer = 0;
     function flash(text) {

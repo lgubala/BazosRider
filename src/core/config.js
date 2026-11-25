@@ -27,7 +27,7 @@
 
     /* --- automatic grouping of similar listings ------------------------- */
 
-    AUTO: { enabled: true, minComparables: 2, minShare: 0.05, mode: "strict" },
+    AUTO: { enabled: true, minComparables: 2, minShare: 0.05, mode: "loose" },
 
     SIMILARITY: 0.6,        // Dice score a title needs to join a group
     MIN_SHARED: 2,          // and at least this many shared words
@@ -39,6 +39,21 @@
      * nothing else vouches for them. */
     LOOSE_SIMILARITY: 0.75,
     LOOSE_MIN_SHARED: 2,
+
+    /* Units joined to the number before them, "128 GB" → "128gb", so the two
+     * spellings are one word. Compared after diacritics are stripped. */
+    UNITS: ["gb", "tb", "mb", "mah", "ah", "w", "kw", "hp", "ps", "l", "ml", "cm", "mm",
+            "m", "kg", "g", "eu", "v", "hz", "mpx", "mp", "palcov", "inch"],
+
+    /* Endings cut off longer words before comparing, so "kočík", "kočíka" and
+     * "kočíky" match. The longest that fits is cut, and at least four letters
+     * stay. */
+    WORD_ENDINGS: ["ami", "ach", "ov", "om", "ej", "ou", "ia", "ie", "iu",
+                   "a", "e", "i", "o", "u", "y"],
+
+    /* A title with one of these never groups with one without it: an "iPhone
+     * 13 Pro" is not an "iPhone 13" at a discount. */
+    VARIANT_WORDS: ["pro", "max", "mini", "plus", "ultra", "lite", "fe", "xl"],
 
     /* Words that say nothing about which product it is. Written plain; they
      * are compared after diacritics are stripped. */

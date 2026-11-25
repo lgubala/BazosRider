@@ -1,5 +1,28 @@
 # Changelog
 
+## 1.4.0
+
+- **The scan continues instead of starting over.** After *Prejsť ďalších 10
+  strán*, the button becomes *Pokračovať ďalšími 10 stranami* and reads pages
+  11–20, then 21–30, adding to the deals already listed. *→ na poslednú
+  prečítanú stranu* takes you to the last page read; scanning from there
+  continues too. At the end of the search the bar says so
+- **Many more listings find their match**:
+  - "128GB" and "128 GB" are the same word now. Before, the two spellings
+    looked like different numbers and were kept apart on purpose
+  - "iPhone 13", "Golf 7", "PS 5": a short number counts as a model together
+    with the word before it, and equals "iPhone13" or "PS5"
+  - "1.6 TDI" and "1,6 TDI" match; "1.6" and "2.0" never do
+  - Slovak word endings are ignored: "kočík", "kočíka", "kočíky"
+  - "Pro", "Max", "Mini", "Plus", "Ultra", "Lite", "FE" and "XL" keep a
+    variant apart, so an "iPhone 13 Pro" is never a cheap "iPhone 13"
+- **Voľnejšie is the default grouping.** Settings saved by an older version
+  switch to it once; choosing *Prísne* again sticks
+- **Export and import** under *Nastavenia → Záloha*, to move settings and
+  price history to another computer. Import replaces the settings and merges
+  the history. It opens in a tab, because a file picker closes the popup
+- Group labels in the popup read "iphone 13 128gb" instead of word stems
+
 ## 1.3.0
 
 - **The good deals are visible as soon as a page opens.** A bar above the

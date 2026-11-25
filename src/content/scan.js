@@ -5,8 +5,13 @@
  * pause between them. Only bazos.sk is contacted, only when you click, and
  * what is read goes into the same local price history as pages you open.
  *
- *   BR.scan.run(doc, { pages, signal, onPage }) → { listings, pages, error }
+ *   BR.scan.run(doc, { from, pages, signal, onPage })
+ *       → { listings, pages, last, next, error }
+ *     from      the first page to read; default: this page's "Ďalšia"
  *     listings  parsed listings, without page elements
+ *     last      the URL of the last page read, null when none was
+ *     next      that page's "Ďalšia", where a further scan continues;
+ *               null at the end of the search
  *     error     the message when a page failed; what was read before is kept.
  *               Stopping (signal aborted) is not an error.
  *     onPage(done, pages, listingsSoFar)  after each page, for the progress line
@@ -33,28 +38,32 @@
     return doc;
   }
 
-  async function run(doc, { pages = C.SCAN_PAGES, signal, onPage } = {}) {
+  async function run(doc, { from, pages = C.SCAN_PAGES, signal, onPage } = {}) {
     const found = [];
     const seen = new Set();
-    let url = BR.parse.nextPageUrl(doc);
+    let url = from || BR.parse.nextPageUrl(doc);
+    let last = null;
     let done = 0;
+    let error = null;
     try {
       while (url && done < pages && !seen.has(url)) {
         if (done > 0) await wait(C.SCAN_DELAY_MS, signal);
         seen.add(url);
-        const next = await page(url, signal);
-        for (const l of BR.parse.listings(next)) {
+        const read = await page(url, signal);
+        for (const l of BR.parse.listings(read)) {
           l.element = null;
           found.push(l);
         }
         done++;
+        last = url;
+        url = BR.parse.nextPageUrl(read);
         onPage?.(done, pages, found.length);
-        url = BR.parse.nextPageUrl(next);
       }
     } catch (e) {
-      if (!signal?.aborted) return { listings: found, pages: done, error: e.message || String(e) };
+      /* Stopping is not an error; `url` is then the page not read yet. */
+      if (!signal?.aborted) error = e.message || String(e);
     }
-    return { listings: found, pages: done, error: null };
+    return { listings: found, pages: done, last, next: url || null, error };
   }
 
   BR.scan = { run };

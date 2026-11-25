@@ -98,5 +98,9 @@
 
   BR.settingsView.mount(data, renderAll);
   renderAll();
-  show(location.hash === "#settings" ? "settings" : "lists");
+  /* #settings opens the settings view; #import is the same page in a tab,
+   * where a file picker works (popup/settings.js). */
+  const hash = location.hash;
+  show(hash === "#settings" || hash === "#import" ? "settings" : "lists");
+  if (hash === "#import") $("import").closest(".card").scrollIntoView();
 })(globalThis.BR);

@@ -60,6 +60,8 @@ Firefox/        GENERATED, committed. Never edit it.
 | Add a list to the popup | new file in `src/lists/` |
 | Keep a kind of listing out of price history | new file in `src/skip/` |
 | Change how similar listings are grouped | `src/core/groups.js` |
+| Add a unit ("128 GB"), a Slovak ending or a variant word ("Pro") | `config.js` → `UNITS`, `WORD_ENDINGS`, `VARIANT_WORDS` |
+| Change export and import | `src/core/backup.js`, buttons in `src/popup/settings.js` |
 | Change what counts as a good deal or a suspicious one | `src/core/deals.js`, thresholds in `config.js` |
 | Change the bar above the results | `src/content/banner.js` |
 | Change the green highlight, fading or sorting | `src/content/highlight.js` |
@@ -219,9 +221,11 @@ always commit both.
   times" rule is a possible improvement.
 - **The "↓ −490 953 €" drop** from the prototype was never reproduced. A guard
   ignores drops where the old price is over 10× the new one.
-- **Scanned pages are not re-read.** Going back to a page after a scan shows
-  its deals from history, but the "Ďalšie strany" list is gone until the next
-  scan.
+- **The "Ďalšie strany" list lives on the page.** Leaving it, even for the
+  last page read, starts a fresh list; the deals themselves stay in history
+  and the popup.
+- **Stemming is crude.** It cuts endings, it does not know Slovak grammar, so
+  rare words can collide. English titles get the same treatment.
 - **Open decisions:** watched searches with notifications, and whether to read
   Bazoš's bare `rss.php` (allowed by robots.txt) for them or rely on Bazoš's
   own e-mail alerts.

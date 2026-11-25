@@ -71,6 +71,9 @@ label.line { display: flex; align-items: center; gap: 8px; margin: .5em 0; flex-
 .actions { display: flex; align-items: center; gap: 12px; position: sticky; bottom: 0;
            padding: 10px 0; background: var(--bg); }
 #status { color: var(--ok); font-size: 13px; }
+.buttons { display: flex; flex-wrap: wrap; gap: 8px; }
+#backup-status { color: var(--ok); }
+#backup-status.bad { color: var(--bad, #cf222e); }
 
 .settings footer { text-align: center; }
 

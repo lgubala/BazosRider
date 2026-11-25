@@ -5,7 +5,7 @@
  * with its own defaults without touching this file.
  *
  * {
- *   schema: 1,
+ *   schema: 2,
  *   filters:  { [filterId]: { enabled, config } },
  *   products: ["romer king", "iphone 13"],      manual product search terms
  *   dealThreshold: 0.2,                          manual product: 20 % under median
@@ -19,7 +19,10 @@
 (function (BR) {
   "use strict";
 
-  const SCHEMA = 1;
+  /* 2 (1.4.0): loose grouping became the default. Strict was the only
+   * default before, not a choice anyone made, so schema-1 settings move to
+   * loose once. Choosing strict again sticks. */
+  const SCHEMA = 2;
   const C = BR.config;
 
   const plain = (v) => v && typeof v === "object" && !Array.isArray(v);
@@ -65,6 +68,7 @@
     if (Array.isArray(raw.products)) out.products = raw.products.filter((p) => typeof p === "string");
     if (Number.isFinite(raw.dealThreshold)) out.dealThreshold = raw.dealThreshold;
     if (plain(raw.auto)) out.auto = { ...out.auto, ...raw.auto };
+    if (!(raw.schema >= 2) && out.auto.mode === "strict") out.auto.mode = "loose";
     if (!["strict", "loose"].includes(out.auto.mode)) out.auto.mode = C.AUTO.mode;
     if (Number.isFinite(raw.highlightShare)) out.highlightShare = raw.highlightShare;
     if (plain(raw.page)) {

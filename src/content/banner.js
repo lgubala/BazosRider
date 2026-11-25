@@ -88,19 +88,28 @@
       stop.type = "button";
       stop.addEventListener("click", actions.stopScan);
       line.append(stop);
+    } else if (state.scanned && !state.scanned.next) {
+      line.append(el("span", "margin-right:.6em;color:#57606a;", BR.t("bar_scan_end")));
     } else if (next) {
-      const scan = el("button", BUTTON, BR.t("bar_scan", { pages: C.SCAN_PAGES }));
+      /* After a scan the button continues from the last page read. */
+      const key = state.scanned ? "bar_scan_more" : "bar_scan";
+      const scan = el("button", BUTTON, BR.t(key, { pages: C.SCAN_PAGES }));
       scan.type = "button";
       scan.title = BR.t("bar_scan_title");
       scan.addEventListener("click", actions.scan);
       line.append(scan);
     }
-    if (next) {
-      const link = el("a", "white-space:nowrap;", BR.t("banner_next"));
-      link.href = next;
-      line.append(link);
+    if (next) line.append(link(next, BR.t("banner_next")));
+    if (state.scanned && state.scanned.last) {
+      line.append(link(state.scanned.last, BR.t("bar_scan_last", { pages: state.scanned.pages })));
     }
     return line;
+  }
+
+  function link(href, text) {
+    const a = el("a", "white-space:nowrap;margin-right:.8em;", text);
+    a.href = href;
+    return a;
   }
 
   /** What the scan of further pages turned up. */
