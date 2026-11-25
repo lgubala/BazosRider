@@ -5,6 +5,7 @@ BR.lists.add({
   id: "watches",
   order: 30,
   title: "list_watches_title",
+  tab: "tab_watches",
   hint: "list_watches_hint",
   layout: "sections",
   scoped: false,                  // picks near or all itself, below
@@ -30,5 +31,5 @@ BR.lists.add({
     return rows;
   },
 
-  meta: (row) => [BR.categories.label(row.category), BR.t("meta_seen", { date: BR.text.shortDate(row.lastSeen) })]
+  meta: (row) => [BR.categories.label(row.category), BR.lists.seen(row)]
 });

@@ -25,8 +25,10 @@ have not hidden, every 3 hours (one page every 1.5 seconds, section pages only, 
 Open the popup and today's deals are there, without browsing Bazoš.
 *Prečítať teraz* reads at once.
 
-**A dashboard.** *⤢ Prehľad* opens the lists in a whole tab: deals of the
-day and the year, watchdogs and today's cheapest side by side.
+**A dashboard.** *⤢ Prehľad* opens the lists in a whole tab, fitted to the
+window: deals, watchdogs, today's cheapest and your products side by side,
+nothing to scroll past. The popup shows one list at a time, with a tab for
+each.
 
 **Watchdogs.** Tell it what you are looking for, "sony hifi" in Elektro, and
 the popup's *Strážcovia* shows the 5 cheapest near you, or in all of Slovakia

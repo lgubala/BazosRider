@@ -563,10 +563,6 @@
     "message": "dealov dnes",
     "description": "Dashboard tile"
   },
-  "stat_year": {
-    "message": "dealov tento rok",
-    "description": "Dashboard tile"
-  },
   "stat_watches": {
     "message": "nálezov strážcov",
     "description": "Dashboard tile"
@@ -575,8 +571,28 @@
     "message": "nových inzerátov dnes",
     "description": "Dashboard tile"
   },
-  "stat_history": {
-    "message": "inzerátov v histórii",
-    "description": "Dashboard tile"
+  "tab_day": {
+    "message": "Deal dňa",
+    "description": "Short list name on a tab"
+  },
+  "tab_year": {
+    "message": "Deal roka",
+    "description": "Short list name on a tab"
+  },
+  "tab_watches": {
+    "message": "Strážcovia",
+    "description": "Short list name on a tab"
+  },
+  "tab_cheapest": {
+    "message": "Najlacnejšie",
+    "description": "Short list name on a tab"
+  },
+  "tab_products": {
+    "message": "Moje produkty",
+    "description": "Short list name on a tab"
+  },
+  "tab_free": {
+    "message": "Zadarmo",
+    "description": "Short list name on a tab"
   }
 }

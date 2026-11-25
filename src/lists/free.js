@@ -3,6 +3,8 @@ BR.lists.add({
   id: "free",
   order: 60,
   title: "list_free_title",
+  tab: "tab_free",
+  card: "extra",
   empty: "list_free_empty",
   layout: "categories",
   clearable: true,
@@ -14,5 +16,5 @@ BR.lists.add({
       .sort((a, b) => String(b.firstSeenAt).localeCompare(String(a.firstSeenAt)));
   },
 
-  meta: (row) => [BR.t("meta_seen", { date: BR.text.shortDate(row.lastSeen) })]
+  meta: (row) => [BR.lists.seen(row)]
 });

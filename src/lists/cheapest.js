@@ -5,6 +5,7 @@ BR.lists.add({
   id: "cheapest",
   order: 40,
   title: "list_cheapest_title",   // _locales keys
+  tab: "tab_cheapest",            // shorter, for the tab when cards share
   hint: "list_cheapest_hint",
   empty: "list_cheapest_empty",
   layout: "categories",           // tabs per category, LIST_LIMIT rows each
@@ -26,7 +27,7 @@ BR.lists.add({
     if (row.median != null && row.n >= 2) {
       parts.push(BR.t("meta_median", { price: BR.text.money(row.median), n: row.n }));
     }
-    parts.push(BR.t("meta_seen", { date: BR.text.shortDate(row.lastSeen) }));
+    parts.push(BR.lists.seen(row));
     return parts;
   }
 });

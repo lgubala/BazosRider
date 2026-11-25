@@ -63,5 +63,11 @@
     };
   }
 
-  Object.assign(BR.lists, { inPeriod, topPerCategory, itemsOf, groupFields });
+  /** "videné 24.11.", or null when it was seen today: then it says nothing. */
+  function seen(row) {
+    if (!row.lastSeen || row.lastSeen === BR.text.localDay(new Date())) return null;
+    return BR.t("meta_seen", { date: BR.text.shortDate(row.lastSeen) });
+  }
+
+  Object.assign(BR.lists, { inPeriod, topPerCategory, itemsOf, groupFields, seen });
 })(globalThis.BR);

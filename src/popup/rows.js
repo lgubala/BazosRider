@@ -28,17 +28,19 @@
     return parts.length ? parts.join(" · ") : null;
   }
 
-  /** Price and discount on the left, title and context on the right. */
+  /**
+   * One line each: price and discount, then the title, then where and the
+   * comparison. Long titles are cut; the full text is the tooltip.
+   */
   function row(r, metaParts, rank) {
     const place = where(r);
-    if (place) metaParts = [place, ...metaParts];
+    const meta = [place, ...metaParts].filter(Boolean).join(" · ");
     return h("div", { class: "row" },
-      h("div", { class: "left" },
-        h("div", { class: "price" }, BR.text.money(r.price)),
-        pill(r, rank)),
+      h("div", { class: "price" }, BR.text.money(r.price)),
+      h("div", { class: "pillbox" }, pill(r, rank)),
       h("div", { class: "right" },
-        h("a", { href: r.url, target: "_blank", rel: "noopener" }, r.title),
-        h("div", { class: "meta" }, metaParts.join(" · "))));
+        h("a", { href: r.url, target: "_blank", rel: "noopener", title: r.title }, r.title),
+        h("div", { class: "meta", title: meta }, meta)));
   }
 
   /**

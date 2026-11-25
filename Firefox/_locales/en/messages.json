@@ -563,10 +563,6 @@
     "message": "deals today",
     "description": "Dashboard tile"
   },
-  "stat_year": {
-    "message": "deals this year",
-    "description": "Dashboard tile"
-  },
   "stat_watches": {
     "message": "watchdog finds shown",
     "description": "Dashboard tile"
@@ -575,8 +571,28 @@
     "message": "new listings today",
     "description": "Dashboard tile"
   },
-  "stat_history": {
-    "message": "listings in history",
-    "description": "Dashboard tile"
+  "tab_day": {
+    "message": "Today's deals",
+    "description": "Short list name on a tab"
+  },
+  "tab_year": {
+    "message": "This year",
+    "description": "Short list name on a tab"
+  },
+  "tab_watches": {
+    "message": "Watchdogs",
+    "description": "Short list name on a tab"
+  },
+  "tab_cheapest": {
+    "message": "Cheapest",
+    "description": "Short list name on a tab"
+  },
+  "tab_products": {
+    "message": "My products",
+    "description": "Short list name on a tab"
+  },
+  "tab_free": {
+    "message": "Free",
+    "description": "Short list name on a tab"
   }
 }

@@ -22,7 +22,7 @@
   function meta(row) {
     const parts = [BR.categories.label(row.category)];
     if (row.median != null) parts.push(BR.t("meta_median", { price: BR.text.money(row.median), n: row.n }));
-    parts.push(BR.t("meta_seen", { date: BR.text.shortDate(row.lastSeen) }));
+    parts.push(BR.lists.seen(row));
     return parts;
   }
 
@@ -49,13 +49,14 @@
     };
   }
 
-  const common = { layout: "top", clearable: true, needsGroups: true, meta };
+  const common = { layout: "top", clearable: true, needsGroups: true, card: "deals", meta };
 
   BR.lists.add({
     ...common,
     id: "day",
     order: 10,
     title: "list_day_title",
+    tab: "tab_day",
     hint: "list_day_hint",
     empty: empty("day"),
     items: deals("day")
@@ -66,6 +67,7 @@
     id: "year",
     order: 20,
     title: "list_year_title",
+    tab: "tab_year",
     hint: "list_year_hint",
     empty: empty("year"),
     items: deals("year")

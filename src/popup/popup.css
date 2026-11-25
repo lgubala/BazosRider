@@ -19,27 +19,12 @@ header h1 { flex: 1; }
 .watch { display: grid; grid-template-columns: 1fr 9em 6em auto; gap: 6px; margin: 6px 0; align-items: center; }
 .watch input, .watch select { width: 100%; box-sizing: border-box; }
 
-.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: start; }
+.grid { display: grid; gap: 14px; align-items: start; }
 .grid > .card { min-width: 0; }
+.card.list { padding-top: 10px; }
+.card .sub { margin: -4px 0 6px; font-size: 12px; }
 
 select.pick { margin: 0 0 6px; max-width: 100%; font-size: 13px; }
-
-.stats { display: none; }
-
-/* --- dashboard: the whole tab ------------------------------------------- */
-
-body.full { width: auto; max-width: 1900px; margin: 0 auto; padding: 18px 24px 24px; }
-body.full header h1 { font-size: 22px; }
-body.full .grid { grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); }
-/* Each card scrolls on its own, so every list starts above the fold. */
-body.full .grid > .card { max-height: calc(100vh - 210px); display: flex; flex-direction: column; }
-body.full .grid > .card > .body { overflow-y: auto; min-height: 0; padding-right: 4px; }
-body.full .stats { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
-.stat { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
-        padding: 8px 16px; display: flex; align-items: baseline; gap: 8px; }
-.stat b { font-size: 22px; }
-.stat span { color: var(--muted); font-size: 13px; }
-body.full .settings { max-width: 900px; margin: 0 auto; }
 
 .head { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 8px; }
 
@@ -52,24 +37,28 @@ body.full .settings { max-width: 900px; margin: 0 auto; }
   font-size: 12px;
 }
 .tab.on { background: var(--link); border-color: var(--link); color: #fff; }
-.cathead { font-weight: 600; margin: .8em 0 .2em; color: var(--muted); font-size: 13px; }
+.cardtabs { margin: 0; }
+.cardtabs .tab { font-size: 13px; padding: 4px 12px; font-weight: 600; }
+.tab .n { margin-left: 6px; font-weight: 400; opacity: .75; }
+.cathead { font-weight: 600; margin: .7em 0 .1em; color: var(--muted); font-size: 12px; }
 
-.row { display: flex; gap: 12px; align-items: flex-start; padding: 9px 0; border-bottom: 1px solid var(--line-soft); }
+/* One line per listing: price, discount, title over where and why. */
+.row { display: grid; grid-template-columns: 4.6em 4.4em minmax(0, 1fr); gap: 8px; align-items: center;
+       padding: 5px 0; border-bottom: 1px solid var(--line-soft); }
 .row:last-child { border-bottom: none; }
-.row .left { min-width: 92px; }
-.row .price { font-size: 20px; font-weight: 700; line-height: 1.1; white-space: nowrap; }
-.row .right { flex: 1; min-width: 0; }
-.row .right a { font-weight: 600; text-decoration: none; word-break: break-word; }
-.row .meta { color: var(--muted); font-size: 12px; margin-top: 3px; }
+.row .price { font-size: 15px; font-weight: 700; white-space: nowrap; text-align: right; }
+.row .right { min-width: 0; }
+.row .right a, .row .meta { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.row .right a { font-weight: 600; text-decoration: none; }
+.row .meta { color: var(--muted); font-size: 12px; }
 
 .pill {
   display: inline-block;
-  margin-top: 4px;
-  padding: 2px 8px;
-  border-radius: 5px;
+  padding: 1px 6px;
+  border-radius: 4px;
   color: #fff;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 12px;
   white-space: nowrap;
 }
 .pill.big { background: #1a7f37; }     /* 50 % and more */
@@ -77,6 +66,29 @@ body.full .settings { max-width: 900px; margin: 0 auto; }
 .pill.small { background: #0a66c2; }
 .pill.free { background: #1a7f37; }
 .pill.rank { background: #57606a; }
+
+.stats { display: none; }
+
+/* --- dashboard: the whole tab ------------------------------------------- */
+
+body.full { width: auto; max-width: none; padding: 14px 18px; }
+body.full header { flex-wrap: wrap; }
+.scope .tab { white-space: nowrap; }
+body.full .stats { display: flex; gap: 14px; font-size: 13px; color: var(--muted); white-space: nowrap; }
+.stat b { color: var(--text); font-size: 15px; }
+body.full .grid { grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); }
+body.full .settings { max-width: 900px; margin: 0 auto; }
+@media (max-width: 1100px) { body.full .stats { display: none; } }
+
+/* Fitted to the window: every card the full height, scrolling on its own,
+   so all lists are in sight at once. Too small a window scrolls instead. */
+@media (min-width: 700px) and (min-height: 500px) {
+  body.fit { height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+  body.fit #view-lists { flex: 1; min-height: 0; }
+  body.fit .grid { height: 100%; grid-auto-rows: minmax(0, 1fr); align-items: stretch; }
+  body.fit .grid > .card { display: flex; flex-direction: column; min-height: 0; }
+  body.fit .grid > .card > .body { flex: 1; min-height: 0; overflow-y: auto; padding-right: 6px; }
+}
 
 /* --- settings view ------------------------------------------------------ */
 

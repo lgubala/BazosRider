@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.7.1
+
+- **Everything in sight at once.** The dashboard fits the window: four cards
+  side by side (Deal dňa / Deal roka, Strážcovia, Najlacnejšie dnes, Moje
+  produkty / Zadarmo), each the full height and scrolling on its own; two by
+  two in a narrower window. No page scrolling
+- **The popup is one card with a tab per list**, each tab with its count, so
+  one list fills the popup and you see what the others hold
+- **One line per listing**: price, discount, title, and under it town,
+  distance and median. Long titles are cut, with the full one on hover.
+  "videné" is left out for listings seen today
+- A card opens on a list that has something in it, until you pick a tab;
+  the tab you pick is remembered
+- The dashboard's numbers moved into its header
+
 ## 1.7.0
 
 - **Dashboard.** *⤢ Prehľad* in the popup's header opens the lists in a

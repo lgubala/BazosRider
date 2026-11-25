@@ -4,6 +4,8 @@ BR.lists.add({
   id: "products",
   order: 50,
   title: "list_products_title",
+  tab: "tab_products",
+  card: "extra",
   empty: (ctx) => BR.t(ctx.settings.products.length ? "list_products_empty" : "list_products_none"),
   layout: "top",
   limit: 15,
