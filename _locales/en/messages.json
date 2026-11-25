@@ -379,5 +379,56 @@
   },
   "backup_not_ours": {
     "message": "this is not a Bazoš Rider backup"
+  },
+  "detail_cheaper": {
+    "message": "{pct} % cheaper than similar ones"
+  },
+  "detail_dearer": {
+    "message": "{pct} % dearer than similar ones"
+  },
+  "detail_fair": {
+    "message": "about the usual price"
+  },
+  "detail_suspicious": {
+    "message": "{pct} % cheaper than similar ones: suspiciously cheap"
+  },
+  "detail_median": {
+    "message": "Median {median} of {n} similar"
+  },
+  "detail_median_product": {
+    "message": "Your product's median {median} of {n} listings"
+  },
+  "detail_range": {
+    "message": "from {min} to {max}"
+  },
+  "detail_since": {
+    "message": "In your history since {date}"
+  },
+  "detail_drop": {
+    "message": "price dropped from {from} ({date})"
+  },
+  "detail_changed": {
+    "message": "was {from}"
+  },
+  "detail_compared": {
+    "message": "Compared with:"
+  },
+  "detail_search": {
+    "message": "Search similar on Bazoš →"
+  },
+  "detail_nothing": {
+    "message": "nothing to compare with yet"
+  },
+  "detail_nothing_hint": {
+    "message": "Your history has no listings alike enough. Open a search for similar ones and click Go through the next 10 pages; the usual price then shows here."
+  },
+  "detail_skipped": {
+    "message": "not compared: {why}"
+  },
+  "detail_free": {
+    "message": "free"
+  },
+  "detail_no_price": {
+    "message": "no price given, nothing to compare"
   }
 }

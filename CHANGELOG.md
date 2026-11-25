@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.5.0
+
+- **Price check on a listing's own page.** Open any listing and a box under
+  its title says *o 28 % lacnejší ako podobné*, *o 12 % drahší* or
+  *približne bežná cena*, with the median, the price range and the listings
+  it was compared with. It also says since when the listing is in your
+  history and whether its price dropped. Nothing to compare with yet? It
+  says so, and *Hľadať podobné na Bazoši* opens a search for the same kind of
+  item, where the scan fills the history
+- **A listing's "Podobné inzeráty" are recorded** and badged like search
+  results. Before, they were read with an empty title, and the page got a
+  results bar it did not need
+- **"13Pro" is "13 Pro"**: a variant written together with the number is
+  still recognised, so "iPhone 13Pro" is never compared with "iPhone 13"
+- Badges wrap onto two lines instead of running over Bazoš's narrow price
+  column
+- Checked against real bazos.sk pages (results and a listing) from 25
+  November 2026
+
 ## 1.4.0
 
 - **The scan continues instead of starting over.** After *Prejsť ďalších 10

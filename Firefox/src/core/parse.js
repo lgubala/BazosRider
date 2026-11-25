@@ -1,7 +1,7 @@
 /* Bazoš Rider — core/parse.js
  *
- * Reads the listings off a Bazoš results page. Nothing else touches Bazoš's
- * markup; selectors are in config.js.
+ * Reads the listings off a Bazoš results page, and a single listing off its
+ * own page. Nothing else touches Bazoš's markup; selectors are in config.js.
  *
  * A listing: { element, id, url, category, title, description, price }
  *   price   number; 0 for "Zadarmo"; null for "V texte", "Dohodou", unknown
@@ -70,5 +70,38 @@
     return null;
   }
 
-  BR.parse = { categoryFromUrl, listingId, price, listings, nextPageUrl };
+  /**
+   * A single listing's own page: the listing, or null on any other page.
+   * { element, id, url, category, title, description, price, detail: true }
+   * `element` is the header row the price check goes under.
+   */
+  function detail(doc) {
+    const S = C.SELECTORS;
+    const titleEl = doc.querySelector(S.detailTitle);
+    if (!titleEl) return null;
+    const canonical = doc.querySelector(S.canonical);
+    const url = ((canonical && canonical.href) || doc.location.href).split("#")[0];
+    const id = listingId(url) || listingId(doc.location.href);
+    if (!id) return null;
+    const descEl = doc.querySelector(S.detailDescription);
+    return {
+      element: doc.querySelector(S.detailHeader) || titleEl,
+      id,
+      url,
+      category: categoryFromUrl(url),
+      title: titleEl.textContent.trim(),
+      description: descEl ? descEl.textContent.trim().slice(0, C.DETAIL_DESCRIPTION_MAX) : "",
+      price: detailPrice(doc),
+      detail: true
+    };
+  }
+
+  /** The cell after "Cena:" in the listing's info table. */
+  function detailPrice(doc) {
+    const cells = [...doc.querySelectorAll(C.SELECTORS.detailInfo)];
+    const i = cells.findIndex((td) => td.textContent.trim() === C.DETAIL_PRICE_LABEL);
+    return i >= 0 && cells[i + 1] ? price(cells[i + 1].textContent) : null;
+  }
+
+  BR.parse = { categoryFromUrl, listingId, price, listings, detail, nextPageUrl };
 })(globalThis.BR);

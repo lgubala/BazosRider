@@ -78,7 +78,11 @@
     SUSPICIOUS_SHARE: 0.7,
     SUSPICIOUS_COLOR: "#bc4c00",
 
-    DETAILS_LIMIT: 8,       // comparables shown when a deal badge is clicked
+    DETAILS_LIMIT: 8,
+
+    /* A listing's own page calls a price within this much of the median
+     * "about the usual price" instead of cheaper or dearer. */
+    FAIR_BAND: 0.05,       // comparables shown when a deal badge is clicked
 
     /* "Prejsť ďalšie strany": how many result pages, and the pause between
      * two requests so Bazoš is not hammered. */
@@ -97,12 +101,23 @@
     SELECTORS: {
       listing: "div.inzeraty",
       link: 'a[href*="/inzerat/"]',
-      title: "h2.nadpis",
+      /* h2 on results pages, span in a listing page's "Podobné inzeráty". */
+      title: ".nadpis",
       description: "div.popis",
       price: "div.inzeratycena",
       pagination: ".strankovani a",
-      resultsAnchor: ".listainzerat"
+      resultsAnchor: ".listainzerat",
+
+      /* A single listing's own page (/inzerat/<id>/...). Checked against
+       * mobil.bazos.sk in November 2026. */
+      detailTitle: "h1.nadpisdetail",
+      detailHeader: ".inzeratydetnadpis",
+      detailDescription: "div.popisdetail",
+      detailInfo: "td.listadvlevo td",
+      canonical: 'link[rel="canonical"]'
     },
+    DETAIL_PRICE_LABEL: "Cena:",
+    DETAIL_DESCRIPTION_MAX: 400,   // characters kept in history, like a results snippet
     NEXT_PAGE_TEXT: "Ďalšia",
     FREE_WORDS: ["zadarmo"]
   };

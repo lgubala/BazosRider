@@ -6,14 +6,19 @@
  *   3. badge the visible listings and mark the good deals
  *   4. draw the bar above the results and the count on the toolbar icon
  *
+ * On a listing's own page there is no bar: the listing gets a price check
+ * under its title (content/detail.js), and its "Podobné inzeráty" are
+ * badged and recorded like any results.
+ *
  * The bar's switches and "Prejsť ďalšie strany" come back here as actions.
  */
 (async function (BR) {
   "use strict";
 
   const api = globalThis.browser || globalThis.chrome;
+  const detail = BR.parse.detail(document);
   const listings = BR.parse.listings(document);
-  if (!listings.length) return;
+  if (!detail && !listings.length) return;
 
   const loaded = await BR.store.load();
   const state = {
@@ -30,8 +35,9 @@
 
   state.counts = BR.filters.apply(listings, state.settings);
   for (const l of listings) l.skip = BR.skips.reasonFor(l);
+  if (detail) detail.skip = BR.skips.reasonFor(detail);
 
-  BR.history.record(state.history, listings, state.now);
+  BR.history.record(state.history, detail ? [detail, ...listings] : listings, state.now);
   BR.history.prune(state.history, state.now);
   await BR.store.saveHistory(state.history);
 
@@ -62,6 +68,12 @@
       BR.page.drawBadges(l.element, BR.badges.for(l, entry, ctx));
       const deal = BR.deals.best(l, entry, ctx);
       if (BR.deals.isGood(deal, ctx)) l.deal = deal;
+    }
+    if (detail) {
+      const entry = detail.skip ? null : state.history[detail.id] || null;
+      const verdict = BR.page.priceCheck(document, detail, entry, ctx);
+      toolbar(BR.deals.isGood(verdict, ctx) ? 1 : 0);
+      return;
     }
     state.more = goodAmong(state.scannedListings, ctx);
     BR.page.highlight(listings, state.settings.page);

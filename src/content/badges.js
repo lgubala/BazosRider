@@ -12,7 +12,8 @@
   const FONT = "font-family:system-ui,sans-serif;";
   const STYLE =
     "display:block;margin-top:2px;padding:1px 5px;border-radius:3px;font-size:12px;" +
-    "font-weight:bold;white-space:nowrap;color:#fff;" + FONT;
+    "font-weight:bold;white-space:normal;line-height:1.3;max-width:100%;box-sizing:border-box;" +
+    "color:#fff;" + FONT;   // wraps: Bazoš's price column is narrow
   /* Bazoš rows are flex rows: flex-basis 100 % (with the row wrapping while
    * the panel is open) puts the panel under the listing, not beside it. */
   const PANEL =

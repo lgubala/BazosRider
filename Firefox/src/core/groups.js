@@ -26,14 +26,17 @@
   const STOP = new Set(C.STOP_WORDS.map(normalize));
   const VARIANTS = new Set(C.VARIANT_WORDS);
   const UNIT = new RegExp("(\\d)\\s+(" + C.UNITS.join("|") + ")\\b", "g");
+  const GLUED_VARIANT = new RegExp("(\\d)(" + C.VARIANT_WORDS.join("|") + ")\\b", "g");
   const ENDINGS = [...C.WORD_ENDINGS].sort((a, b) => b.length - a.length);
 
   /** Normalised words, with "128 GB" → "128gb" and "1,5 l" → "1p5l", so a
-   * number and its unit are one word however they are written. */
+   * number and its unit are one word however they are written, and
+   * "13Pro" → "13 pro", so a variant is a word of its own. */
   function words(title) {
     return normalize(title)
       .replace(/(\d)[.,](\d)/g, "$1p$2")
       .replace(UNIT, "$1$2")
+      .replace(GLUED_VARIANT, "$1 $2")
       .split(/[^a-z0-9]+/)
       .filter(Boolean);
   }

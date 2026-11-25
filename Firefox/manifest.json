@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Bazoš Rider",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "__MSG_extDescription__",
   "default_locale": "sk",
   "homepage_url": "https://github.com/lgubala/BazosRider",
@@ -76,6 +76,7 @@
         "src/content/badges.js",
         "src/content/highlight.js",
         "src/content/scan.js",
+        "src/content/detail.js",
         "src/content/banner.js",
         "src/content/main.js"
       ],

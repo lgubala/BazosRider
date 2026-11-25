@@ -379,5 +379,56 @@
   },
   "backup_not_ours": {
     "message": "toto nie je záloha Bazoš Ridera"
+  },
+  "detail_cheaper": {
+    "message": "o {pct} % lacnejší ako podobné"
+  },
+  "detail_dearer": {
+    "message": "o {pct} % drahší ako podobné"
+  },
+  "detail_fair": {
+    "message": "približne bežná cena"
+  },
+  "detail_suspicious": {
+    "message": "o {pct} % lacnejší ako podobné: podozrivo lacné"
+  },
+  "detail_median": {
+    "message": "Medián {median} z {n} podobných"
+  },
+  "detail_median_product": {
+    "message": "Medián tvojho produktu {median} z {n} inzerátov"
+  },
+  "detail_range": {
+    "message": "od {min} do {max}"
+  },
+  "detail_since": {
+    "message": "V tvojej histórii od {date}"
+  },
+  "detail_drop": {
+    "message": "cena klesla z {from} ({date})"
+  },
+  "detail_changed": {
+    "message": "predtým {from}"
+  },
+  "detail_compared": {
+    "message": "Porovnané s:"
+  },
+  "detail_search": {
+    "message": "Hľadať podobné na Bazoši →"
+  },
+  "detail_nothing": {
+    "message": "zatiaľ nie je s čím porovnať"
+  },
+  "detail_nothing_hint": {
+    "message": "V histórii nie sú dosť podobné inzeráty. Otvor vyhľadávanie podobných a klikni na Prejsť ďalších 10 strán; potom sa tu ukáže bežná cena."
+  },
+  "detail_skipped": {
+    "message": "neporovnáva sa: {why}"
+  },
+  "detail_free": {
+    "message": "zadarmo"
+  },
+  "detail_no_price": {
+    "message": "cena nie je uvedená, nie je s čím porovnať"
   }
 }

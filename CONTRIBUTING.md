@@ -38,7 +38,8 @@ src/
   skip/         "never record this" rules, one each   ← modules
   badges/       labels on Bazoš pages, one each       ← modules
   lists/        cards in the popup, one each          ← modules
-  content/      runs on bazos.sk: badges, highlight, scan, the bar, main
+  content/      runs on bazos.sk: badges, highlight, scan, the bar, the
+                listing-page price check (detail.js), main
   background/   puts the deal count on the toolbar icon; nothing else
   popup/        the toolbar popup: lists view and settings view
   ui/           shared CSS and DOM helpers
@@ -64,6 +65,8 @@ Firefox/        GENERATED, committed. Never edit it.
 | Change export and import | `src/core/backup.js`, buttons in `src/popup/settings.js` |
 | Change what counts as a good deal or a suspicious one | `src/core/deals.js`, thresholds in `config.js` |
 | Change the bar above the results | `src/content/banner.js` |
+| Change the price check on a listing's page | `src/content/detail.js`; the verdict is `BR.deals.verdict` |
+| Fix listing-page parsing after Bazoš changes its HTML | `config.js` → `SELECTORS.detail*` |
 | Change the green highlight, fading or sorting | `src/content/highlight.js` |
 | Change how further pages are read | `src/content/scan.js`, `SCAN_*` in `config.js` |
 | The look | `src/ui/base.css`, `src/popup/popup.css` |

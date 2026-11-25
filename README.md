@@ -33,6 +33,15 @@ lists the good deals it found there. Click again to continue with the 10
 after those. It also fills the price history, so the
 first visit to a new kind of item already has something to compare with.
 
+**Checks the price of any listing you open.** Under the title of a
+listing's own page: *o 28 % lacnejší ako podobné* (or *drahší*, or *približne
+bežná cena*), the median and range of similar listings, the listings
+themselves, and whether this one's price dropped since you first saw it.
+
+<p align="center">
+  <img src="docs/screenshots/listing.png" alt="A Bazoš listing page with the Bazoš Rider price check: 28 % cheaper than similar ones, median 419 € of 7, the listings it was compared with" width="640">
+</p>
+
 **Hides listings.** Tick whole sections (cars, jobs, real estate…) or type
 words like `na diely`. The bar says how many were hidden, next to Bazoš's own
 *next page* link.
